@@ -19,16 +19,23 @@ nexttag = =>
         if v == src
             idx = i
             break
-    idx += 1
-    idx = 1 if idx > #tags
-    tag = tags[idx]
-    while tag.name != src.name
+    for i = idx+1, #tags
+        tag = tags[i]
         if #tag\clients! > 0
             tag\view_only!
             return
-        idx += 1
-        idx = 1 if idx > #tags
-        tag = tags[idx]
+
+    -- -- Rotating
+    -- idx += 1
+    -- idx = 1 if idx > #tags
+    -- tag = tags[idx]
+    -- while tag.name != src.name
+    --     if #tag\clients! > 0
+    --         tag\view_only!
+    --         return
+    --     idx += 1
+    --     idx = 1 if idx > #tags
+    --     tag = tags[idx]
 
 prevtag = =>
     tags = awful.screen.focused!.tags
@@ -38,16 +45,23 @@ prevtag = =>
         if v == src
             idx = i
             break
-    idx -= 1
-    idx = #tags if idx == 0
-    tag = tags[idx]
-    while tag.name != src.name
+    for i = idx-1, 1, -1
+        tag = tags[i]
         if #tag\clients! > 0
             tag\view_only!
             return
-        idx -= 1
-        idx = #tags if idx == 0
-        tag = tags[idx]
+
+    -- -- Rotating
+    -- idx -= 1
+    -- idx = #tags if idx == 0
+    -- tag = tags[idx]
+    -- while tag.name != src.name
+    --     if #tag\clients! > 0
+    --         tag\view_only!
+    --         return
+    --     idx -= 1
+    --     idx = #tags if idx == 0
+    --     tag = tags[idx]
 
 --------------------------------------------------------------------------------
 --- Global keys
@@ -396,8 +410,9 @@ client.connect_signal "request::default_mousebindings", ->
     }
 
 
----------------------
--- Per-window keys --
+--------------------------------------------------------------------------------
+--- Per-client keys
+
 client.connect_signal "request::default_keybindings", ->
     awful.keyboard.append_client_keybindings {
         awful.key
@@ -407,28 +422,28 @@ client.connect_signal "request::default_keybindings", ->
                 @fullscreen = not @fullscreen
                 @\raise!
             description: "toggle fullscreen"
-            group: "client"
+            group:       "client"
 
         awful.key
             modifiers: {"Mod4"}
             key:       "q"
             on_press: => @\kill!
             description: "close window"
-            group: "client"
+            group:       "client"
 
         awful.key
             modifiers: {"Mod4", "Mod1"}
             key:       "q"
             on_press: => awesome.kill @pid, 9
             description: "kill application"
-            group: "client"
+            group:       "client"
 
         -- awful.key
         --     modifiers: {"Mod4", "Shift"}
         --     key:       " "
         --     on_press: awful.client.floating.toggle
         --     description: "toggle floating"
-        --     group: "client"
+        --     group:       "client"
 
         -- awful.key
         --     modifiers: {"Mod4", "Control"}
@@ -436,14 +451,16 @@ client.connect_signal "request::default_keybindings", ->
         --     on_press: =>
         --         @\swap awful.client.getmaster!
         --     description: "move to master"
-        --     group: "client"
+        --     group:       "client"
 
         awful.key
             modifiers: {"Mod4"}
             key:       "F11"
             on_press: =>
+                @titlebars_enabled = @maximized
                 @maximized = not @maximized
                 @\raise!
+                @\emit_signal "request::titlebars"
             description: "(un)maximize"
-            group: "client"
+            group:       "client"
     }

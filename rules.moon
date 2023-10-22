@@ -295,6 +295,8 @@ ruled.client.connect_signal "request::rules", ->
             }
             role: {"^browser$"}
         properties:
-            fullscreen:      true
-            tag:            awful.tag.find_by_name nil, " "
-            switch_to_tags: true
+            maximized:         true
+            border_width:      0
+            titlebars_enabled: false
+            tag:               awful.tag.find_by_name nil, " "
+            switch_to_tags:    true
