@@ -7,7 +7,12 @@ wibox = require"wibox"
 --------------------------------------------------------------------------------
 --- Titlebars
 client.connect_signal "request::titlebars", =>
-    if not @maximized
+    if @maximized
+        @titlebars_enabled = false
+
+    else
+        @titlebars_enabled = true unless @fullscreen
+
         -- buttons for the titlebar
         buttons = {
             awful.button {}, 1, -> @\activate context: "titlebar", action: "mouse_move"
