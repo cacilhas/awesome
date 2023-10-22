@@ -4,7 +4,7 @@ gears = require"gears"
 awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
-import i3blocksassets, reload, shell, terminal, trim from require"helpers"
+import i3blocksassets, reload, shell, showpopup, terminal, trim from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -116,15 +116,38 @@ screen.connect_signal "request::desktop_decoration", =>
         eth: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
-            buttons: [awful.button({}, b, -> @topbar.widgets.eth.markup = @topbar.helpers.updateeth b) for b in *{1, 2, 3, 4, 5}]
+            buttons: {
+                awful.button {}, 1, ->
+                    text = shell "ip link show dev eno1"
+                        noempty: true
+                        removegarbage: true
+                    showpopup(text).visible = true
+            }
 
         internet: wibox.widget
             markup: ""
             widget: wibox.widget.textbox
+            buttons: {
+                awful.button {}, 1, ->
+                    text = shell "ip addr show dev eno1"
+                        noempty: true
+                        removegarbage: true
+                    showpopup(text).visible = true
+            }
 
         vpn: wibox.widget
             markup: ""
             widget: wibox.widget.textbox
+            buttons: {
+                awful.button {}, 1, ->
+                    text = shell "nordvpn status",
+                        noempty: true
+                        removegarbage: true
+                    showpopup(text).visible = true
+                awful.button {}, 2, -> awful.spawn "sudo nordvpn disconnect"
+                awful.button {}, 4, -> awful.spawn "sudo nordvpn connect us"
+                awful.button {}, 5, -> awful.spawn "sudo nordvpn connect br"
+            }
 
         layoutbox: awful.widget.layoutbox {
             screen:  @
@@ -218,7 +241,7 @@ screen.connect_signal "request::desktop_decoration", =>
         reloadbt: wibox.widget
             markup: '<span size="large" color="#aaff00">♼</span>'
             widget: wibox.widget.textbox
-            buttons: {awful.button {}, 1, -> os.execute"dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"}
+            buttons: {awful.button {}, 1, -> awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"}
 
         taskbar: awful.widget.tasklist {
             screen:  @,
