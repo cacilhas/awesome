@@ -62,14 +62,14 @@ fg_minimize = "#ffffff"
     exit_icon: "#{themes_path}/cacilhas/exit.png"
 
         -- from default for now...
-    menu_submenu_icon: "#{themes_path}/default/submenu.png"
+    menu_submenu_icon: "#{themes_path}/cacilhas/submenu.png"
 
         -- Generate taglist squares:
     taglist_squares_sel:   theme_assets.taglist_squares_sel   taglist_square_size, fg_normal
     taglist_squares_unsel: theme_assets.taglist_squares_unsel taglist_square_size, fg_normal
 
         -- MISC
-    wallpaper: "#{themes_path}/cacilhas/cacilhas-background.png"
+    wallpaper: "#{themes_path}/cacilhas/sky-background.png"
     taglist_squares: "true"
     titlebar_close_button: "true"
     menu_height: apply_dpi 24

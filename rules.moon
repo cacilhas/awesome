@@ -40,7 +40,6 @@ ruled.client.connect_signal "request::rules", ->
                 "^Guake"
                 "^i3quitdialog"
                 "^java-lang-"
-                "^kodumaro-clock$"
                 "^Nemo$"
                 "^plasma%.emojier$"
                 "^processing-core-"
@@ -56,7 +55,9 @@ ruled.client.connect_signal "request::rules", ->
                 "splash"
                 "utility"
             }
-            name: {"Event Tester"}  -- xev.
+            name: {
+                "Event Tester"  -- xev.
+            }
             role: {"pop-up"}
 
         properties:
@@ -64,11 +65,67 @@ ruled.client.connect_signal "request::rules", ->
             placement: awful.placement.centered
 
     ruled.client.append_rule
+        id: "unframed"
+        rule_any:
+            class: {
+                "^archlogo$"
+                "^Clock$"
+                "^Cairo-dock"
+                "^Catclock$"
+                "^dde-calendar$"
+                "^Display$"
+                "^Guake"
+                "^i3quitdialog"
+                "^XEyes$"
+            }
+            type: {"splash"}
+            name: {
+                "Kodumaro Clock"
+                "kodumaro-clock"
+            }
+            role: {"pop-up"}
+        properties:
+            border_width:      0
+            titlebars_enabled: false
+
+    ruled.client.append_rule
         id: "titlebars"
         rule_any:
-            type: {"normal", "dialog"}
+            type: {
+                "normal"
+                "dialog"
+            }
+        except_any:
+            class: {
+                "^archlogo$"
+                "^Clock$"
+                "^Cairo-dock"
+                "^Catclock$"
+                "^dde-calendar$"
+                "^Display$"
+                "^Guake"
+                "^i3quitdialog"
+                "^XEyes$"
+            }
+            name: {
+                "Kodumaro Clock"
+                "kodumaro-clock"
+            }
+            role: {"pop-up"}
+            type: {"splash"}
         properties:
             titlebars_enabled: true
+
+    ruled.client.append_rule
+        id: "clock"
+        rule_any:
+            name: {
+                "Kodumaro Clock"
+                "kodumaro-clock"
+            }
+        properties:
+            floating: true
+            placement: awful.placement.top_right
 
     ruled.client.append_rule
         id: "xlock"
@@ -227,6 +284,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Abiword$"
                 "^Google Docs$"
                 "^Gnumeric$"
+                "^tm$"
             }
         properties:
             maximized:      true

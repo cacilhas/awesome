@@ -457,7 +457,6 @@ client.connect_signal "request::default_keybindings", ->
             modifiers: {"Mod4"}
             key:       "F11"
             on_press: =>
-                -- @titlebars_enabled = @maximized
                 @maximized = not @maximized
                 @\raise!
                 @\emit_signal "request::titlebars"

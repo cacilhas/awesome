@@ -9,6 +9,7 @@ wibox = require"wibox"
 client.connect_signal "request::titlebars", =>
     if @maximized
         @titlebars_enabled = false
+        awful.titlebar(@).enabled = false
 
     else
         @titlebars_enabled = true unless @fullscreen
