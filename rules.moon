@@ -59,7 +59,11 @@ ruled.client.connect_signal "request::rules", ->
                 "Event Tester"  -- xev.
             }
             role: {"pop-up"}
-
+        except_any:
+            name: { -- Clock has its own management
+                "Kodumaro Clock"
+                "kodumaro-clock"
+            }
         properties:
             floating: true
             placement: awful.placement.centered
