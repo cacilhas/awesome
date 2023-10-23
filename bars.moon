@@ -103,20 +103,26 @@ screen.connect_signal "request::desktop_decoration", =>
             }
         }
 
-        expandtags: wibox.widget
+        et1: wibox.widget
             text: " "
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    if @topbar.widgets.taglist.visible
-                        @topbar.widgets.taglist.visible = false
-                        @topbar.widgets.taglist_full.visible = true
-                        @topbar.widgets.expandtags.text == " "
-                    else
-                        @topbar.widgets.taglist.visible = true
-                        @topbar.widgets.taglist_full.visible = false
-                        @topbar.widgets.expandtags.text == " "
-                    @topbar.widgets.expandtags\emit_signal "widget::redraw_needed"
+                    @topbar.widgets.taglist.visible = false
+                    @topbar.widgets.taglist_full.visible = true
+                    @topbar.widgets.et1.visible = false
+                    @topbar.widgets.et2.visible = true
+            }
+
+        et2: wibox.widget
+            text: " "
+            widget: wibox.widget.textbox
+            buttons: {
+                awful.button {}, 1, ->
+                    @topbar.widgets.taglist.visible = true
+                    @topbar.widgets.taglist_full.visible = false
+                    @topbar.widgets.et1.visible = true
+                    @topbar.widgets.et2.visible = false
             }
 
         archlogolauncher: wibox.widget
@@ -195,7 +201,8 @@ screen.connect_signal "request::desktop_decoration", =>
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.taglist
                 @topbar.widgets.taglist_full
-                @topbar.widgets.expandtags
+                @topbar.widgets.et1
+                @topbar.widgets.et2
             }
             wibox.widget
                 color: theme.bg_normal
@@ -222,6 +229,7 @@ screen.connect_signal "request::desktop_decoration", =>
         }
 
     @topbar.widgets.taglist_full.visible = false
+    @topbar.widgets.et2.visible = false
 
     ---------------------
     -- Top bar updates --
