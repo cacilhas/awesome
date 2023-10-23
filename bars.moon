@@ -90,41 +90,33 @@ screen.connect_signal "request::desktop_decoration", =>
             }
         }
 
+        taglist_full: awful.widget.taglist {
+            screen:  @
+            filter:  awful.widget.taglist.filter.all
+            buttons: {
+                awful.button {},       1, => @\view_only!
+                awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
+                awful.button {},       3, awful.tag.viewtoggle
+                awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
+                awful.button {},       4, => awful.tag.viewprev @screen
+                awful.button {},       5, => awful.tag.viewnext @screen
+            }
+        }
+
         expandtags: wibox.widget
             text: " "
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    if @topbar.widgets.expandtags.text == " "
+                    if @topbar.widgets.taglist.visible
+                        @topbar.widgets.taglist.visible = false
+                        @topbar.widgets.taglist_full.visible = true
                         @topbar.widgets.expandtags.text == " "
-                        @topbar.widgets.taglist\setup
-                            screen: @
-                            filter: awful.widget.taglist.filter.all
-                            layout: wibox.layout.fixed.horizontal
-                            buttons: {
-                                awful.button {},       1, => @\view_only!
-                                awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
-                                awful.button {},       3, awful.tag.viewtoggle
-                                awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
-                                awful.button {},       4, => awful.tag.viewprev @screen
-                                awful.button {},       5, => awful.tag.viewnext @screen
-                            }
                     else
+                        @topbar.widgets.taglist.visible = true
+                        @topbar.widgets.taglist_full.visible = false
                         @topbar.widgets.expandtags.text == " "
-                        @topbar.widgets.taglist\setup
-                            screen: @
-                            filter: awful.widget.taglist.filter.noempty
-                            layout: wibox.layout.fixed.horizontal
-                            buttons: {
-                                awful.button {},       1, => @\view_only!
-                                awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
-                                awful.button {},       3, awful.tag.viewtoggle
-                                awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
-                                awful.button {},       4, => awful.tag.viewprev @screen
-                                awful.button {},       5, => awful.tag.viewnext @screen
-                            }
                     @topbar.widgets.expandtags\emit_signal "widget::redraw_needed"
-                    @topbar.widgets.taglist\emit_signal "widget::redraw_needed"
             }
 
         archlogolauncher: wibox.widget
@@ -202,6 +194,7 @@ screen.connect_signal "request::desktop_decoration", =>
             {
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.taglist
+                @topbar.widgets.taglist_full
                 @topbar.widgets.expandtags
             }
             wibox.widget
@@ -227,6 +220,8 @@ screen.connect_signal "request::desktop_decoration", =>
                 @topbar.widgets.layoutbox
             }
         }
+
+    @topbar.widgets.taglist_full.visible = false
 
     ---------------------
     -- Top bar updates --
