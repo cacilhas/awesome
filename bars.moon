@@ -4,7 +4,7 @@ gears = require"gears"
 awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
-import i3blocksassets, nexttag, prevtag, reload, shell, showpopup, terminal, trim from require"helpers"
+import i3blocksassets, nexttag, prevtag, reload, showpopup, terminal, trim from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -39,42 +39,29 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @topbar =
         helpers:
-            updateaudio: =>
-                command = "#{i3blocksassets}/audio.sh"
-                command = "button=#{@} #{command}" if @
-                with io.popen command
-                    text = \read"*l"
-                    \read"*l" -- discard
-                    color = \read"*l"
-                    \close!
-                    return "<span color=\"#{color}\">#{text}</span>"
+            updatemarkup: (command, bt) =>
+                command = "button=#{bt} #{command}" if bt
+                awful.spawn.easy_async_with_shell command, (res) ->
+                    it = res\gmatch"[^\n]+"
+                    text = it!
+                    it! -- discard
+                    color = it!
+                    @markup = "<span color=\"#{color}\">#{text}</span>"
 
-            updatemic: =>
-                command = "#{i3blocksassets}/mic.sh"
-                command = "button=#{@} #{command}" if @
-                with io.popen command
-                    text = \read"*l"
-                    \read"*l" -- discard
-                    color = \read"*l"
-                    \close!
-                    return "<span color=\"#{color}\">#{text}</span>"
-
-            updateeth: =>
-                command = "#{i3blocksassets}/eth.sh"
-                command = "button=#{@} #{command}" if @
-                with io.popen command
-                    text = \read"*l"
-                    \read"*l" -- discard
-                    color = \read"*l"
-                    \close!
-                    return "<span color=\"#{color}\">#{text}</span>"
+            updateuserhost: =>
+                awful.spawn.easy_async_with_shell "hostname", (host) ->
+                    if host
+                        @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+                    else
+                        awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
+                            @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
 
             updatevpn: =>
-                vpn = shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'"
-                if #vpn > 0
-                    "<span color=\"green\">#{trim vpn}</span>"
-                else
-                    '<span color="red">disconnected</span>'
+                awful.spawn.easy_async_with_shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'", (vpn) ->
+                    if vpn or #vpn > 0
+                        @markup = "<span color=\"green\">#{trim vpn}</span>"
+                    else
+                        @markup = '<span color="red">disconnected</span>'
 
     @topbar.widgets =
         taglist: awful.widget.taglist {
@@ -131,40 +118,36 @@ screen.connect_signal "request::desktop_decoration", =>
             buttons: {awful.button {}, 1, -> awful.spawn "#{i3blocksassets}/archlogo"}
 
         userhost: wibox.widget
-            markup:  "<span color=\"blue\">#{os.getenv"USER"}@#{shell"hostname"}</span>"
+            markup:  '<span color="red">_@_</span>'
             widget:  wibox.widget.textbox
             buttons: {awful.button {}, 1, -> awful.spawn "prime-run nemo Desktop"}
 
         audio: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
-            buttons: [awful.button({}, b, -> @topbar.widgets.audio.markup = @topbar.helpers.updateaudio b) for b in *{1, 2, 3, 4, 5}]
+            buttons: [awful.button({}, b, -> @topbar.helpers.updatemarkup @topbar.widgets.audio, "#{i3blocksassets}/audio.sh", b) for b = 1, 5]
 
         mic: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
-            buttons: [awful.button({}, b, -> @topbar.widgets.mic.markup = @topbar.helpers.updatemic b) for b in *{1, 2, 3, 4, 5}]
+            buttons: [awful.button({}, b, -> @topbar.helpers.updatemarkup @topbar.widgets.mic, "#{i3blocksassets}/mic.sh", b) for b = 1, 5]
 
         eth: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    text = shell "ip link show dev eno1"
-                        noempty: true
-                        removegarbage: true
-                    showpopup(text).visible = true
+                    awful.spawn.easy_async_with_shell "ip link show dev eno1", (text) ->
+                        showpopup(text).visible = true
             }
 
         internet: wibox.widget
-            markup: ""
+            text: "‼️"
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    text = shell "ip addr show dev eno1"
-                        noempty: true
-                        removegarbage: true
-                    showpopup(text).visible = true
+                    awful.spawn.easy_async_with_shell "ip addr show dev eno1", (text) ->
+                        showpopup(text).visible = true
             }
 
         vpn: wibox.widget
@@ -172,10 +155,8 @@ screen.connect_signal "request::desktop_decoration", =>
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    text = shell "nordvpn status",
-                        noempty: true
-                        removegarbage: true
-                    showpopup(text).visible = true
+                    awful.spawn.easy_async_with_shell "nordvpn status", (text) ->
+                        showpopup(text).visible = true
                 awful.button {}, 2, -> awful.spawn "sudo nordvpn disconnect"
                 awful.button {}, 4, -> awful.spawn "sudo nordvpn connect us"
                 awful.button {}, 5, -> awful.spawn "sudo nordvpn connect br"
@@ -238,48 +219,66 @@ screen.connect_signal "request::desktop_decoration", =>
         autostart: true
         call_now:  true
         timeout:   1
-        callback:  -> @topbar.widgets.audio.markup = @topbar.helpers.updateaudio!
+        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.audio, "#{i3blocksassets}/audio.sh"
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   1
-        callback:  -> @topbar.widgets.mic.markup = @topbar.helpers.updatemic!
+        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.mic, "#{i3blocksassets}/mic.sh"
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   5
-        callback:  -> @topbar.widgets.eth.markup = @topbar.helpers.updateeth!
+        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.eth, "#{i3blocksassets}/eth.sh"
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   10
-        callback:  -> @topbar.widgets.internet.markup = shell "#{i3blocksassets}/internet.sh"
+        callback:  ->
+            awful.spawn.easy_async_with_shell "#{i3blocksassets}/internet.sh", (st) ->
+                @topbar.widgets.internet.text = st or "‼️"
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   5
-        callback:  -> @topbar.widgets.vpn.markup = @topbar.helpers.updatevpn!
+        callback:  -> @topbar.helpers.updatevpn @topbar.widgets.vpn
+
+    gears.timer
+        autostart: true
+        call_now:  true
+        timeout:   15*60
+        callback: -> @topbar.helpers.updateuserhost @topbar.widgets.userhost
 
     ----------------------------------------------------------------------------
     -- Bottom bar
 
     @bottombar =
         helpers:
+            updatebright: =>
+                xrandr = "xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }'"
+                awful.spawn.easy_async_with_shell xrandr, (bri) ->
+                    @text = if bri then "🔆#{math.floor (100 * tonumber bri) + .5}%" else "🔆‼️%"
+
             updateloadavg: =>
-                with io.popen "#{i3blocksassets}/loadavg.awk"
-                    res = \read"*l"
-                    \close!
-                    return res
+                awful.spawn.easy_async_with_shell "#{i3blocksassets}/loadavg.awk", (load) ->
+                    @markup = (load or "")\gmatch"[^\n]+"!
 
     @bottombar.widgets =
+        bright: wibox.widget
+            text: "🔆‼️%"
+            widget: wibox.widget.textbox
+
         reloadbt: wibox.widget
             markup: '<span size="large" color="#aaff00">♼</span>'
             widget: wibox.widget.textbox
-            buttons: {awful.button {}, 1, -> awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"}
+            buttons: {
+                awful.button {}, 1, ->
+                    awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+            }
 
         taskbar: awful.widget.tasklist {
             screen:  @,
@@ -356,6 +355,8 @@ screen.connect_signal "request::desktop_decoration", =>
                     color:  theme.bg_normal
                     bg:     theme.bg_normal
                     widget: wibox.widget.textbox" "
+                @bottombar.widgets.bright
+                wibox.widget.textbox"┊"
                 @bottombar.widgets.loadavg
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.localclock
@@ -373,8 +374,12 @@ screen.connect_signal "request::desktop_decoration", =>
     -----------------------
     -- Bottom bar update --
 
+    gears.timer
+        autostart: true
+        timeout: 5
+        callback: -> @bottombar.helpers.updatebright @bottombar.widgets.bright
 
     gears.timer
         autostart: true
         timeout:   5
-        callback:  -> @bottombar.widgets.loadavg.markup = @bottombar.helpers.updateloadavg!
+        callback:  -> @bottombar.helpers.updateloadavg @bottombar.widgets.loadavg

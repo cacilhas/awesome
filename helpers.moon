@@ -5,27 +5,23 @@ awful   = require"awful"
 naughty = require"naughty"
 wibox   = require"wibox"
 
+
+--------------------------------------------------------------------------------
 trim = =>
     res = @\gsub "^%s+", ""
     res = res\gsub "%s+$", ""
     res
 
-shell = (t={}) =>
+--------------------------------------------------------------------------------
+-- XXX: ¡¡BLOCKING FUNCTION!! prefer using awful.spawn.easy_async_with_shell instead
+shell = =>
     with io.popen @
-        res = ""
-        if t.noempty
-            for line in \lines!
-                line = line\gsub "%s+$", ""
-                res ..= line .. "\n" if #line\gsub("^%ѕ+", "") > 0
-            res = res\gsub "\n$", ""
-        else
-            res = \read"*a"
+        res = \read"*a"
         \close!
-        if t.removegarbage
-            while #res > 0 and not res\sub(1, 1)\match"[0-9A-Za-z_]"
-                res = res\sub 2
         return trim res
 
+--------------------------------------------------------------------------------
+-- XXX: reload MUST be a blocking function
 reload = ->
     stderr = os.tmpname!
 
@@ -48,6 +44,7 @@ reload = ->
         title:   "Awesome reload failed"
         message: err
 
+--------------------------------------------------------------------------------
 showpopup = =>
     lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch"[^\n]+"]
     lines.layout = wibox.layout.fixed.vertical
@@ -62,6 +59,7 @@ showpopup = =>
     popup\connect_signal "mouse::leave", => @visible = false
     popup
 
+--------------------------------------------------------------------------------
 nexttag = (screen=awful.screen.focused!) =>
     tags = screen.tags
     src  = awful.tag.selected!
@@ -88,6 +86,7 @@ nexttag = (screen=awful.screen.focused!) =>
     --     idx = 1 if idx > #tags
     --     tag = tags[idx]
 
+--------------------------------------------------------------------------------
 prevtag = (screen=awful.screen.focused!) =>
     tags = screen.tags
     src  = awful.tag.selected!
@@ -114,14 +113,14 @@ prevtag = (screen=awful.screen.focused!) =>
     --     idx = #tags if idx == 0
     --     tag = tags[idx]
 
+--------------------------------------------------------------------------------
 terminal = "sakura"
 
+
+--------------------------------------------------------------------------------
 {
-    :terminal, :trim, :shell
-    :showpopup, :reload
+    :terminal, :trim, :showpopup, :reload
     :nexttag, :prevtag
-    -- editor:         os.getenv"EDITOR" or "vim"
-    -- editor_cmd:     "#{terminal} -e #{editor}"
     i3blocksassets: "#{gears.filesystem.get_xdg_config_home!}/i3blocks/assets"
-    wezterm:        "call-terminal.sh"
+    wezterm: "call-terminal.sh"
 }

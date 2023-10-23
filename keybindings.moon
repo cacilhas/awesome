@@ -2,7 +2,7 @@ local *
 
 awful = require"awful"
 import show_help from require"awful.hotkeys_popup"
-import nexttag, prevtag, reload, shell, wezterm from require"helpers"
+import nexttag, prevtag, reload, wezterm from require"helpers"
 import mainmenu from require"menus"
 
 -- Mod1 = Meta/Alt
@@ -121,31 +121,35 @@ awful.keyboard.append_global_keybindings {
         modifiers:  {"Mod4"}
         key:        "F7"
         on_press: ->
-            bright = tonumber shell [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
-            bright -= 0.1
-            bright = 0.1 if bright < 0.1
-            os.execute "xrandr --output HDMI-1 --brightness #{bright}"
+            command = [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
+            awful.spawn.easy_async_with_shell command, (bri) ->
+                bri = tonumber bri
+                bri -= 0.1
+                bri = 0.1 if bright < 0.1
+                awful.spawn "xrandr --output HDMI-1 --brightness #{bright}"
 
     awful.key
         modifiers:  {"Mod4"}
         key:        "F8"
         on_press: ->
-            bright = tonumber shell [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
-            bright += 0.1
-            bright = 1 if bright > 1
-            os.execute "xrandr --output HDMI-1 --brightness #{bright}"
+            command = [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
+            awful.spawn.easy_async_with_shell command, (bri) ->
+                bri = tonumber bri
+                bright += 0.1
+                bright = 1 if bright > 1
+                awful.spawn "xrandr --output HDMI-1 --brightness #{bright}"
 
     awful.key
         modifiers: {}
         key:       "Print"
-        on_press: -> os.execute"capture.sh"
+        on_press: -> awful.spawn "capture.sh"
         description: "take a screenshot"
         group:       "screen"
 
     awful.key
         modifiers: {"Mod4"}
         key:       "Print"
-        on_press: -> os.execute"capture.sh root"
+        on_press: -> awful.spawn "capture.sh root"
         description: "take a root screenshot"
         group:       "screen"
 
