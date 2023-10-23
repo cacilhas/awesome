@@ -62,10 +62,64 @@ showpopup = =>
     popup\connect_signal "mouse::leave", => @visible = false
     popup
 
+nexttag = (screen=awful.screen.focused!) =>
+    tags = screen.tags
+    src  = awful.tag.selected!
+    idx  = 0
+    for i, v in ipairs(tags)
+        if v == src
+            idx = i
+            break
+    for i = idx+1, #tags
+        tag = tags[i]
+        if #tag\clients! > 0
+            tag\view_only!
+            return
+
+    -- -- Rotating
+    -- idx += 1
+    -- idx = 1 if idx > #tags
+    -- tag = tags[idx]
+    -- while tag.name != src.name
+    --     if #tag\clients! > 0
+    --         tag\view_only!
+    --         return
+    --     idx += 1
+    --     idx = 1 if idx > #tags
+    --     tag = tags[idx]
+
+prevtag = (screen=awful.screen.focused!) =>
+    tags = screen.tags
+    src  = awful.tag.selected!
+    idx  = 0
+    for i, v in ipairs(tags)
+        if v == src
+            idx = i
+            break
+    for i = idx-1, 1, -1
+        tag = tags[i]
+        if #tag\clients! > 0
+            tag\view_only!
+            return
+
+    -- -- Rotating
+    -- idx -= 1
+    -- idx = #tags if idx == 0
+    -- tag = tags[idx]
+    -- while tag.name != src.name
+    --     if #tag\clients! > 0
+    --         tag\view_only!
+    --         return
+    --     idx -= 1
+    --     idx = #tags if idx == 0
+    --     tag = tags[idx]
+
 terminal = "sakura"
 
 {
-    :terminal, :trim, :shell, :showpopup, :reload
+    :terminal, :trim, :shell
+    :showpopup, :reload
+    :nexttag, :prevtag
     -- editor:         os.getenv"EDITOR" or "vim"
     -- editor_cmd:     "#{terminal} -e #{editor}"
     i3blocksassets: "#{gears.filesystem.get_xdg_config_home!}/i3blocks/assets"

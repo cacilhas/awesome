@@ -2,7 +2,7 @@ local *
 
 awful = require"awful"
 import show_help from require"awful.hotkeys_popup"
-import reload, shell, wezterm from require"helpers"
+import nexttag, prevtag, reload, shell, wezterm from require"helpers"
 import mainmenu from require"menus"
 
 -- Mod1 = Meta/Alt
@@ -11,57 +11,6 @@ import mainmenu from require"menus"
 -- Mod4 = Super
 -- Mod5 = ISO_Level3_Shift/AltGrp
 
-nexttag = =>
-    tags = awful.screen.focused!.tags
-    src  = awful.tag.selected!
-    idx  = 0
-    for i, v in ipairs(tags)
-        if v == src
-            idx = i
-            break
-    for i = idx+1, #tags
-        tag = tags[i]
-        if #tag\clients! > 0
-            tag\view_only!
-            return
-
-    -- -- Rotating
-    -- idx += 1
-    -- idx = 1 if idx > #tags
-    -- tag = tags[idx]
-    -- while tag.name != src.name
-    --     if #tag\clients! > 0
-    --         tag\view_only!
-    --         return
-    --     idx += 1
-    --     idx = 1 if idx > #tags
-    --     tag = tags[idx]
-
-prevtag = =>
-    tags = awful.screen.focused!.tags
-    src  = awful.tag.selected!
-    idx  = 0
-    for i, v in ipairs(tags)
-        if v == src
-            idx = i
-            break
-    for i = idx-1, 1, -1
-        tag = tags[i]
-        if #tag\clients! > 0
-            tag\view_only!
-            return
-
-    -- -- Rotating
-    -- idx -= 1
-    -- idx = #tags if idx == 0
-    -- tag = tags[idx]
-    -- while tag.name != src.name
-    --     if #tag\clients! > 0
-    --         tag\view_only!
-    --         return
-    --     idx -= 1
-    --     idx = #tags if idx == 0
-    --     tag = tags[idx]
 
 --------------------------------------------------------------------------------
 --- Global keys

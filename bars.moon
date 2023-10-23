@@ -4,7 +4,7 @@ gears = require"gears"
 awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
-import i3blocksassets, reload, shell, showpopup, terminal, trim from require"helpers"
+import i3blocksassets, nexttag, prevtag, reload, shell, showpopup, terminal, trim from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -85,8 +85,8 @@ screen.connect_signal "request::desktop_decoration", =>
                 awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
                 awful.button {},       3, awful.tag.viewtoggle
                 awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
-                awful.button {},       4, => awful.tag.viewprev @screen
-                awful.button {},       5, => awful.tag.viewnext @screen
+                awful.button {},       4, => prevtag @screen
+                awful.button {},       5, => nexttag @screen
             }
         }
 
