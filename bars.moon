@@ -351,7 +351,11 @@ screen.connect_signal "request::desktop_decoration", =>
             @bottombar.widgets.taskbar
             {
                 layout: wibox.layout.fixed.horizontal
-                wibox.widget.textbox"┊"
+                wibox.widget
+                    text:   " "
+                    color:  theme.bg_normal
+                    bg:     theme.bg_normal
+                    widget: wibox.widget.textbox" "
                 @bottombar.widgets.loadavg
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.localclock
