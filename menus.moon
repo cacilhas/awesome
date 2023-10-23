@@ -4,7 +4,7 @@ menubar = require"menubar"
 awful   = require"awful"
 theme   = require"beautiful"
 wibox   = require"wibox"
-import reload, terminal, wezterm from require"helpers"
+import reload, reloadscripts, terminal, wezterm from require"helpers"
 
 
 --------------------------------------------------------------------------------
@@ -12,19 +12,25 @@ import reload, terminal, wezterm from require"helpers"
 mainmenu = awful.menu
     items: {
         {
+            "System"
+            {
+                {"Halt", -> os.execute"sudo halt -p"}
+                {"Reboot", -> os.execute"sudo reboot"}
+            }
+            theme.system_logo
+        }
+        {
             "Awesome"
             {
-                {"Manual", "#mterminal} -e 'man awesome'"}
                 {"Terminal", wezterm}
+                {widget: wibox.widget.separator}
+                {"Reload Awesome", reload}
+                {"Exit", -> awesome.quit!}
             }
             theme.awesome_icon
         }
         {widget: wibox.widget.separator}
-        {"Halt", -> os.execute"sudo halt -p"}
-        {"Reboot", -> os.execute"sudo reboot"}
-        {widget: wibox.widget.separator}
-        {"Reload", reload}
-        {"Exit", -> awesome.quit!}
+        {"Reload Scripts", reloadscripts, theme.recycle}
     }
     hide_on_unfocus: 5
 

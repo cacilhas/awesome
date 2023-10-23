@@ -272,14 +272,6 @@ screen.connect_signal "request::desktop_decoration", =>
             text: "🔆‼️%"
             widget: wibox.widget.textbox
 
-        reloadbt: wibox.widget
-            markup: '<span size="large" color="#aaff00">♼</span>'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
-            }
-
         taskbar: awful.widget.tasklist {
             screen:  @,
             filter:  awful.widget.tasklist.filter.currenttags,
@@ -292,7 +284,7 @@ screen.connect_signal "request::desktop_decoration", =>
         }
 
         loadavg: wibox.widget
-            markup: @bottombar.helpers.updateloadavg!
+            markup: ""
             widget: wibox.widget.textbox
             buttons: {awful.button {}, 1, -> awful.spawn "#{terminal} -e btop"}
 
@@ -343,8 +335,6 @@ screen.connect_signal "request::desktop_decoration", =>
             {
                 layout: wibox.layout.fixed.horizontal
                 mainlauncher
-                wibox.widget.textbox" "
-                @bottombar.widgets.reloadbt
                 wibox.widget.textbox" "
             }
             @bottombar.widgets.taskbar

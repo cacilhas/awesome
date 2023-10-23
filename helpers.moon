@@ -45,6 +45,10 @@ reload = ->
         message: err
 
 --------------------------------------------------------------------------------
+reloadscripts = ->
+    awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+
+--------------------------------------------------------------------------------
 showpopup = =>
     lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch"[^\n]+"]
     lines.layout = wibox.layout.fixed.vertical
@@ -119,7 +123,7 @@ terminal = "sakura"
 
 --------------------------------------------------------------------------------
 {
-    :terminal, :trim, :showpopup, :reload
+    :terminal, :trim, :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     i3blocksassets: "#{gears.filesystem.get_xdg_config_home!}/i3blocks/assets"
     wezterm: "call-terminal.sh"

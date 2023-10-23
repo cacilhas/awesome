@@ -70,6 +70,8 @@ fg_minimize = "#ffffff"
 
         -- MISC
     wallpaper: "#{themes_path}/cacilhas/sky-background.png"
+    recycle: "#{themes_path}/cacilhas/recycle.png"
+    system_logo: "#{themes_path}/cacilhas/system-logo.png"
     taglist_squares: "true"
     titlebar_close_button: "true"
     menu_height: apply_dpi 24
