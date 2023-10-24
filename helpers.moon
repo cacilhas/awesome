@@ -77,18 +77,11 @@ nexttag = (screen=awful.screen.focused!) =>
         if #tag\clients! > 0
             tag\view_only!
             return
-
-    -- -- Rotating
-    -- idx += 1
-    -- idx = 1 if idx > #tags
-    -- tag = tags[idx]
-    -- while tag.name != src.name
-    --     if #tag\clients! > 0
-    --         tag\view_only!
-    --         return
-    --     idx += 1
-    --     idx = 1 if idx > #tags
-    --     tag = tags[idx]
+    for i = 1, idx
+        tag = tags[i]
+        if #tag\clients! > 0
+            tag\view_only!
+            return
 
 --------------------------------------------------------------------------------
 prevtag = (screen=awful.screen.focused!) =>
@@ -104,18 +97,11 @@ prevtag = (screen=awful.screen.focused!) =>
         if #tag\clients! > 0
             tag\view_only!
             return
-
-    -- -- Rotating
-    -- idx -= 1
-    -- idx = #tags if idx == 0
-    -- tag = tags[idx]
-    -- while tag.name != src.name
-    --     if #tag\clients! > 0
-    --         tag\view_only!
-    --         return
-    --     idx -= 1
-    --     idx = #tags if idx == 0
-    --     tag = tags[idx]
+    for i = #tags, idx, -1
+        tag = tags[i]
+        if #tag\clients! > 0
+            tag\view_only!
+            return
 
 --------------------------------------------------------------------------------
 terminal = "sakura"
