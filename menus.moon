@@ -23,6 +23,7 @@ mainmenu = awful.menu
         {
             "Awesome"
             {
+                {"Manual", "www-browser https://awesomewm.org/doc/api/"}
                 {"Terminal", wezterm}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload}
@@ -33,9 +34,10 @@ mainmenu = awful.menu
         {
             "X11"
             {
+                -- {"Xev", "#{terminal} -e xev"}
                 {"XKill", "xkill"}
-                -- TODO: xprop and xev
             }
+            theme.xorg_icon
         }
         {widget: wibox.widget.separator}
         {"Reload Scripts", reloadscripts, theme.recycle}

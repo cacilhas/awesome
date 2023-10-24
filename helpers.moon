@@ -82,6 +82,7 @@ nexttag = (screen=awful.screen.focused!) =>
         if #tag\clients! > 0
             tag\view_only!
             return
+    -- No other non-empty tag, quitting silently
 
 --------------------------------------------------------------------------------
 prevtag = (screen=awful.screen.focused!) =>
@@ -102,7 +103,18 @@ prevtag = (screen=awful.screen.focused!) =>
         if #tag\clients! > 0
             tag\view_only!
             return
+    -- No other non-empty tag, quitting silently
 
+--------------------------------------------------------------------------------
+xprop = ->
+    -- FIXME: not working
+    awful.spawn.with_shell "DISPLAY=:0 xprop | xmessage -f-"
+        -- naughty.notify
+        --     title: "xprop"
+        --     icon: theme.xorg_logo
+        --     icon_size: apply_dpi 64
+        --     text: @
+        --     timeout: 0
 
 --------------------------------------------------------------------------------
 terminal = "sakura"

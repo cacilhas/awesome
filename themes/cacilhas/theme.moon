@@ -59,7 +59,8 @@ fg_minimize = "#ffffff"
     layout_cornerse: "#{themes_path}/cacilhas/layouts/cornerse.png"
 
     awesome_icon: "#{themes_path}/cacilhas/awesome-icon.png"
-    exit_icon: "#{themes_path}/cacilhas/exit.png"
+    exit_icon:    "#{themes_path}/cacilhas/exit.png"
+    xorg_icon:    "#{themes_path}/cacilhas/xorg.svg"
 
         -- from default for now...
     menu_submenu_icon: "#{themes_path}/cacilhas/submenu.png"

@@ -6,7 +6,10 @@ import terminal from require"helpers"
 
 --------------------------------------------------------------------------------
 (cmd, cb) ->
-    awful.spawn "#{terminal} -e btop" if cmd == "show"
+    if cmd == "show"
+        awful.spawn "#{terminal} -e btop"
+            fullscreen: true
+            urgent:     true
 
     awful.spawn.easy_async_with_shell "cat /proc/loadavg", =>
         it = @\gmatch"[%d%.]+"
