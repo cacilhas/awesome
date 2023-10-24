@@ -403,11 +403,13 @@ screen.connect_signal "request::desktop_decoration", =>
 
     gears.timer
         autostart: true
+        call_now:  true
         timeout: 5
         callback: -> @bottombar.helpers.updatebright @bottombar.widgets.bright
 
     gears.timer
         autostart: true
+        call_now:  true
         timeout:   5
         callback:  ->
             assets.loadavg nil, (markup) ->
