@@ -2,7 +2,6 @@ local *
 
 awful = require"awful"
 ruled = require"ruled"
-naughty = require"naughty"
 
 
 --------------------------------------------------------------------------------
@@ -265,8 +264,11 @@ ruled.client.connect_signal "request::rules", ->
                 "^zoom$"
             }
         properties:
-            tag:                  awful.tag.find_by_name nil, " "
-            switch_to_tags:       true
+            floating:       false
+            fullscreen:     false
+            maximized:      false
+            tag:            awful.tag.find_by_name nil, " "
+            switch_to_tags: true
 
     ruled.client.append_rule
         id: "image-manipulation"
