@@ -36,8 +36,8 @@ setvol = "pactl set-sink-volume"
             cb '<span color="#444400">   0%</span>'
 
         elseif vol >= 100
-            cb '<span color="#4444ff"> %3d</span>'\format(vol)
+            cb '<span color="#4444ff"> %3d%%</span>'\format(vol)
 
         else
             color = math.floor vol * 256 / 100
-            cb '<span color="#4444%02x"> %3d</span>'\format(color, vol)
+            cb '<span color="#4444%02x"> %3d%%</span>'\format(color, vol)
