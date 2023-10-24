@@ -125,8 +125,8 @@ awful.keyboard.append_global_keybindings {
             awful.spawn.easy_async_with_shell command, (bri) ->
                 bri = tonumber bri
                 bri -= 0.1
-                bri = 0.1 if bright < 0.1
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bright}"
+                bri = 0.1 if bri < 0.1
+                awful.spawn "xrandr --output HDMI-1 --brightness #{bri}"
 
     awful.key
         modifiers:  {"Mod4"}
@@ -135,9 +135,9 @@ awful.keyboard.append_global_keybindings {
             command = [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
             awful.spawn.easy_async_with_shell command, (bri) ->
                 bri = tonumber bri
-                bright += 0.1
-                bright = 1 if bright > 1
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bright}"
+                bri += 0.1
+                bri = 1 if bri > 1
+                awful.spawn "xrandr --output HDMI-1 --brightness #{bri}"
 
     awful.key
         modifiers: {}
