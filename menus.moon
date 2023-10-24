@@ -25,6 +25,7 @@ mainmenu = awful.menu
             {
                 {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
                 {"Reddit", "www-browser https://www.reddit.com/r/awesomewm/", theme.reddit_icon}
+                {"Settings", "#{terminal} -e 'nvim #{awful.util.getdir"config"}/rc.moon'"}
                 {"Terminal", wezterm}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload}
