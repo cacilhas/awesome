@@ -44,10 +44,10 @@ screen.connect_signal "request::desktop_decoration", =>
         updateuserhost: =>
             awful.spawn.easy_async_with_shell "hostname", (host) ->
                 if host
-                    @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+                    @markup = "<span color=\"#0044ff\">#{os.getenv"USER"}@#{trim host}</span>"
                 else
                     awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
-                        @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+                        @markup = "<span color=\"#0044ff\">#{os.getenv"USER"}@#{trim host}</span>"
 
         updatevpn: =>
             awful.spawn.easy_async_with_shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'", (vpn) ->
@@ -106,7 +106,7 @@ screen.connect_signal "request::desktop_decoration", =>
             }
 
         archlogolauncher: wibox.widget
-            markup:  '<span color="brown"> </span><span color="black"> </span><span color="blue"> </span>'
+            markup:  '<span color="brown"> </span><span color="black"> </span><span color="#0044ff"> </span>'
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->

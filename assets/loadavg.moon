@@ -21,21 +21,21 @@ import terminal from require"helpers"
             '<span foreground="gray"> </span>'
 
         res ..= if avg1 < 3
-            "<span foreground=\"blue\">¹#{avg1}</span> "
+            "<span foreground=\"cyan\">¹#{avg1}</span> "
         elseif avg1 < 5
             "<span foreground=\"yellow\">¹#{avg1}</span> "
         else
             "<span foreground=\"red\">¹#{avg1}</span> "
 
         res ..= if avg5 < 3
-            "<span foreground=\"blue\">⁵#{avg5}</span> "
+            "<span foreground=\"cyan\">⁵#{avg5}</span> "
         elseif avg5 < 5
             "<span foreground=\"yellow\">⁵#{avg5}</span> "
         else
             "<span foreground=\"red\">⁵#{avg5}</span> "
 
         res ..= if avg15 < 3
-            "<span foreground=\"blue\">¹⁵#{avg15}</span>"
+            "<span foreground=\"cyan\">¹⁵#{avg15}</span>"
         elseif avg15 < 5
             "<span foreground=\"yellow\">¹⁵#{avg15}</span>"
         else
