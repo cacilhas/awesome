@@ -23,7 +23,8 @@ mainmenu = awful.menu
         {
             "Awesome"
             {
-                {"Manual", "www-browser https://awesomewm.org/doc/api/"}
+                {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
+                {"Reddit", "www-browser https://www.reddit.com/r/awesomewm/", theme.reddit_icon}
                 {"Terminal", wezterm}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload}

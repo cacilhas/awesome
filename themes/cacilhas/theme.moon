@@ -61,6 +61,7 @@ fg_minimize = "#ffffff"
     awesome_icon: "#{themes_path}/cacilhas/awesome-icon.png"
     exit_icon:    "#{themes_path}/cacilhas/exit.png"
     xorg_icon:    "#{themes_path}/cacilhas/xorg.svg"
+    reddit_icon:  "#{themes_path}/cacilhas/reddit.svg"
 
         -- from default for now...
     menu_submenu_icon: "#{themes_path}/cacilhas/submenu.png"
