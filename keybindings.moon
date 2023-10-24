@@ -127,23 +127,17 @@ awful.keyboard.append_global_keybindings {
         modifiers:  {"Mod4"}
         key:        "F7"
         on_press: ->
-            command = [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
-            awful.spawn.easy_async_with_shell command, (bri) ->
-                bri = tonumber bri
-                bri -= 0.1
-                bri = 0.1 if bri < 0.1
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bri}"
+            with awful.screen.focused!.topbar.widgets.mic
+                assets.bright "dec", (text) ->
+                    .text = text
 
     awful.key
         modifiers:  {"Mod4"}
         key:        "F8"
         on_press: ->
-            command = [[xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }']]
-            awful.spawn.easy_async_with_shell command, (bri) ->
-                bri = tonumber bri
-                bri += 0.1
-                bri = 1 if bri > 1
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bri}"
+            with awful.screen.focused!.topbar.widgets.mic
+                assets.bright "inc", (text) ->
+                    .text = text
 
     awful.key
         modifiers: {}

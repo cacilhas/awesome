@@ -38,22 +38,23 @@ screen.connect_signal "request::desktop_decoration", =>
     ----------------------------------------------------------------------------
     -- Top bar
 
-    @topbar =
-        helpers:
-            updateuserhost: =>
-                awful.spawn.easy_async_with_shell "hostname", (host) ->
-                    if host
-                        @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
-                    else
-                        awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
-                            @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+    @topbar = {}
 
-            updatevpn: =>
-                awful.spawn.easy_async_with_shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'", (vpn) ->
-                    if vpn or #vpn > 0
-                        @markup = "<span color=\"green\">#{trim vpn}</span>"
-                    else
-                        @markup = '<span color="red">disconnected</span>'
+    @topbar.helpers =
+        updateuserhost: =>
+            awful.spawn.easy_async_with_shell "hostname", (host) ->
+                if host
+                    @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+                else
+                    awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
+                        @markup = "<span color=\"blue\">#{os.getenv"USER"}@#{trim host}</span>"
+
+        updatevpn: =>
+            awful.spawn.easy_async_with_shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'", (vpn) ->
+                if vpn or #vpn > 0
+                    @markup = "<span color=\"green\">#{trim vpn}</span>"
+                else
+                    @markup = '<span color="red">disconnected</span>'
 
     @topbar.widgets =
         taglist: awful.widget.taglist {
@@ -284,17 +285,21 @@ screen.connect_signal "request::desktop_decoration", =>
     ----------------------------------------------------------------------------
     -- Bottom bar
 
-    @bottombar =
-        helpers:
-            updatebright: =>
-                xrandr = "xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }'"
-                awful.spawn.easy_async_with_shell xrandr, (bri) ->
-                    @text = if bri then "🔆#{math.floor (100 * tonumber bri) + .5}%" else "🔆‼️%"
+    @bottombar = {}
 
     @bottombar.widgets =
         bright: wibox.widget
             text: "🔆‼️%"
             widget: wibox.widget.textbox
+            buttons: {
+                awful.button {}, 4, =>
+                    assets.bright "dec", (text) ->
+                        @text = text
+
+                awful.button {}, 5, =>
+                    assets.bright "inc", (text) ->
+                        @text = text
+            }
 
         taskbar: awful.widget.tasklist {
             screen:  @,
@@ -396,7 +401,9 @@ screen.connect_signal "request::desktop_decoration", =>
         autostart: true
         call_now:  true
         timeout: 5
-        callback: -> @bottombar.helpers.updatebright @bottombar.widgets.bright
+        callback: ->
+            assets.bright nil, (text) ->
+                @bottombar.widgets.bright.text = text
 
     gears.timer
         autostart: true
