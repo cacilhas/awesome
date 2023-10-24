@@ -15,8 +15,8 @@ mainmenu = awful.menu
         {
             "System"
             {
-                {"Halt", -> os.execute"sudo halt -p"}
-                {"Reboot", -> os.execute"sudo reboot"}
+                {"Halt", "sudo halt -p"}
+                {"Reboot", "sudo reboot"}
             }
             theme.system_logo
         }
@@ -29,6 +29,13 @@ mainmenu = awful.menu
                 {"Exit", -> awesome.quit!}
             }
             theme.awesome_icon
+        }
+        {
+            "X11"
+            {
+                {"XKill", "xkill"}
+                -- TODO: xprop and xev
+            }
         }
         {widget: wibox.widget.separator}
         {"Reload Scripts", reloadscripts, theme.recycle}
