@@ -4,6 +4,7 @@ menubar = require"menubar"
 awful   = require"awful"
 theme   = require"beautiful"
 wibox   = require"wibox"
+import apply_dpi from require"beautiful.xresources"
 import reload, reloadscripts, terminal, wezterm from require"helpers"
 
 
@@ -41,9 +42,12 @@ mainlauncher = awful.widget.launcher
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 desktopmenu = awful.menu
+    theme:
+        width: apply_dpi 300
     items: {
         {"Desktop", (->), theme.awesome_icon, widget: wibox.widget.textbox}
-        {"Change wallpaper", -> awful.screen.focused!\emit_signal "request::wallpaper"}
+        {"Change current wallpaper", -> awful.screen.focused!\emit_signal "request::wallpaper"}
+        {"Change all wallpapers",    -> awesome.emit_signal "request::wallpaper"}
         {
             "Layout"
             with awful.layout
@@ -59,5 +63,7 @@ desktopmenu = awful.menu
 
 mainmenu\connect_signal    "mouse::leave", => @\hide!
 desktopmenu\connect_signal "mouse::leave", => @\hide!
+awesome.connect_signal "request::wallpaper", ->
+    s\emit_signal"request::wallpaper" for s in screen
 
 {:mainmenu, :desktopmenu, :mainlauncher}

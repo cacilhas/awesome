@@ -1,6 +1,7 @@
 local *
 
 awful = require"awful"
+assets = require"assets"
 import show_help from require"awful.hotkeys_popup"
 import nexttag, prevtag, reload, wezterm from require"helpers"
 import mainmenu from require"menus"
@@ -39,34 +40,41 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {}
+        key:       "XF86AudioMute"
+        on_press: ->
+            with awful.screen.focused!.topbar.widgets.audio
+                assets.audio "mute", (markup) ->
+                    .markup = markup
+        description: "mute/umute audio"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {}
         key:       "XF86AudioLowerVolume"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.audio
-                    widget.markup = .helpers.updateaudio 4
+            with awful.screen.focused!.topbar.widgets.audio
+                assets.audio "dec", (markup) ->
+                    .markup = markup
         description: "lower volume"
         group:       "awesome"
 
     awful.key
-        modify: {"Mod4"}
-        key:    "F2"
+        modifiers: {"Mod4"}
+        key:       "F2"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.audio
-                    widget.markup = .helpers.updateaudio 4
-        description: "lower volume"
+            with awful.screen.focused!.topbar.widgets.audio
+                assets.audio "dec", (markup) ->
+                    .markup = markup
+        description: "raise volume"
         group:       "awesome"
 
     awful.key
         modifiers: {}
         key:       "XF86AudioRaiseVolume"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.audio
-                    widget.markup = .helpers.updateaudio 5
+            with awful.screen.focused!.topbar.widgets.audio
+                assets.audio "inc", (markup) ->
+                    .markup = markup
         description: "raise volume"
         group:       "awesome"
 
@@ -74,32 +82,19 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod4"}
         key:       "F3"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.audio
-                    widget.markup = .helpers.updateaudio 5
+            with awful.screen.focused!.topbar.widgets.audio
+                assets.audio "inc", (markup) ->
+                    .markup = markup
         description: "raise volume"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {}
-        key:       "XF86AudioMute"
-        on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.audio
-                    widget.markup = .helpers.updateaudio 1
-        description: "mute/umute audio"
         group:       "awesome"
 
     awful.key
         modifiers: {}
         key:       "XF86AudioMuteMic"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.mic
-                    widget.markup = .helpers.updatemic 1
+            with awful.screen.focused!.topbar.widgets.mic
+                assets.mic "mute", (markup) ->
+                    .markup = markup
         description: "mute/unmute mic"
         group:       "awesome"
 
@@ -107,12 +102,23 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod4"}
         key:       "F4"
         on_press: ->
-            with bar = awful.screen.focused!.topbar
-                if .bar
-                    widget = .widgets.mic
-                    widget.markup = .helpers.updatemic 1
+            with awful.screen.focused!.topbar.widgets.mic
+                assets.mic "mute", (markup) ->
+                    .markup = markup
         description: "mute/unmute mic"
         group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        Key:       "F5"
+        on_press: ->
+            with awful.screen.focused!
+                .topbar.bar.ontop = true
+                .bottombar.bar.ontop = true
+        on_release: ->
+            with awful.screen.focused!
+                .topbar.bar.ontop = false
+                .bottombar.bar.ontop = false
 
     -- awful.key {"Mod4"}, "F7", -> os.execute"brighcli -", description: "decrease brightness", group: "awesome"
     -- awful.key {"Mod4"}, "F8", -> os.execute"brighcli +", description: "increase brightness", group: "awesome"

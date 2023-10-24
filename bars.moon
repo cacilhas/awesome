@@ -4,7 +4,8 @@ gears = require"gears"
 awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
-import i3blocksassets, nexttag, prevtag, reload, showpopup, terminal, trim from require"helpers"
+assets = require"assets"
+import nexttag, prevtag, reload, showpopup, terminal, trim from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -115,30 +116,60 @@ screen.connect_signal "request::desktop_decoration", =>
         archlogolauncher: wibox.widget
             markup:  '<span color="brown"> </span><span color="black"> </span><span color="blue"> </span>'
             widget:  wibox.widget.textbox
-            buttons: {awful.button {}, 1, -> awful.spawn "#{i3blocksassets}/archlogo"}
+            buttons: {
+                awful.button {}, 1, ->
+                    awful.spawn "#{awful.util.getdir"config"}/assets/archlogo"
+            }
 
         userhost: wibox.widget
             markup:  '<span color="red">_@_</span>'
             widget:  wibox.widget.textbox
-            buttons: {awful.button {}, 1, -> awful.spawn "prime-run nemo Desktop"}
+            buttons: {
+                awful.button {}, 1, ->
+                    awful.spawn "prime-run nemo Desktop"
+                        floating: true
+                        focus:    true
+                        sticky:   true
+                        placement: awful.placement.centered
+            }
 
         audio: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
-            buttons: [awful.button({}, b, -> @topbar.helpers.updatemarkup @topbar.widgets.audio, "#{i3blocksassets}/audio.sh", b) for b = 1, 5]
+            buttons: {
+                awful.button {}, 1, ->
+                    assets.audio "mute", (markup) ->
+                        @topbar.widgets.audio.markup = markup
+
+                awful.button {}, 4, ->
+                    assets.audio "dec", (markup) ->
+                        @topbar.widgets.audio.markup = markup
+
+                awful.button {}, 5, ->
+                    assets.audio "inc", (markup) ->
+                        @topbar.widgets.audio.markup = markup
+            }
 
         mic: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
-            buttons: [awful.button({}, b, -> @topbar.helpers.updatemarkup @topbar.widgets.mic, "#{i3blocksassets}/mic.sh", b) for b = 1, 5]
+            buttons: {
+                awful.button {}, 1, ->
+                    assets.mic "mute", (markup) ->
+                        @topbar.widgets.mic.markup = markup
+            }
 
         eth: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    awful.spawn.easy_async_with_shell "ip link show dev eno1", (text) ->
-                        showpopup(text).visible = true
+                    assets.eth "show", (markup) ->
+                        @topbar.widgets.eth.markup = markup
+
+                awful.button {}, 3, ->
+                    assets.eth "reset", (markup) ->
+                        @topbar.widgets.eth.markup = markup
             }
 
         internet: wibox.widget
@@ -146,8 +177,8 @@ screen.connect_signal "request::desktop_decoration", =>
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    awful.spawn.easy_async_with_shell "ip addr show dev eno1", (text) ->
-                        showpopup(text).visible = true
+                    assets.webconn "show", (text) ->
+                        @topbar.widgets.internet.text = text
             }
 
         vpn: wibox.widget
@@ -219,27 +250,33 @@ screen.connect_signal "request::desktop_decoration", =>
         autostart: true
         call_now:  true
         timeout:   1
-        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.audio, "#{i3blocksassets}/audio.sh"
+        callback:  ->
+            assets.audio nil, (markup) ->
+                @topbar.widgets.audio.markup = markup
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   1
-        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.mic, "#{i3blocksassets}/mic.sh"
+        callback:  ->
+            assets.mic nil, (markup) ->
+                @topbar.widgets.mic.markup = markup
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   5
-        callback:  -> @topbar.helpers.updatemarkup @topbar.widgets.eth, "#{i3blocksassets}/eth.sh"
+        callback:  ->
+            assets.eth nil, (markup) ->
+                @topbar.widgets.eth.markup = markup
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   10
         callback:  ->
-            awful.spawn.easy_async_with_shell "#{i3blocksassets}/internet.sh", (st) ->
-                @topbar.widgets.internet.text = st or "‼️"
+            assets.webconn nil, (text) ->
+                @topbar.widgets.internet.text = text
 
     gears.timer
         autostart: true
@@ -263,10 +300,6 @@ screen.connect_signal "request::desktop_decoration", =>
                 awful.spawn.easy_async_with_shell xrandr, (bri) ->
                     @text = if bri then "🔆#{math.floor (100 * tonumber bri) + .5}%" else "🔆‼️%"
 
-            updateloadavg: =>
-                awful.spawn.easy_async_with_shell "#{i3blocksassets}/loadavg.awk", (load) ->
-                    @markup = (load or "")\gmatch"[^\n]+"!
-
     @bottombar.widgets =
         bright: wibox.widget
             text: "🔆‼️%"
@@ -284,9 +317,13 @@ screen.connect_signal "request::desktop_decoration", =>
         }
 
         loadavg: wibox.widget
-            markup: ""
+            markup: '<span foreground="yellow"> </span>'
             widget: wibox.widget.textbox
-            buttons: {awful.button {}, 1, -> awful.spawn "#{terminal} -e btop"}
+            buttons: {
+                awful.button {}, 1, ->
+                    assets.loadavg "show", (markup) ->
+                        @bottombar.widgets.loadavg.markup = markup
+            }
 
         localclock: wibox.widget
             format:  '<span color="#ffaa88">%a %F %H:%MBRT</span>'
@@ -372,4 +409,6 @@ screen.connect_signal "request::desktop_decoration", =>
     gears.timer
         autostart: true
         timeout:   5
-        callback:  -> @bottombar.helpers.updateloadavg @bottombar.widgets.loadavg
+        callback:  ->
+            assets.loadavg nil, (markup) ->
+                @bottombar.widgets.loadavg.markup = markup

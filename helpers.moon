@@ -103,14 +103,15 @@ prevtag = (screen=awful.screen.focused!) =>
             tag\view_only!
             return
 
+
 --------------------------------------------------------------------------------
 terminal = "sakura"
 
 
 --------------------------------------------------------------------------------
 {
-    :terminal, :trim, :showpopup, :reload, :reloadscripts
+    :terminal, :trim
+    :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
-    i3blocksassets: "#{gears.filesystem.get_xdg_config_home!}/i3blocks/assets"
     wezterm: "call-terminal.sh"
 }
