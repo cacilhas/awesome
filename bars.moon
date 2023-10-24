@@ -40,15 +40,6 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @topbar =
         helpers:
-            updatemarkup: (command, bt) =>
-                command = "button=#{bt} #{command}" if bt
-                awful.spawn.easy_async_with_shell command, (res) ->
-                    it = res\gmatch"[^\n]+"
-                    text = it!
-                    it! -- discard
-                    color = it!
-                    @markup = "<span color=\"#{color}\">#{text}</span>"
-
             updateuserhost: =>
                 awful.spawn.easy_async_with_shell "hostname", (host) ->
                     if host
