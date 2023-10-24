@@ -329,6 +329,7 @@ ruled.client.connect_signal "request::rules", ->
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            placement: awful.placement.centered
 
     ruled.client.append_rule
         id: "video"
