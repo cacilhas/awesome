@@ -75,6 +75,14 @@ moonprompt = -> awful.prompt.run
                 timeout: 10
 
 --------------------------------------------------------------------------------
+redditsearch = -> awful.prompt.run
+    prompt: " <span color=\"#884400\">Reddit&gt;</span> "
+    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    history_path: "#{awful.util.get_cache_dir!}/reddit"
+    exe_callback: =>
+        awful.spawn "www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
+
+--------------------------------------------------------------------------------
 reloadscripts = ->
     awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
 
@@ -137,14 +145,7 @@ prevtag = (screen=awful.screen.focused!) =>
 
 --------------------------------------------------------------------------------
 xprop = ->
-    -- FIXME: not working
-    awful.spawn.with_shell "DISPLAY=:0 xprop | xmessage -f-"
-        -- naughty.notify
-        --     title: "xprop"
-        --     icon: theme.xorg_logo
-        --     icon_size: apply_dpi 64
-        --     text: @
-        --     timeout: 0
+    awful.spawn.easy_async_with_shell "xprop", showpopup
 
 --------------------------------------------------------------------------------
 terminal = "sakura"
@@ -155,5 +156,6 @@ terminal = "sakura"
     :terminal, :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
+    :redditsearch, :xprop
     wezterm: "call-terminal.sh"
 }

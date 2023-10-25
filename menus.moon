@@ -6,7 +6,7 @@ naughty = require"naughty"
 theme   = require"beautiful"
 wibox   = require"wibox"
 import apply_dpi from require"beautiful.xresources"
-import moonprompt, reload, reloadscripts, terminal, wezterm from require"helpers"
+import moonprompt, reload, reloadscripts, redditsearch, terminal, wezterm, xprop from require"helpers"
 
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ mainmenu = awful.menu
             "Awesome"
             {
                 {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
-                {"Reddit", "www-browser https://www.reddit.com/r/awesomewm/", theme.reddit_icon}
+                {"Reddit", redditsearch, theme.reddit_icon}
                 { "Command", moonprompt, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
                 {"Settings", "wezterm start --cwd #{awful.util.getdir"config"} -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
                 {"Terminal", wezterm, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
@@ -38,7 +38,8 @@ mainmenu = awful.menu
         {
             "X11"
             {
-                -- {"Xev", "#{terminal} -e xev"}
+                {"Xev", "#{terminal} -e xev"}
+                {"Xprop", xprop}
                 {"XKill", "xkill"}
             }
             theme.xorg_icon
