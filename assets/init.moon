@@ -4,5 +4,6 @@
     eth:     assert require"assets.eth"
     loadavg: assert require"assets.loadavg"
     mic:     assert require"assets.mic"
+    vpn:     assert require"assets.vpn"
     webconn: assert require"assets.webconn"
 }

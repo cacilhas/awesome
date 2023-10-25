@@ -66,6 +66,12 @@ moonprompt = -> awful.prompt.run
     prompt: " <span color=\"#4444ff\">AWM&gt;</span> "
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
     history_path: "#{awful.util.get_cache_dir!}/history"
+    hook: {
+        awful.key
+            modifier: {"Mod4"}
+            key:      "c"
+            on_press: => "#{@}#{selection!}", false
+    }
     exe_callback: =>
         awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", =>
             res = tostring awful.util.eval "#{setup}#{@}"

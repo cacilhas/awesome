@@ -5,7 +5,7 @@ awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
 assets = require"assets"
-import nexttag, prevtag, reload, showpopup, terminal, trim from require"helpers"
+import nexttag, prevtag, reload, trim from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -48,13 +48,6 @@ screen.connect_signal "request::desktop_decoration", =>
                 else
                     awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
                         @markup = "<span color=\"#0044ff\">#{os.getenv"USER"}@#{trim host}</span>"
-
-        updatevpn: =>
-            awful.spawn.easy_async_with_shell "nordvpn status | awk -F': ' '$1 ~ /Country/ { print $2; }'", (vpn) ->
-                if vpn or #vpn > 0
-                    @markup = "<span color=\"green\">#{trim vpn}</span>"
-                else
-                    @markup = '<span color="red">disconnected</span>'
 
     @topbar.widgets =
         prompt: awful.widget.prompt!
@@ -166,25 +159,27 @@ screen.connect_signal "request::desktop_decoration", =>
                         @topbar.widgets.eth.markup = markup
             }
 
-        internet: wibox.widget
+        webconn: wibox.widget
             text: "‼️"
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
                     assets.webconn "show", (text) ->
-                        @topbar.widgets.internet.text = text
+                        @topbar.widgets.webconn.text = text
             }
 
         vpn: wibox.widget
-            markup: ""
+            markup: '<span color="yellow">Connecting…</span>'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    awful.spawn.easy_async_with_shell "nordvpn status", (text) ->
-                        showpopup(text).visible = true
-                awful.button {}, 2, -> awful.spawn "sudo nordvpn disconnect"
-                awful.button {}, 4, -> awful.spawn "sudo nordvpn connect us"
-                awful.button {}, 5, -> awful.spawn "sudo nordvpn connect br"
+                    assets.vpn "status", (markup) -> @topbar.widgets.vpn.markup = markup
+                awful.button {}, 2, ->
+                    assets.vpn "disconnect", (markup) -> @topbar.widgets.vpn.markup = markup
+                awful.button {}, 4, ->
+                    assets.vpn "us", (markup) -> @topbar.widgets.vpn.markup = markup
+                awful.button {}, 5, ->
+                    assets.vpn "br", (markup) -> @topbar.widgets.vpn.markup = markup
             }
 
         layoutbox: awful.widget.layoutbox {
@@ -224,7 +219,7 @@ screen.connect_signal "request::desktop_decoration", =>
                 wibox.widget.textbox"┊"
                 @topbar.widgets.mic
                 wibox.widget.textbox"┊"
-                @topbar.widgets.internet
+                @topbar.widgets.webconn
                 wibox.widget.textbox"┊"
                 @topbar.widgets.eth
                 wibox.widget.textbox"┊"
@@ -271,13 +266,15 @@ screen.connect_signal "request::desktop_decoration", =>
         timeout:   10
         callback:  ->
             assets.webconn nil, (text) ->
-                @topbar.widgets.internet.text = text
+                @topbar.widgets.webconn.text = text
 
     gears.timer
         autostart: true
         call_now:  true
         timeout:   5
-        callback:  -> @topbar.helpers.updatevpn @topbar.widgets.vpn
+        callback: ->
+            assets.vpn nil, (markup) ->
+                @topbar.widgets.vpn.markup = markup
 
     gears.timer
         autostart: true
