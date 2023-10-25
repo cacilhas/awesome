@@ -1,7 +1,7 @@
 local *
 
 awful = require"awful"
-import geo from require"helpers"
+import geo, trim from require"helpers"
 
 
 --------------------------------------------------------------------------------
@@ -24,4 +24,9 @@ import geo from require"helpers"
                 bri = 1 if bri > 1
                 awful.spawn "xgamma -gamma #{bri}"
 
-        cb "🔆#{math.floor .5 + (bri * 100)}%"
+        awful.spawn.with_line_callback "xrandr --verbose --current"
+            stdout: (line) ->
+                line = trim line
+                if line\match"^Brightness:"
+                    realbri = tonumber line\gmatch"[%d%.]+"!
+                    cb "🔆#{math.floor .5 + (bri * realbri * 100)}%"
