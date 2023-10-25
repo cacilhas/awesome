@@ -95,6 +95,23 @@ reloadscripts = ->
     awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
 
 --------------------------------------------------------------------------------
+geo =
+    lat: 0
+    lon: 0
+    temp: 3400
+with f = io.open "#{os.getenv"XDG_CONFIG_HOME"}/redshift.conf"
+    if f
+        for line in \lines!
+            geo.lat = line\gsub "^lat%s*=%s*", "" if line\match"^lat%s*="
+            geo.lon = line\gsub "^lon%s*=%s*", "" if line\match"^lon%s*="
+            geo.temp = line\gsub "^temp.*=%s*", "" if line\match"^temp.*="
+        geo.lat = tonumber geo.lat
+        geo.lon = tonumber geo.lon
+        \close!
+
+
+
+--------------------------------------------------------------------------------
 showpopup = =>
     lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch"[^\n]+"]
     lines.layout = wibox.layout.fixed.vertical
@@ -164,6 +181,6 @@ terminal = "sakura"
     :terminal, :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
-    :redditsearch, :xprop
+    :ddgo, :redditsearch, :geo, :xprop
     wezterm: "call-terminal.sh"
 }
