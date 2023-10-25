@@ -57,6 +57,8 @@ screen.connect_signal "request::desktop_decoration", =>
                     @markup = '<span color="red">disconnected</span>'
 
     @topbar.widgets =
+        prompt: awful.widget.prompt!
+
         taglist: awful.widget.taglist {
             screen:  @
             filter:  awful.widget.taglist.filter.noempty
@@ -207,6 +209,7 @@ screen.connect_signal "request::desktop_decoration", =>
                 @topbar.widgets.taglist_full
                 @topbar.widgets.et1
                 @topbar.widgets.et2
+                @topbar.widgets.prompt
             }
             wibox.widget
                 color: theme.bg_normal

@@ -2,10 +2,11 @@ local *
 
 menubar = require"menubar"
 awful   = require"awful"
+naughty = require"naughty"
 theme   = require"beautiful"
 wibox   = require"wibox"
 import apply_dpi from require"beautiful.xresources"
-import reload, reloadscripts, terminal, wezterm from require"helpers"
+import moonprompt, reload, reloadscripts, terminal, wezterm from require"helpers"
 
 
 --------------------------------------------------------------------------------
@@ -15,8 +16,8 @@ mainmenu = awful.menu
         {
             "System"
             {
-                {"Halt", "sudo halt -p"}
-                {"Reboot", "sudo reboot"}
+                {"Halt", "sudo halt -p", "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
+                {"Reboot", "sudo reboot", "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
             }
             theme.system_logo
         }
@@ -25,11 +26,12 @@ mainmenu = awful.menu
             {
                 {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
                 {"Reddit", "www-browser https://www.reddit.com/r/awesomewm/", theme.reddit_icon}
-                {"Settings", "wezterm start --cwd #{awful.util.getdir"config"} -- nvim -cNvimTreeFocus"}
-                {"Terminal", wezterm}
+                { "Command", moonprompt, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
+                {"Settings", "wezterm start --cwd #{awful.util.getdir"config"} -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
+                {"Terminal", wezterm, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
                 {widget: wibox.widget.separator}
-                {"Reload Awesome", reload}
-                {"Exit", -> awesome.quit!}
+                {"Reload Awesome", reload, "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
+                {"Exit", -> awesome.quit!, "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
             }
             theme.awesome_icon
         }

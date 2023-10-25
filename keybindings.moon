@@ -3,7 +3,7 @@ local *
 awful = require"awful"
 assets = require"assets"
 import show_help from require"awful.hotkeys_popup"
-import nexttag, prevtag, reload, wezterm from require"helpers"
+import moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
 import mainmenu from require"menus"
 
 -- Mod1 = Meta/Alt
@@ -16,7 +16,50 @@ import mainmenu from require"menus"
 --------------------------------------------------------------------------------
 --- Global keys
 
+
 awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "1"
+        on_press: -> awful.screen.focused!.tags[1]\view_only!
+        description: "got to tag #{awful.screen.focused!.tags[1].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "2"
+        on_press: -> awful.screen.focused!.tags[2]\view_only!
+        description: "got to tag #{awful.screen.focused!.tags[2].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "3"
+        on_press: -> awful.screen.focused!.tags[3]\view_only!
+        description: "got to tag #{awful.screen.focused!.tags[3].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "4"
+        on_press: -> awful.screen.focused!.tags[2]\view_only!
+        description: "got to tag #{awful.screen.focused!.tags[4].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "5"
+        on_press: -> awful.screen.focused!.tags[5]\view_only!
+        description: "got to tag #{awful.screen.focused!.tags[5].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "d"
+        on_press: moonprompt
+        description: "run Moon command"
+        group:       "awesome"
+
     awful.key
         modifiers: {"Mod4"}
         key:       "Escape"

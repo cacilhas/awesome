@@ -51,6 +51,30 @@ reload = ->
         message: err
 
 --------------------------------------------------------------------------------
+setup = ""
+setup ..= "if not #{req} then #{req} = require[[#{req}]] end " for req in *{
+    "awful"
+    "gears"
+    "wibox"
+    "ruled"
+    "naughty"
+    "inspect"
+}
+setup ..= "if not s then s = awful.screen.focused() end "
+
+moonprompt = -> awful.prompt.run
+    prompt: " <span color=\"#4444ff\">AWM&gt;</span> "
+    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    history_path: "#{awful.util.get_cache_dir!}/history"
+    exe_callback: =>
+        awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", =>
+            naughty.notify
+                title: "Moonscript response"
+                ontop:  true
+                text: tostring awful.util.eval "#{setup}#{@}"
+                timeout: 10
+
+--------------------------------------------------------------------------------
 reloadscripts = ->
     awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
 
@@ -128,7 +152,7 @@ terminal = "sakura"
 
 --------------------------------------------------------------------------------
 {
-    :terminal, :trim
+    :terminal, :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     wezterm: "call-terminal.sh"
