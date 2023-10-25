@@ -92,7 +92,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod4", "Shift"}
         key:       "r"
         on_press: reload
-        description: "reload awesome"
+        description: "reload settings"
         group:       "awesome"
 
     awful.key
@@ -154,7 +154,7 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {}
-        key:       "XF86AudioMuteMic"
+        key:       "XF86AudioMicMute"
         on_press: ->
             with awful.screen.focused!.topbar.widgets.mic
                 assets.mic "mute", (markup) ->
@@ -267,7 +267,7 @@ awful.keyboard.append_global_keybindings {
         key:       "Tab"
         on_press: ->
             awful.spawn "rofi -show-icons -modes windowcd -show windowcd -display-windowcd App -theme sidebar-v2"
-        description: "navigate between windows"
+        description: "open between-clients navigation window"
         group:       "client"
 
     awful.key
@@ -366,8 +366,8 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod4", "Control"}
         key:       "Left"
-        on_press: prevtag -- awful.tag.viewprev
-        description: "view previous tag"
+        on_press: prevtag
+        description: "view previous non-empty tag"
         group:       "tag"
 
     awful.key
@@ -380,8 +380,8 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod4", "Control"}
         key:       "Right"
-        on_press: nexttag -- awful.tag.viewnext
-        description: "view next tag"
+        on_press: nexttag
+        description: "view next non-empty tag"
         group:       "tag"
 
     awful.key
