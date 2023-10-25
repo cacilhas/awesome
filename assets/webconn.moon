@@ -21,7 +21,7 @@ erroricon = "/usr/share/icons/breeze/status/24@3x/state-error.svg"
                     cb "🌐"
                 else
                     cb "⛔"
-                    awful.spawn.swith_line_callback "nordvpn status"
+                    awful.spawn.with_line_callback "nordvpn status"
                         stdout: (text) ->
                             awful.spawn "sudo nordvpn disconnect" if text == "Status: Connected"
             else
