@@ -23,7 +23,7 @@ screen.connect_signal "request::desktop_decoration", =>
         " "
         " "
         " "
-        " "
+        " " -- 
         " "
         " "
         " "
@@ -70,7 +70,7 @@ screen.connect_signal "request::desktop_decoration", =>
         }
 
         et1: wibox.widget
-            text: " "
+            text: " "
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
@@ -81,7 +81,7 @@ screen.connect_signal "request::desktop_decoration", =>
             }
 
         et2: wibox.widget
-            text: " "
+            text: " "
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->

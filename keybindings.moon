@@ -1,6 +1,6 @@
 local *
 
-awful = require"awful"
+awful  = require"awful"
 assets = require"assets"
 import show_help from require"awful.hotkeys_popup"
 import ddgo, moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
@@ -8,7 +8,7 @@ import mainmenu from require"menus"
 
 -- Mod1 = Meta/Alt
 -- Mod2 =
--- Mod3 = ISO_Level5_Shift/Menu
+-- Mod3 = Menu - former ISO_Level5_Shift/Menu
 -- Mod4 = Super
 -- Mod5 = ISO_Level3_Shift/AltGrp
 
@@ -18,6 +18,20 @@ import mainmenu from require"menus"
 
 
 awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       "Menu"
+        on_press: ->
+            for s in screen
+                s.topbar.bar.ontop = true
+                s.bottombar.bar.ontop = true
+        on_release: ->
+            for s in screen
+                s.topbar.bar.ontop = false
+                s.bottombar.bar.ontop = false
+        description: "raise bars using "
+        group:       "awesome"
+
     awful.key
         modifiers: {"Mod4"}
         key:       "1"
@@ -357,7 +371,7 @@ awful.keyboard.append_global_keybindings {
         group:       "tag"
 
     awful.key
-        modifiers: {"Mod3"}
+        modifiers: {"Mod4", "Mod1", "Control"}
         key:       "Left"
         on_press: awful.tag.viewprev
         description: "view previous tag"
@@ -371,7 +385,7 @@ awful.keyboard.append_global_keybindings {
         group:       "tag"
 
     awful.key
-        modifiers: {"Mod3"}
+        modifiers: {"Mod4", "Mod1", "Control"}
         key:       "Right"
         on_press: awful.tag.viewnext
         description: "view next tag"
