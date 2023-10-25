@@ -115,7 +115,7 @@ awful.keyboard.append_global_keybindings {
             with awful.screen.focused!.topbar.widgets.audio
                 assets.audio "dec", (markup) ->
                     .markup = markup
-        description: "raise volume"
+        description: "lower volume"
         group:       "awesome"
 
     awful.key
