@@ -5,7 +5,7 @@ awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
 assets = require"assets"
-import nexttag, prevtag, reload, trim from require"helpers"
+import nexttag, prevtag, reload from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -39,15 +39,6 @@ screen.connect_signal "request::desktop_decoration", =>
     -- Top bar
 
     @topbar = {}
-
-    @topbar.helpers =
-        updateuserhost: =>
-            awful.spawn.easy_async_with_shell "hostname", (host) ->
-                if host
-                    @markup = "<span color=\"#0044ff\">#{os.getenv"USER"}@#{trim host}</span>"
-                else
-                    awful.spawn.easy_async_with_shell "cat /etc/hostname", (host) ->
-                        @markup = "<span color=\"#0044ff\">#{os.getenv"USER"}@#{trim host}</span>"
 
     @topbar.widgets =
         prompt: awful.widget.prompt!
@@ -108,16 +99,12 @@ screen.connect_signal "request::desktop_decoration", =>
                     awful.spawn "#{awful.util.getdir"config"}/assets/archlogo"
             }
 
-        userhost: wibox.widget
+        hostname: wibox.widget
             markup:  '<span color="red">_@_</span>'
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    awful.spawn "prime-run nemo Desktop"
-                        floating: true
-                        focus:    true
-                        sticky:   true
-                        placement: awful.placement.centered
+                    assets.hostname "nemo", (markup) -> @topbar.widgets.hostname.markup = markup
             }
 
         audio: wibox.widget
@@ -213,7 +200,7 @@ screen.connect_signal "request::desktop_decoration", =>
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.archlogolauncher
                 wibox.widget.textbox"┊"
-                @topbar.widgets.userhost
+                @topbar.widgets.hostname
                 wibox.widget.textbox"┊"
                 @topbar.widgets.audio
                 wibox.widget.textbox"┊"
@@ -280,7 +267,9 @@ screen.connect_signal "request::desktop_decoration", =>
         autostart: true
         call_now:  true
         timeout:   15*60
-        callback: -> @topbar.helpers.updateuserhost @topbar.widgets.userhost
+        callback: ->
+            assets.hostname nil, (markup) ->
+                @topbar.widgets.hostname.markup = markup
 
     ----------------------------------------------------------------------------
     -- Bottom bar
