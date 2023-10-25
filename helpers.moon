@@ -25,8 +25,11 @@ shell = =>
 reload = ->
     stderr = os.tmpname!
 
-    if os.execute"cd #{awful.util.getdir"config"} && find . -name \"*.moon\" | xargs moonc &> #{stderr}" != 0
-        err = shell "cat #{stderr}"
+    if os.execute"cd #{awful.util.getdir"config"} && make &> #{stderr}" != 0
+        err = with io.open stderr, "r"
+            content = \read"*a"
+            \close!
+            return content
         os.remove stderr
         return naughty.notification
             urgency: "critical"
@@ -37,7 +40,10 @@ reload = ->
         os.remove stderr
         return awesome.restart!
 
-    err = shell "cat #{stderr}"
+    err = with io.open stderr, "r"
+        content = \read"*a"
+        \close!
+        return content
     os.remove stderr
     naughty.notification
         urgency: "critical"
