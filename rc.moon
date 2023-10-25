@@ -2,12 +2,13 @@ local *
 
 -- Deal with LuaRocks
 pcall require, "luarocks.loader"
+_, posix = xpcall (-> require"posix"), (-> os)
 
 -- Standard libs
-gears = assert require"gears"
 assert require"wibox"
 assert require"ruled"     -- declarative object management
 awful = assert require"awful"
+import filesystem from assert require"gears"
 
 assert require"awful.hotkeys_popup.keys" -- enable hotkeys help widget for VIM and other apps
 assert require"awful.autofocus"
@@ -19,15 +20,16 @@ naughty = assert require"naughty"   -- notification library
 naughty.connect_signal "request::display_error", (startup) =>
     naughty.notification
         urgency: "critical"
-        title:   "Oops, an error happened#{startup and " during startup!" or "!"}"
+        title:   "Oops, an error happened#{startup and " during startup" or ""}!"
         message: @
 
 
 --------------------------------------------------------------------------------
 --- Theme
 theme = assert require"beautiful"
-themes_path = "#{gears.filesystem.get_configuration_dir!}/themes"
-theme.init "#{themes_path}/cacilhas/theme.lua"
+themes_path = filesystem.get_configuration_dir! .. "/themes"
+posix.setenv "AWESOME_THEMES_PATH", themes_path if posix.setenv
+theme.init themes_path .. "/cacilhas/theme.lua"
 
 
 --------------------------------------------------------------------------------

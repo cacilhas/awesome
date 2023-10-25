@@ -6,7 +6,8 @@ import apply_dpi from require"beautiful.xresources"
 import filesystem from require"gears"
 
 -- themes_path = require"gears.filesystem".get_themes_dir!
-themes_path = "#{filesystem.get_configuration_dir!}/themes"
+themes_path = filesystem.get_themes_dir!
+themes_path = filesystem.get_configuration_dir! .. "/themes" if themes_path\match"/usr"
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal "request::rules", ->
