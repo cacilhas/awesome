@@ -4,6 +4,7 @@ gears   = require"gears"
 awful   = require"awful"
 naughty = require"naughty"
 wibox   = require"wibox"
+import filesystem from gears
 
 
 --------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ shell = =>
 reload = ->
     stderr = os.tmpname!
 
-    if os.execute"cd #{awful.util.getdir"config"} && make &> #{stderr}" != 0
+    if os.execute"cd #{filesystem.get_configuration_dir!} && make &> #{stderr}" != 0
         err = with io.open stderr, "r"
             content = \read"*a"
             \close!
@@ -65,7 +66,7 @@ setup ..= "if not s then s = awful.screen.focused() end "
 moonprompt = -> awful.prompt.run
     prompt: " <span color=\"#4444ff\">AWM&gt;</span> "
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
-    history_path: "#{awful.util.get_cache_dir!}/history"
+    history_path: "#{filesystem.get_cache_dir!}/history"
     hook: {
         awful.key
             modifier: {"Mod4"}
@@ -86,7 +87,7 @@ moonprompt = -> awful.prompt.run
 ddgo = -> awful.prompt.run
     prompt: " <span color=\"#884400\">DuckDuckGo&gt;</span> "
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
-    history_path: "#{awful.util.get_cache_dir!}/reddit"
+    history_path: "#{filesystem.get_cache_dir!}/ddgo"
     exe_callback: =>
         awful.spawn "www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
 
@@ -94,20 +95,20 @@ ddgo = -> awful.prompt.run
 redditsearch = -> awful.prompt.run
     prompt: " <span color=\"#884400\">Reddit&gt;</span> "
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
-    history_path: "#{awful.util.get_cache_dir!}/reddit"
+    history_path: "#{filesystem.get_cache_dir!}/reddit"
     exe_callback: =>
         awful.spawn "www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
 
 --------------------------------------------------------------------------------
 reloadscripts = ->
-    awful.spawn "dex #{gears.filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+    awful.spawn "dex #{filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
 
 --------------------------------------------------------------------------------
 geo =
     lat: 0
     lon: 0
     temp: 3400
-with f = io.open "#{os.getenv"XDG_CONFIG_HOME"}/redshift.conf"
+with f = io.open "#{filesystem.get_xdg_config_home!}/redshift.conf"
     if f
         for line in \lines!
             geo.lat = line\gsub "^lat%s*=%s*", "" if line\match"^lat%s*="

@@ -4,7 +4,7 @@ local *
 pcall require, "luarocks.loader"
 
 -- Standard libs
-assert require"gears"
+gears = assert require"gears"
 assert require"wibox"
 assert require"ruled"     -- declarative object management
 awful = assert require"awful"
@@ -26,7 +26,7 @@ naughty.connect_signal "request::display_error", (startup) =>
 --------------------------------------------------------------------------------
 --- Theme
 theme = assert require"beautiful"
-themes_path = "#{awful.util.getdir"config"}/themes"
+themes_path = "#{gears.filesystem.get_configuration_dir!}/themes"
 theme.init "#{themes_path}/cacilhas/theme.lua"
 
 

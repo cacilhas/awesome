@@ -5,6 +5,7 @@ awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
 assets = require"assets"
+import filesystem from gears
 import nexttag, prevtag, reload from require"helpers"
 import mainlauncher from require"menus"
 
@@ -96,7 +97,7 @@ screen.connect_signal "request::desktop_decoration", =>
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    awful.spawn "#{awful.util.getdir"config"}/assets/archlogo"
+                    awful.spawn "#{filesystem.get_configuration_dir!}/assets/archlogo"
             }
 
         hostname: wibox.widget

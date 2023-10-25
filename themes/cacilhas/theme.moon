@@ -1,12 +1,12 @@
 local *
 
-awful         = assert require"awful"
-theme_assets  = assert require"beautiful.theme_assets"
-rnotification = assert require"ruled.notification"
-import apply_dpi from assert require"beautiful.xresources"
+theme_assets  = require"beautiful.theme_assets"
+rnotification = require"ruled.notification"
+import apply_dpi from require"beautiful.xresources"
+import filesystem from require"gears"
 
 -- themes_path = require"gears.filesystem".get_themes_dir!
-themes_path = "#{awful.util.getdir"config"}/themes"
+themes_path = "#{filesystem.get_configuration_dir!}/themes"
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal "request::rules", ->
