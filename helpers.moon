@@ -68,11 +68,13 @@ moonprompt = -> awful.prompt.run
     history_path: "#{awful.util.get_cache_dir!}/history"
     exe_callback: =>
         awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", =>
+            res = tostring awful.util.eval "#{setup}#{@}"
             naughty.notify
                 title: "Moonscript response"
                 ontop:  true
-                text: tostring awful.util.eval "#{setup}#{@}"
+                text:   res
                 timeout: 10
+            awful.spawn.with_shell "printf %s '#{res}' | xclip -i -selection clipboard"
 
 --------------------------------------------------------------------------------
 ddgo = -> awful.prompt.run
