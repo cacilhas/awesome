@@ -3,7 +3,7 @@ local *
 awful = require"awful"
 assets = require"assets"
 import show_help from require"awful.hotkeys_popup"
-import moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
+import ddgo, moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
 import mainmenu from require"menus"
 
 -- Mod1 = Meta/Alt
@@ -51,6 +51,13 @@ awful.keyboard.append_global_keybindings {
         key:       "5"
         on_press: -> awful.screen.focused!.tags[5]\view_only!
         description: "got to tag #{awful.screen.focused!.tags[5].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "/"
+        on_press:  ddgo
+        description: "search on DuckDuckGo"
         group:       "awesome"
 
     awful.key
@@ -170,7 +177,7 @@ awful.keyboard.append_global_keybindings {
         modifiers:  {"Mod4"}
         key:        "F7"
         on_press: ->
-            with awful.screen.focused!.topbar.widgets.mic
+            with awful.screen.focused!.bottombar.widgets.bright
                 assets.bright "dec", (text) ->
                     .text = text
 
@@ -178,7 +185,7 @@ awful.keyboard.append_global_keybindings {
         modifiers:  {"Mod4"}
         key:        "F8"
         on_press: ->
-            with awful.screen.focused!.topbar.widgets.mic
+            with awful.screen.focused!.bottombar.widgets.bright
                 assets.bright "inc", (text) ->
                     .text = text
 

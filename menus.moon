@@ -6,7 +6,7 @@ naughty = require"naughty"
 theme   = require"beautiful"
 wibox   = require"wibox"
 import apply_dpi from require"beautiful.xresources"
-import moonprompt, reload, reloadscripts, redditsearch, terminal, wezterm, xprop from require"helpers"
+import ddgo, moonprompt, reload, reloadscripts, redditsearch, terminal, wezterm, xprop from require"helpers"
 
 
 --------------------------------------------------------------------------------
@@ -44,6 +44,8 @@ mainmenu = awful.menu
             }
             theme.xorg_icon
         }
+        {widget: wibox.widget.separator}
+        {"DuckDuckGo", ddgo, theme.ddgo_icon}
         {widget: wibox.widget.separator}
         {"Reload Scripts", reloadscripts, theme.recycle}
     }

@@ -75,6 +75,14 @@ moonprompt = -> awful.prompt.run
                 timeout: 10
 
 --------------------------------------------------------------------------------
+ddgo = -> awful.prompt.run
+    prompt: " <span color=\"#884400\">DuckDuckGo&gt;</span> "
+    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    history_path: "#{awful.util.get_cache_dir!}/reddit"
+    exe_callback: =>
+        awful.spawn "www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
+
+--------------------------------------------------------------------------------
 redditsearch = -> awful.prompt.run
     prompt: " <span color=\"#884400\">Reddit&gt;</span> "
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
