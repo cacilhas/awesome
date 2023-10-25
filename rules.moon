@@ -345,7 +345,7 @@ ruled.client.connect_signal "request::rules", ->
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
 
     ruled.client.append_rule
