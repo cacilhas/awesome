@@ -131,6 +131,13 @@ ruled.client.connect_signal "request::rules", ->
             placement: awful.placement.top_right
 
     ruled.client.append_rule
+        id: "vlc"
+        rule:
+            class: "^vlc$"
+        properties:
+            fullscreen: true
+
+    ruled.client.append_rule
         id: "xlock"
         rule:
             class: "^i3lock$"
@@ -347,6 +354,7 @@ ruled.client.connect_signal "request::rules", ->
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            placement: awful.placement.centered
 
     ruled.client.append_rule
         id: "wwww-browser"

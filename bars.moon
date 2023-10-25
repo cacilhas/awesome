@@ -70,8 +70,7 @@ screen.connect_signal "request::desktop_decoration", =>
         }
 
         et1: wibox.widget
-            -- text: " "
-            markup: ' <span color="#00c838"> </span>'
+            markup: ' <span color="#00c838"></span>'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
@@ -82,8 +81,7 @@ screen.connect_signal "request::desktop_decoration", =>
             }
 
         et2: wibox.widget
-            -- text: " "
-            markup: '| <span color="#ffbd2f"> </span>'
+            markup: '| <span color="#ffbd2f"></span>'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
