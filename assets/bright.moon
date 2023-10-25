@@ -6,26 +6,22 @@ import geo from require"helpers"
 
 --------------------------------------------------------------------------------
 (cmd, cb) ->
-    xrandr = "xrandr --verbose --current | grep '^HDMI-1 ' -A5 | awk -F': ' '$1 ~ /Brightness/ { print $2; }'"
-    awful.spawn.easy_async_with_shell xrandr, (bri) ->
-        return cb "🔆‼️%" unless bri
+    awful.spawn.easy_async_with_shell "xgamma 2>&1", (text) ->
+        return cb "🔆‼️%" unless text
+        it = text\gmatch"[%d%.]+"
+        bri = 0
+        bri += tonumber it! for _ = 1, 3
+        bri /= 3
 
         switch cmd
             when "dec"
-                bri = math.floor 10 * tonumber bri
-                bri -= 1
-                bri = 3 if bri < 3
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bri/10}"
-                bri *= 10
+                bri -= 0.1
+                bri = .3 if bri < .3
+                awful.spawn "xgamma -gamma #{bri}"
 
             when "inc"
-                bri = math.floor 10 * tonumber bri
-                bri += 1
-                bri = 10 if bri > 10
-                awful.spawn "xrandr --output HDMI-1 --brightness #{bri/10}"
-                bri *= 10
+                bri += 0.1
+                bri = 1 if bri > 1
+                awful.spawn "xgamma -gamma #{bri}"
 
-            when '*'
-                bri = math.floor 100 * tonumber(bri) + .5
-
-        cb "🔆#{bri}%"
+        cb "🔆#{math.floor .5 + (bri * 100)}%"
