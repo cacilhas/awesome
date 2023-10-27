@@ -27,6 +27,7 @@ ruled.client.connect_signal "request::rules", ->
             --instance: {"copyq", "pinentry"}
             class: {
                 "^archlogo$"
+                "^Audacious$"
                 "^Clock$"
                 "^Cairo-dock"
                 "^Catclock$"
@@ -72,6 +73,7 @@ ruled.client.connect_signal "request::rules", ->
         rule_any:
             class: {
                 "^archlogo$"
+                "^Audacious$"
                 "^Clock$"
                 "^Cairo-dock"
                 "^Catclock$"
@@ -101,6 +103,7 @@ ruled.client.connect_signal "request::rules", ->
         except_any:
             class: {
                 "^archlogo$"
+                "^Audacious$"
                 "^Clock$"
                 "^Cairo-dock"
                 "^Catclock$"
@@ -131,13 +134,6 @@ ruled.client.connect_signal "request::rules", ->
             placement: awful.placement.top_right
 
     ruled.client.append_rule
-        id: "vlc"
-        rule:
-            class: "^vlc$"
-        properties:
-            fullscreen: true
-
-    ruled.client.append_rule
         id: "xlock"
         rule:
             class: "^i3lock$"
@@ -159,6 +155,28 @@ ruled.client.connect_signal "request::rules", ->
         properties:
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
+            switch_to_tags: true
+
+    ruled.client.append_rule
+        id: "audacious"
+        rule:
+            class: "Audacious"
+        properties:
+            request_no_titlebar: true
+            tag:                 awful.tag.find_by_name nil, " "
+            switch_to_tags:      true
+            skip_taskbar:        true
+
+    ruled.client.append_rule
+        id: "emu"
+        rule_any:
+            class: {
+                "^Qemu-system"
+                "^Virt-manager"
+            }
+        properties:
+            fullscreen:     true
+            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
 
     ruled.client.append_rule
