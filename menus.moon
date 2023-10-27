@@ -16,8 +16,8 @@ mainmenu = awful.menu
         {
             "System"
             {
-                {"Halt", "sudo halt -p", "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
-                {"Reboot", "sudo reboot", "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
+                {"Reboot", "sudo reboot", "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
+                {"Halt", "sudo halt -p", "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
             }
             theme.system_logo
         }
@@ -46,7 +46,6 @@ mainmenu = awful.menu
         }
         {widget: wibox.widget.separator}
         {"DuckDuckGo", ddgo, theme.ddgo_icon}
-        {widget: wibox.widget.separator}
         {"Reload Scripts", reloadscripts, theme.recycle}
     }
     hide_on_unfocus: 5
