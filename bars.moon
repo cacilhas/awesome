@@ -291,7 +291,7 @@ screen.connect_signal "request::desktop_decoration", =>
                         @text = text
             }
 
-        taskbar: awful.widget.tasklist {
+        taskbar: awful.widget.tasklist
             screen:  @,
             filter:  awful.widget.tasklist.filter.currenttags,
             buttons: {
@@ -300,7 +300,6 @@ screen.connect_signal "request::desktop_decoration", =>
                 awful.button {}, 4, -> awful.client.focus.byidx -1
                 awful.button {}, 5, -> awful.client.focus.byidx  1
             }
-        }
 
         loadavg: wibox.widget
             markup: '<span foreground="yellow"> </span>'
