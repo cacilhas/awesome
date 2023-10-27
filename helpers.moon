@@ -89,7 +89,7 @@ ddgo = -> awful.prompt.run
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/ddgo"
     exe_callback: =>
-        awful.spawn "www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
+        awful.spawn "prime-run www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
 
 --------------------------------------------------------------------------------
 redditsearch = -> awful.prompt.run
@@ -97,7 +97,7 @@ redditsearch = -> awful.prompt.run
     textbox: awful.screen.focused!.topbar.widgets.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/reddit"
     exe_callback: =>
-        awful.spawn "www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
+        awful.spawn "prime-run www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
 
 --------------------------------------------------------------------------------
 reloadscripts = ->
