@@ -6,7 +6,7 @@ wibox = require"wibox"
 theme = require"beautiful"
 assets = require"assets"
 import filesystem from gears
-import nexttag, prevtag, reload from require"helpers"
+import nexttag, prevtag, reload, showpopup from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -323,12 +323,14 @@ screen.connect_signal "request::desktop_decoration", =>
             timezone: 'US/Pacific'
             refresh:  60
             widget:   wibox.widget.textclock
+            buttons:  {awful.button {}, 1, -> showpopup"US/Pacific".visible = true}
 
         cstclock: wibox.widget
             format:   '<span size="small">%H:%MCST</span>'
             timezone: 'US/Central'
             refresh:  60
             widget:   wibox.widget.textclock
+            buttons:  {awful.button {}, 1, -> showpopup"US/Central".visible = true}
 
         utcclock: wibox.widget
             format:   '<span color="#00aa55">%H:%MZ</span>'
@@ -372,13 +374,13 @@ screen.connect_signal "request::desktop_decoration", =>
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.loadavg
                 wibox.widget.textbox"┊"
-                @bottombar.widgets.localclock
-                wibox.widget.textbox"┊"
                 @bottombar.widgets.pstclock
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.cstclock
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.utcclock
+                wibox.widget.textbox"┊"
+                @bottombar.widgets.localclock
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.quitbt
             }
