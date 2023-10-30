@@ -147,10 +147,10 @@ ruled.client.connect_signal "request::rules", ->
         id: "astro"
         rule_any:
             class: {
+                "^Celestia$"
+                "^kstars$"
                 "^stellarium$"
-                -- TODO: Celestia
-                -- TODO: KStars
-                -- TODO: Xephem
+                "^XEphem$"
             }
         properties:
             fullscreen:     true
@@ -191,6 +191,7 @@ ruled.client.connect_signal "request::rules", ->
             maximized:      true
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+
     ruled.client.append_rule
         id: "emu"
         rule_any:
@@ -202,7 +203,6 @@ ruled.client.connect_signal "request::rules", ->
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
-
 
     ruled.client.append_rule
         id: "game"
