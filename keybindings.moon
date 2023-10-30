@@ -247,26 +247,15 @@ awful.keyboard.append_global_keybindings {
 -- Navigation --
 ----------------
 do
-    dealsupernumber = (shift=false) =>
+    dealsupernumber = =>
         tag = if @ == 0 then 10 else @
-        return if shift
-            awful.key
-                modifiers: {"Shift", "Mod4"}
-                key:       tostring @
-                on_press: ->
-                    client.focus\move_to_tag awful.screen.focused!.tags[tag]
-                    awful.screen.focused!.tags[tag]\view_only!
-                description: "move to tag #{awful.screen.focused!.tags[tag].name}"
-                group:       "awesome"
-        else
-            awful.key
-                modifiers: {"Mod4"}
-                key:       tostring @
-                on_press: -> awful.screen.focused!.tags[tag]\view_only!
-                description: "got to tag #{awful.screen.focused!.tags[tag].name}"
-                group:       "awesome"
-    awful.keyboard.append_global_keybindings [dealsupernumber tag       for tag = 0, 9]
-    awful.keyboard.append_global_keybindings [dealsupernumber tag, true for tag = 0, 9]
+        awful.key
+            modifiers: {"Mod4"}
+            key:       tostring @
+            on_press: -> awful.screen.focused!.tags[tag]\view_only!
+            description: "got to tag #{awful.screen.focused!.tags[tag].name}"
+            group:       "awesome"
+    awful.keyboard.append_global_keybindings [dealsupernumber tag for tag = 0, 9]
 
 awful.keyboard.append_global_keybindings {
     awful.key
@@ -455,8 +444,20 @@ client.connect_signal "request::default_mousebindings", ->
 
 --------------------------------------------------------------------------------
 --- Per-client keys
-
 client.connect_signal "request::default_keybindings", ->
+    do
+        dealsupernumber = =>
+            tag = if @ == 0 then 10 else @
+            awful.key
+                modifiers: {"Shift", "Mod4"}
+                key:       tostring @
+                on_press: =>
+                    @\move_to_tag awful.screen.focused!.tags[tag]
+                    awful.screen.focused!.tags[tag]\view_only!
+                description: "move to tag #{awful.screen.focused!.tags[tag].name}"
+                group:       "awesome"
+        awful.keyboard.append_client_keybindings [dealsupernumber tag for tag = 0, 9]
+
     awful.keyboard.append_client_keybindings {
         awful.key
             modifiers: {"Mod4"}
