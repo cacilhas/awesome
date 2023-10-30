@@ -263,11 +263,25 @@ awful.keyboard.append_global_keybindings {
         group:       "launcher"
 
     awful.key
-        modifiers: {"Mod1"}
+        modifiers: {"Mod4"}
         key:       "Tab"
         on_press: ->
             awful.spawn "rofi -show-icons -modes windowcd -show windowcd -display-windowcd App -theme sidebar-v2"
         description: "open between-clients navigation window"
+        group:       "client"
+
+    awful.key
+        modifiers: {"Mod1"}
+        key:       "Tab"
+        on_press: -> awful.client.focus.byidx 1
+        description: "focus next window"
+        group:       "client"
+
+    awful.key
+        modifiers: {"Shift", "Mod1"}
+        key:       "Tab"
+        on_press: -> awful.client.focus.byidx -1
+        description: "focus previous window"
         group:       "client"
 
     awful.key
