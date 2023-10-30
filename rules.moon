@@ -315,6 +315,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Abiword$"
                 "^Google Docs$"
                 "^Gnumeric$"
+                "^ONLYOFFICE"
                 "^tm$"
             }
         properties:
