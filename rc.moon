@@ -79,10 +79,10 @@ assert require"notifications"
 
 --------------------------------------------------------------------------------
 -- Startup apps
-if os.execute"pgrep picom" != 0
+if os.execute"pgrep -f 'picom --daemon'" != 0
     awful.spawn "dex --autostart --environment awesome"
     awful.spawn "play /usr/share/sounds/Oxygen-Sys-Log-In-Short.ogg"
 
 if os.execute"pgrep f.lux" != 0
     import geo from require"helpers"
-    awful.spawn "f.lux -l #{geo.lat} -g #{geo.lat} -k #{geo.temp}"
+    awful.spawn "f.lux -l #{geo.lat} -g #{geo.lon} -k #{geo.temp}"
