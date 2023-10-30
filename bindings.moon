@@ -6,11 +6,13 @@ import show_help from require"awful.hotkeys_popup"
 import ddgo, moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
 import mainmenu from require"menus"
 
--- Mod1 = Meta/Alt
--- Mod2 =
--- Mod3 = Menu - former ISO_Level5_Shift/Menu
--- Mod4 = Super
--- Mod5 = ISO_Level3_Shift/AltGrp
+-- Mod1    = Meta/Alt_L
+-- Mod2    = Num_Lock
+-- Mod3    = Menu, ISO_Level5_Shift
+-- Mod4    = Super_L, Super_R
+-- Mod5    = ISO_Level3_Shift/AltGrp
+-- Shift   = Shift_L, Shift_R
+-- Control = Control_L, Control_R
 
 
 --------------------------------------------------------------------------------
@@ -419,28 +421,6 @@ awful.keyboard.append_global_keybindings {
         group:       "client"
 }
 
---------------------------------------------------------------------------------
---- Mouse bindings
-
-client.connect_signal "request::default_mousebindings", ->
-    awful.mouse.append_client_mousebindings {
-        awful.button
-            modifiers: {}
-            button:    1
-            on_press: =>
-                @activate context: "mouse_click"
-
-        awful.button
-            modifiers: {"Mod4"}
-            button:    1
-            on_press: => @activate context: "mouse_click", action: "mouse_move"
-
-        awful.button
-            modifiers: {"Mod4"}
-            button: 3
-            on_press: => @activate context: "mouse_click", action: "mouse_resize"
-    }
-
 
 --------------------------------------------------------------------------------
 --- Per-client keys
@@ -506,4 +486,26 @@ client.connect_signal "request::default_keybindings", ->
                 @\emit_signal "request::titlebars"
             description: "(un)maximize"
             group:       "client"
+    }
+
+--------------------------------------------------------------------------------
+--- Mouse bindings
+
+client.connect_signal "request::default_mousebindings", ->
+    awful.mouse.append_client_mousebindings {
+        awful.button
+            modifiers: {}
+            button:    1
+            on_press: =>
+                @activate context: "mouse_click"
+
+        awful.button
+            modifiers: {"Mod4"}
+            button:    1
+            on_press: => @activate context: "mouse_click", action: "mouse_move"
+
+        awful.button
+            modifiers: {"Mod4"}
+            button: 3
+            on_press: => @activate context: "mouse_click", action: "mouse_resize"
     }
