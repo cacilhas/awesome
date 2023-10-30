@@ -40,10 +40,28 @@ awful.keyboard.append_global_keybindings {
         group:       "awesome"
 
     awful.key
+        modifiers: {"Shift", "Mod4"}
+        key:       "1"
+        on_press: ->
+            client.focus\move_to_tag awful.screen.focused!.tags[1]
+            awful.screen.focused!.tags[1]\view_only!
+        description: "move to tag #{awful.screen.focused!.tags[1].name}"
+        group:       "awesome"
+
+    awful.key
         modifiers: {"Mod4"}
         key:       "2"
         on_press: -> awful.screen.focused!.tags[2]\view_only!
         description: "got to tag #{awful.screen.focused!.tags[2].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Shift", "Mod4"}
+        key:       "2"
+        on_press: ->
+            client.focus\move_to_tag awful.screen.focused!.tags[2]
+            awful.screen.focused!.tags[2]\view_only!
+        description: "move to tag #{awful.screen.focused!.tags[2].name}"
         group:       "awesome"
 
     awful.key
@@ -54,10 +72,28 @@ awful.keyboard.append_global_keybindings {
         group:       "awesome"
 
     awful.key
+        modifiers: {"Shift", "Mod4"}
+        key:       "3"
+        on_press: ->
+            client.focus\move_to_tag awful.screen.focused!.tags[3]
+            awful.screen.focused!.tags[3]\view_only!
+        description: "move to tag #{awful.screen.focused!.tags[3].name}"
+        group:       "awesome"
+
+    awful.key
         modifiers: {"Mod4"}
         key:       "4"
-        on_press: -> awful.screen.focused!.tags[2]\view_only!
+        on_press: -> awful.screen.focused!.tags[4]\view_only!
         description: "got to tag #{awful.screen.focused!.tags[4].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Shift", "Mod4"}
+        key:       "4"
+        on_press: ->
+            client.focus\move_to_tag awful.screen.focused!.tags[4]
+            awful.screen.focused!.tags[4]\view_only!
+        description: "move to tag #{awful.screen.focused!.tags[4].name}"
         group:       "awesome"
 
     awful.key
@@ -65,6 +101,15 @@ awful.keyboard.append_global_keybindings {
         key:       "5"
         on_press: -> awful.screen.focused!.tags[5]\view_only!
         description: "got to tag #{awful.screen.focused!.tags[5].name}"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Shift", "Mod4"}
+        key:       "5"
+        on_press: ->
+            client.focus\move_to_tag awful.screen.focused!.tags[5]
+            awful.screen.focused!.tags[5]\view_only!
+        description: "move to tag #{awful.screen.focused!.tags[5].name}"
         group:       "awesome"
 
     awful.key
