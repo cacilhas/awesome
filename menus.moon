@@ -40,6 +40,7 @@ mainmenu = awful.menu
             {
                 {"Xev", "#{terminal} -e xev"}
                 {"Xprop", xprop}
+                {"Reload compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
                 {"XKill", "xkill"}
             }
             theme.xorg_icon

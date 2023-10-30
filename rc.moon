@@ -81,6 +81,8 @@ assert require"notifications"
 -- Startup apps
 if os.execute"pgrep -f 'picom --daemon'" != 0
     awful.spawn "dex --autostart --environment awesome"
+    -- FIXME: workaround over wrong picom startup
+    os.execute"fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"
     awful.spawn "play /usr/share/sounds/Oxygen-Sys-Log-In-Short.ogg"
 
 if os.execute"pgrep f.lux" != 0
