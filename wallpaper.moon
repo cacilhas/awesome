@@ -36,5 +36,6 @@ screen.connect_signal "request::wallpaper", =>
 
 gears.timer
     autostart: true
+    call_now:  true
     timeout:   15*60
     callback:  -> awful.screen.focused!\emit_signal "request::wallpaper"
