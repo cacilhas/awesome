@@ -16,137 +16,10 @@ import mainmenu from require"menus"
 --------------------------------------------------------------------------------
 --- Global keys
 
-
+----------------
+-- Audio keys --
+----------------
 awful.keyboard.append_global_keybindings {
-    awful.key
-        modifiers: {}
-        key:       "Menu"
-        on_press: ->
-            for s in screen
-                s.topbar.bar.ontop = true
-                s.bottombar.bar.ontop = true
-        on_release: ->
-            for s in screen
-                s.topbar.bar.ontop = false
-                s.bottombar.bar.ontop = false
-        description: "raise bars using "
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "1"
-        on_press: -> awful.screen.focused!.tags[1]\view_only!
-        description: "got to tag #{awful.screen.focused!.tags[1].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Shift", "Mod4"}
-        key:       "1"
-        on_press: ->
-            client.focus\move_to_tag awful.screen.focused!.tags[1]
-            awful.screen.focused!.tags[1]\view_only!
-        description: "move to tag #{awful.screen.focused!.tags[1].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "2"
-        on_press: -> awful.screen.focused!.tags[2]\view_only!
-        description: "got to tag #{awful.screen.focused!.tags[2].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Shift", "Mod4"}
-        key:       "2"
-        on_press: ->
-            client.focus\move_to_tag awful.screen.focused!.tags[2]
-            awful.screen.focused!.tags[2]\view_only!
-        description: "move to tag #{awful.screen.focused!.tags[2].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "3"
-        on_press: -> awful.screen.focused!.tags[3]\view_only!
-        description: "got to tag #{awful.screen.focused!.tags[3].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Shift", "Mod4"}
-        key:       "3"
-        on_press: ->
-            client.focus\move_to_tag awful.screen.focused!.tags[3]
-            awful.screen.focused!.tags[3]\view_only!
-        description: "move to tag #{awful.screen.focused!.tags[3].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "4"
-        on_press: -> awful.screen.focused!.tags[4]\view_only!
-        description: "got to tag #{awful.screen.focused!.tags[4].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Shift", "Mod4"}
-        key:       "4"
-        on_press: ->
-            client.focus\move_to_tag awful.screen.focused!.tags[4]
-            awful.screen.focused!.tags[4]\view_only!
-        description: "move to tag #{awful.screen.focused!.tags[4].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "5"
-        on_press: -> awful.screen.focused!.tags[5]\view_only!
-        description: "got to tag #{awful.screen.focused!.tags[5].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Shift", "Mod4"}
-        key:       "5"
-        on_press: ->
-            client.focus\move_to_tag awful.screen.focused!.tags[5]
-            awful.screen.focused!.tags[5]\view_only!
-        description: "move to tag #{awful.screen.focused!.tags[5].name}"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "/"
-        on_press:  ddgo
-        description: "search on DuckDuckGo"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "d"
-        on_press: moonprompt
-        description: "run Moon command"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "Escape"
-        on_press: -> mainmenu\show!
-        description: "show main menu"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4", "Shift"}
-        key:       "r"
-        on_press: reload
-        description: "reload settings"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "F1"
-        on_press: show_help
-        description: "show help"
-        group:       "awesome"
-
     awful.key
         modifiers: {}
         key:       "XF86AudioMute"
@@ -217,25 +90,36 @@ awful.keyboard.append_global_keybindings {
         description: "mute/unmute mic"
         group:       "awesome"
 
+}
+
+--------------------
+-- Searching keys --
+--------------------
+awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod4"}
-        Key:       "F5"
-        on_press: ->
-            with awful.screen.focused!
-                .topbar.bar.ontop = true
-                .bottombar.bar.ontop = true
-        on_release: ->
-            with awful.screen.focused!
-                .topbar.bar.ontop = false
-                .bottombar.bar.ontop = false
+        key:       "/"
+        on_press:  ddgo
+        description: "search on DuckDuckGo"
+        group:       "awesome"
 
-    -- awful.key {"Mod4"}, "F7", -> os.execute"brighcli -", description: "decrease brightness", group: "awesome"
-    -- awful.key {"Mod4"}, "F8", -> os.execute"brighcli +", description: "increase brightness", group: "awesome"
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "d"
+        on_press: moonprompt
+        description: "run Moon command"
+        group:       "awesome"
+}
 
+----------------
+-- Brightness --
+----------------
+awful.keyboard.append_global_keybindings {
     awful.key
         modifiers:  {"Mod4"}
         key:        "F7"
         on_press: ->
+            -- os.execute"brighcli -"
             with awful.screen.focused!.bottombar.widgets.bright
                 assets.bright "dec", (text) ->
                     .text = text
@@ -244,10 +128,70 @@ awful.keyboard.append_global_keybindings {
         modifiers:  {"Mod4"}
         key:        "F8"
         on_press: ->
+            -- os.execute"brighcli +"
             with awful.screen.focused!.bottombar.widgets.bright
                 assets.bright "inc", (text) ->
                     .text = text
+}
 
+--------------------
+-- Menus and bars --
+--------------------
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       "Menu"
+        on_press: ->
+            for s in screen
+                s.topbar.bar.ontop = true
+                s.bottombar.bar.ontop = true
+        on_release: ->
+            for s in screen
+                s.topbar.bar.ontop = false
+                s.bottombar.bar.ontop = false
+        description: "raise bars using "
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "t"
+        on_press: -> awful.spawn "cambridge.sh"
+        description: "search for word in Cambridge dictionary"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "Escape"
+        on_press: -> mainmenu\show!
+        description: "show main menu"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "u"
+        on_press: -> awful.spawn "ibus emoji"
+        description: "show emoji"
+        group:       "launcher"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "o"
+        on_press: -> awful.spawn "ls-otp.sh"
+        description: "load OTP"
+        group:       "client"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "p"
+        on_press: -> awful.spawn "ls-pass.sh"
+        description: "load password"
+        group:       "client"
+}
+
+-----------------
+-- Screenshots --
+-----------------
+awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       "Print"
@@ -261,28 +205,12 @@ awful.keyboard.append_global_keybindings {
         on_press: -> awful.spawn "capture.sh root"
         description: "take a root screenshot"
         group:       "screen"
+}
 
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "u"
-        on_press: -> awful.spawn "ibus emoji"
-        description: "show emoji"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4", "Control"}
-        key:       "Return"
-        on_press: -> awful.spawn wezterm
-        description: "start terminal"
-        group:       "awesome"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "t"
-        on_press: -> awful.spawn "cambridge.sh"
-        description: "search for word in Cambridge dictionary"
-        group:       "awesome"
-
+---------------
+-- Launchers --
+---------------
+awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod1"}
         key:       " "
@@ -308,6 +236,40 @@ awful.keyboard.append_global_keybindings {
         group:       "launcher"
 
     awful.key
+        modifiers: {"Mod4", "Control"}
+        key:       "Return"
+        on_press: -> awful.spawn wezterm
+        description: "start terminal"
+        group:       "launcher"
+}
+
+----------------
+-- Navigation --
+----------------
+do
+    dealsupernumber = (shift=false) =>
+        tag = if @ == 0 then 10 else @
+        return if shift
+            awful.key
+                modifiers: {"Shift", "Mod4"}
+                key:       tostring @
+                on_press: ->
+                    client.focus\move_to_tag awful.screen.focused!.tags[tag]
+                    awful.screen.focused!.tags[tag]\view_only!
+                description: "move to tag #{awful.screen.focused!.tags[tag].name}"
+                group:       "awesome"
+        else
+            awful.key
+                modifiers: {"Mod4"}
+                key:       tostring @
+                on_press: -> awful.screen.focused!.tags[tag]\view_only!
+                description: "got to tag #{awful.screen.focused!.tags[tag].name}"
+                group:       "awesome"
+    awful.keyboard.append_global_keybindings [dealsupernumber tag       for tag = 0, 9]
+    awful.keyboard.append_global_keybindings [dealsupernumber tag, true for tag = 0, 9]
+
+awful.keyboard.append_global_keybindings {
+    awful.key
         modifiers: {"Mod4"}
         key:       "Tab"
         on_press: ->
@@ -328,29 +290,6 @@ awful.keyboard.append_global_keybindings {
         on_press: -> awful.client.focus.byidx -1
         description: "focus previous window"
         group:       "client"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "o"
-        on_press: -> awful.spawn "ls-otp.sh"
-        description: "load OTP"
-        group:       "client"
-
-    awful.key
-        modifiers: {"Mod4"}
-        key:       "p"
-        on_press: -> awful.spawn "ls-pass.sh"
-        description: "load password"
-        group:       "client"
-
-    awful.key
-        modifiers: {"Mod4", "Shift"}
-        key:       " "
-        on_press: ->
-            with awful.layout
-                .set .suit.floating
-        description: "set floating"
-        group: "layout"
 
     awful.key
         modifiers:  {"Mod4"}
@@ -416,13 +355,6 @@ awful.keyboard.append_global_keybindings {
         group:       "client"
 
     awful.key
-        modifiers: {"Mod4", "Mod1"}
-        key:       "l"
-        on_press: -> awful.spawn "xlock.fish"
-        description: "lock screen"
-        group:       "screen"
-
-    awful.key
         modifiers: {"Mod4", "Control"}
         key:       "Left"
         on_press: prevtag
@@ -451,6 +383,41 @@ awful.keyboard.append_global_keybindings {
         group:       "tag"
 
     -- awful.key {"Mod4", "Control"}, "Escape", awful.tag.history.restore, description: "go back", group: "tag"
+}
+
+----------
+-- Misc --
+----------
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {"Mod4", "Shift"}
+        key:       "r"
+        on_press: reload
+        description: "reload settings"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "F1"
+        on_press: show_help
+        description: "show help"
+        group:       "awesome"
+
+    awful.key
+        modifiers: {"Mod4", "Shift"}
+        key:       " "
+        on_press: ->
+            with awful.layout
+                .set .suit.floating
+        description: "set floating"
+        group: "layout"
+
+    awful.key
+        modifiers: {"Mod4", "Mod1"}
+        key:       "l"
+        on_press: -> awful.spawn "xlock.fish"
+        description: "lock screen"
+        group:       "screen"
 
     awful.key
         modifiers: {"Mod4"}
