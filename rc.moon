@@ -59,7 +59,7 @@ assert require"mousebindings"
 
 --------------------------------------------------------------------------------
 --- Key bindings
-assert require"keybindings"
+assert require"bindings"
 
 
 --------------------------------------------------------------------------------
