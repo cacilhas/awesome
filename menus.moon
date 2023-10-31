@@ -28,7 +28,6 @@ mainmenu = awful.menu
                 {"Reddit", redditsearch, theme.reddit_icon}
                 { "Command", moonprompt, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
                 {"Settings", "wezterm start --cwd #{filesystem.get_configuration_dir!} -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
-                {"Terminal", wezterm, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload, "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
                 {"Exit", -> awesome.quit!, "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
@@ -40,6 +39,7 @@ mainmenu = awful.menu
             {
                 {"Xev", "#{terminal} -e xev"}
                 {"Xprop", xprop}
+                {"Terminal", wezterm}
                 {"dconf Editor", "dconf-editor"}
                 {"Reload compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
                 {"XKill", "xkill"}
