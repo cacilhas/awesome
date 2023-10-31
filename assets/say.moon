@@ -5,20 +5,20 @@ import filesystem from require"gears"
 
 
 --------------------------------------------------------------------------------
-(urgency) =>
+(urgent) =>
     if @\match "^%[%["
-        voice = if urgency == "critical" then "Demonic" else "belinda"
-        awful.spawn "espeak -ven+#{voice} -k20 \"#{@}\""
+        voice = if urgent then "Demonic -k1" else "belinda -k20"
+        awful.spawn "espeak -ven+#{voice} \"#{@}\""
     else
         awful.spawn.easy_async_with_shell "#{filesystem.get_configuration_dir!}/assets/langit \"#{@}\"", (res) ->
             it = res\gmatch"[^\n]+"
             res = it!
-            voice = if urgency == "critical"
-                "Demonic"
+            voice = if urgent
+                "Demonic -k1"
             elseif res == "English"
-                "belinda"
+                "belinda -k20"
             else
-                "anika"
+                "anika -k20"
             lang = if res == "English" then "en" else "pt-BR"
             message = @\gsub '"', ""
-            awful.spawn "espeak -v#{lang}+#{voice} -k20 \"#{message}\""
+            awful.spawn "espeak -v#{lang}+#{voice} \"#{message}\""
