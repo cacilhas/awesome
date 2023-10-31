@@ -30,5 +30,5 @@ ruled.notification.connect_signal "request::rules", ->
             timeout: 0
 
 naughty.connect_signal "request::display", =>
-    pcall -> say @message
+    pcall -> say @message, @urgency
     naughty.layout.box notification: @

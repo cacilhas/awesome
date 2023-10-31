@@ -34,8 +34,10 @@ screen.connect_signal "request::wallpaper", =>
             widget: wibox.widget.imagebox
     }
 
-gears.timer
-    autostart: true
-    call_now:  true
-    timeout:   15*60
-    callback:  -> awful.screen.focused!\emit_signal "request::wallpaper"
+    @timer\stop! if @timer
+
+    @timer = gears.timer
+        autostart: true
+        call_now:  true
+        timeout:   15*60
+        callback:  -> @\emit_signal "request::wallpaper"

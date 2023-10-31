@@ -35,6 +35,12 @@ screen.connect_signal "request::desktop_decoration", =>
         " "
     }, @, awful.layout.suit.fair
 
+    if @timers
+        timer\stop! for timer in *@timers
+
+    @timers = {}
+    register = (timer) -> @timers[#@timers+1] = timer
+
 
     ----------------------------------------------------------------------------
     -- Top bar
@@ -224,7 +230,7 @@ screen.connect_signal "request::desktop_decoration", =>
     ---------------------
     -- Top bar updates --
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   1
@@ -232,7 +238,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.audio nil, (markup) ->
                 @topbar.widgets.audio.markup = markup
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   1
@@ -240,7 +246,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.mic nil, (markup) ->
                 @topbar.widgets.mic.markup = markup
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   5
@@ -248,7 +254,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.eth nil, (markup) ->
                 @topbar.widgets.eth.markup = markup
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   10
@@ -256,7 +262,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.webconn nil, (text) ->
                 @topbar.widgets.webconn.text = text
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   5
@@ -264,7 +270,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.vpn nil, (markup) ->
                 @topbar.widgets.vpn.markup = markup
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   15*60
@@ -388,7 +394,7 @@ screen.connect_signal "request::desktop_decoration", =>
     -----------------------
     -- Bottom bar update --
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout: 5
@@ -396,7 +402,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.bright nil, (text) ->
                 @bottombar.widgets.bright.text = text
 
-    gears.timer
+    register gears.timer
         autostart: true
         call_now:  true
         timeout:   5
