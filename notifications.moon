@@ -15,12 +15,22 @@ naughty.config.icon_dirs = {
 }
 
 ruled.notification.connect_signal "request::rules", ->
-    -- All notifications will match this rule.
     ruled.notification.append_rule
         rule: {}
         properties:
             screen: awful.screen.preferred
             implicit_timeout: 5
 
+    ruled.notification.append_rule
+        rule: urgency: "critical"
+        properties:
+            bg: "#ff0000"
+            fg: "#ffffff"
+            timeout: 0
+
 naughty.connect_signal "request::display", =>
+    -- Use Commonwealth accent from West Midlands
+    --awful.spawn "espeak -ven-GB-x-gbcwmd+belinda -k20 '#{@message}'"
+    -- Use Received Pronunciation
+    awful.spawn "espeak -ven-GB-x-rp+belinda -k20 '#{@message}'"
     naughty.layout.box notification: @
