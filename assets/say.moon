@@ -8,7 +8,7 @@ import filesystem from require"gears"
 (urgent) =>
     if @\match "^%[%["
         voice = if urgent then "Demonic -k1" else "belinda -k20"
-        awful.spawn "espeak -ven+#{voice} \"#{@}\""
+        awful.spawn "espeak -ven+#{voice} -s140 \"#{@}\""
     else
         awful.spawn.easy_async_with_shell "#{filesystem.get_configuration_dir!}/assets/langit \"#{@}\"", (res) ->
             it = res\gmatch"[^\n]+"
@@ -21,4 +21,4 @@ import filesystem from require"gears"
                 "anika -k20"
             lang = if res == "English" then "en" else "pt-BR"
             message = @\gsub '"', ""
-            awful.spawn "espeak -v#{lang}+#{voice} \"#{message}\""
+            awful.spawn "espeak -v#{lang}+#{voice} -s140 \"#{message}\""
