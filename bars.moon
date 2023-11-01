@@ -224,7 +224,10 @@ screen.connect_signal "request::desktop_decoration", =>
     ---------------------
     -- Top bar updates --
 
-    gears.timer
+    @topbar.timers or= {}
+    timer\stop! for _, timer in pairs @topbar.timers
+
+    @topbar.timers.audio = gears.timer
         autostart: true
         call_now:  true
         timeout:   1
@@ -232,7 +235,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.audio nil, (markup) ->
                 @topbar.widgets.audio.markup = markup
 
-    gears.timer
+    @topbar.timers.mic = gears.timer
         autostart: true
         call_now:  true
         timeout:   1
@@ -240,7 +243,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.mic nil, (markup) ->
                 @topbar.widgets.mic.markup = markup
 
-    gears.timer
+    @topbar.timers.eth = gears.timer
         autostart: true
         call_now:  true
         timeout:   5
@@ -248,7 +251,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.eth nil, (markup) ->
                 @topbar.widgets.eth.markup = markup
 
-    gears.timer
+    @topbar.timers.webconn = gears.timer
         autostart: true
         call_now:  true
         timeout:   10
@@ -256,7 +259,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.webconn nil, (text) ->
                 @topbar.widgets.webconn.text = text
 
-    gears.timer
+    @topbar.timers.vpn = gears.timer
         autostart: true
         call_now:  true
         timeout:   5
@@ -264,7 +267,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.vpn nil, (markup) ->
                 @topbar.widgets.vpn.markup = markup
 
-    gears.timer
+    @topbar.timers.hostname = gears.timer
         autostart: true
         call_now:  true
         timeout:   15*60
@@ -388,7 +391,10 @@ screen.connect_signal "request::desktop_decoration", =>
     -----------------------
     -- Bottom bar update --
 
-    gears.timer
+    @bottombar.timers or= {}
+    timer\stop! for _, timer in pairs @bottombar.timers
+
+    @bottombar.timers.bright = gears.timer
         autostart: true
         call_now:  true
         timeout: 5
@@ -396,7 +402,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.bright nil, (text) ->
                 @bottombar.widgets.bright.text = text
 
-    gears.timer
+    @bottombar.timers.loadavg = gears.timer
         autostart: true
         call_now:  true
         timeout:   5
