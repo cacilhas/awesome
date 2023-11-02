@@ -3,9 +3,15 @@ local *
 awful = require"awful"
 import filesystem from require"gears"
 
+_G.nospeak_cache = "#{filesystem.get_xdg_cache_home!}/.nospeak"
+if _G.nospeak == nil
+    _G.nospeak = true == filesystem.file_readable _G.nospeak_cache
+
 
 --------------------------------------------------------------------------------
 (urgent) =>
+    return if _G.nospeak
+
     if @\match "^%[%["
         voice = if urgent then "Demonic -k1" else "belinda -k20"
         awful.spawn "espeak -ven+#{voice} -s140 \"#{@}\""

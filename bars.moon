@@ -108,6 +108,15 @@ screen.connect_signal "request::desktop_decoration", =>
                     assets.hostname "nemo", (markup) -> @topbar.widgets.hostname.markup = markup
             }
 
+        speak: wibox.widget
+            markup: ""
+            widget:  wibox.widget.textbox
+            buttons: {
+                awful.button {}, 1, ->
+                    assets.speak "switch", (markup) ->
+                        @topbar.widgets.speak.markup = markup
+            }
+
         audio: wibox.widget
             markup:  ""
             widget:  wibox.widget.textbox
@@ -203,6 +212,8 @@ screen.connect_signal "request::desktop_decoration", =>
                 wibox.widget.textbox"┊"
                 @topbar.widgets.hostname
                 wibox.widget.textbox"┊"
+                @topbar.widgets.speak
+                wibox.widget.textbox"┊"
                 @topbar.widgets.audio
                 wibox.widget.textbox"┊"
                 @topbar.widgets.mic
@@ -226,6 +237,14 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @topbar.timers or= {}
     timer\stop! for _, timer in pairs @topbar.timers
+
+    @topbar.timers.speak = gears.timer
+        autostart: true
+        call_now:  true
+        timeout:   30
+        callback: ->
+            assets.speak nil, (markup) ->
+                @topbar.widgets.speak.markup = markup
 
     @topbar.timers.audio = gears.timer
         autostart: true
