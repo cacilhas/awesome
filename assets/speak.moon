@@ -11,6 +11,6 @@ awful = require"awful"
             awful.spawn.with_shell "rm -f #{_G.nospeak_cache}"
 
     if _G.nospeak
-        cb '<span color="#ff4444">🗢 </span>'
+        cb '<span color="#aa6666">🗢</span>'
     else
         cb '<span color="#4444ff">🗣</span>'
