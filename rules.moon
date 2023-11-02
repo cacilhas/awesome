@@ -131,6 +131,7 @@ ruled.client.connect_signal "request::rules", ->
             }
         properties:
             floating: true
+            sticky:   true
             placement: awful.placement.top_right
 
     ruled.client.append_rule
