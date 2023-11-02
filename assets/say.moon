@@ -37,6 +37,12 @@ process = =>
                 "anika -k20"
             else
                 "belinda -k20"
-            lang = if res == "English" then "en" else "pt-BR"
+            lang = switch res
+                when "Portuguese"
+                    "pt-BR"
+                when "French"
+                    "fr"
+                else
+                    "en"
             message = @\gsub '"', ""
             awful.spawn "espeak -v#{lang}+#{voice} -s140 \"#{message}\""
