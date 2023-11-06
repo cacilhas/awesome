@@ -24,25 +24,25 @@ import terminal from require"helpers"
             '<span foreground="gray"> </span>'
 
         res ..= if avg1 < 3
-            "<span foreground=\"cyan\">¹#{avg1}</span> "
+            "<span foreground=\"cyan\">¹%.2f</span> "\format avg1
         elseif avg1 < 5
-            "<span foreground=\"yellow\">¹#{avg1}</span> "
+            "<span foreground=\"yellow\">¹%.2f</span> "\format avg1
         else
-            "<span foreground=\"red\">¹#{avg1}</span> "
+            "<span foreground=\"red\">¹.2f%</span> "\format avg1
 
         res ..= if avg5 < 3
-            "<span foreground=\"cyan\">⁵#{avg5}</span> "
+            "<span foreground=\"cyan\">⁵%.2f</span> "\format avg5
         elseif avg5 < 5
-            "<span foreground=\"yellow\">⁵#{avg5}</span> "
+            "<span foreground=\"yellow\">⁵%.2f</span> "\format avg5
         else
-            "<span foreground=\"red\">⁵#{avg5}</span> "
+            "<span foreground=\"red\">⁵%.2f</span> "\format avg5
 
         res ..= if avg15 < 3
-            "<span foreground=\"cyan\">¹⁵#{avg15}</span>"
+            "<span foreground=\"cyan\">¹⁵%.2f</span>"\format avg15
         elseif avg15 < 5
-            "<span foreground=\"yellow\">¹⁵#{avg15}</span>"
+            "<span foreground=\"yellow\">¹⁵%.2f</span>"\format avg15
         else
-            "<span foreground=\"red\">¹⁵#{avg15}</span>"
+            "<span foreground=\"red\">¹⁵%.2f</span>"\format avg15
 
         res ..= "</span>"
 
