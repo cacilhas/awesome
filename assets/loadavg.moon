@@ -28,7 +28,7 @@ import terminal from require"helpers"
         elseif avg1 < 5
             "<span foreground=\"yellow\">¹%.2f</span> "\format avg1
         else
-            "<span foreground=\"red\">¹.2f%</span> "\format avg1
+            "<span foreground=\"red\">¹%.2f</span> "\format avg1
 
         res ..= if avg5 < 3
             "<span foreground=\"cyan\">⁵%.2f</span> "\format avg5
