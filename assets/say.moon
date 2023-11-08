@@ -6,12 +6,6 @@ import trim from require"helpers"
 
 
 --------------------------------------------------------------------------------
-_G.nospeak_cache = "#{filesystem.get_xdg_cache_home!}/.nospeak"
-if _G.nospeak == nil
-    _G.nospeak = true == filesystem.file_readable _G.nospeak_cache
-
-
---------------------------------------------------------------------------------
 process = =>
     res = ""
     for word in @\gmatch"%S+"
