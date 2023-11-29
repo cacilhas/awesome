@@ -234,7 +234,7 @@ ruled.client.connect_signal "request::rules", ->
         id: "game-engine"
         rule_any:
             class: {
-                "^com%.defold%.editor$"
+                "^com%.defold%.editor"
                 "^GDevelop"
                 "^Godot"
                 "^TrenchBroom$"

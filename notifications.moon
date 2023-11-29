@@ -30,5 +30,7 @@ ruled.notification.connect_signal "request::rules", ->
             timeout: 0
 
 naughty.connect_signal "request::display", =>
-    pcall -> say @message, @urgency == "critical"
+    pcall ->
+        message = if @title and #@title > 0 then @title else @message
+        say message, @urgency == "critical"
     naughty.layout.box notification: @
