@@ -261,6 +261,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Code$"
                 "^code-oss$"
                 "^DrRacket$"
+                "^ecode%.bin$"
                 "^FreeCAD$"
                 "^Gambas3$"
                 "^jetbrains-idea"
