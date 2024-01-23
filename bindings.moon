@@ -246,7 +246,7 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {}
-        key:       "XF86Eplorer"
+        key:       "XF86Explorer"
         on_press:  -> awful.spawn "prime-run nemo ~/Desktop"
         description: "open Nemo"
         group:       "launcher"
