@@ -40,6 +40,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Guake"
                 "^i3quitdialog"
                 "^java-lang-"
+                "^memory$"
                 "^Nemo$"
                 "^plasma%.emojier$"
                 "^processing-core-"
@@ -304,6 +305,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Gimp"
                 "^kryta$"
                 "^Inkscape$"
+                "^Spriter$"
             }
         properties:
             fullscreen:     true

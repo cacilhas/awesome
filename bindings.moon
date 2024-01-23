@@ -243,6 +243,27 @@ awful.keyboard.append_global_keybindings {
         on_press: -> awful.spawn wezterm
         description: "start terminal"
         group:       "launcher"
+
+    awful.key
+        modifiers: {}
+        key:       "XF86Eplorer"
+        on_press:  -> awful.spawn "prime-run nemo ~/Desktop"
+        description: "open Nemo"
+        group:       "launcher"
+
+    awful.key
+        modifiers: {}
+        key:       "XF86HomePage"
+        on_press:  -> awful.spawn "call-browser.sh"
+        description: "open Nemo"
+        group:       "launcher"
+
+    awful.key
+        modifiers: {}
+        key:       "XFCalculator"
+        on_press:  -> awful.spawn "xcalc"
+        description: "open Nemo"
+        group:       "launcher"
 }
 
 ----------------
