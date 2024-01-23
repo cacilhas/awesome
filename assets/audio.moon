@@ -14,7 +14,7 @@ realprocess = (cb) ->
         mute = 1 == tonumber @
         awful.spawn.easy_async_with_shell "pulsemixer --get-volume", =>
             it = @\gmatch"%d+"
-            left = it!
+            left = it! or 0
             right = it! or left
             left = tonumber left
             right = tonumber right
