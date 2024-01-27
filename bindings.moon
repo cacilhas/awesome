@@ -247,7 +247,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       "XF86Explorer"
-        on_press:  -> awful.spawn "prime-run nemo ~/Desktop"
+        on_press:  -> awful.spawn "prime-run nemo /home/cacilhas/Desktop"
         description: "open Nemo"
         group:       "launcher"
 
@@ -255,14 +255,14 @@ awful.keyboard.append_global_keybindings {
         modifiers: {}
         key:       "XF86HomePage"
         on_press:  -> awful.spawn "call-browser.sh"
-        description: "open Nemo"
+        description: "open Web browser"
         group:       "launcher"
 
     awful.key
         modifiers: {}
         key:       "XFCalculator"
         on_press:  -> awful.spawn "xcalc"
-        description: "open Nemo"
+        description: "open calculator"
         group:       "launcher"
 }
 
