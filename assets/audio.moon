@@ -27,8 +27,15 @@ realprocess = (cb) ->
             elseif vol == 0
                 cb '<span color="#444400">   0%</span>'
 
-            elseif vol >= 100
-                cb '<span color="#4444ff"> %3d%%</span>'\format(vol)
+            elseif vol == 100
+                cb '<span color="#44ffff"> %3d%%</span>'\format(vol)
+
+            elseif vol > 100
+                cb '<span color="#ffff22"> %3d%%</span>'\format(vol)
+
+            elseif vol >= 80
+                color = math.floor vol * 256 / 100
+                cb '<span color="#4444%02x"> %3d%%</span>'\format(color, vol)
 
             else
                 color = math.floor vol * 256 / 100

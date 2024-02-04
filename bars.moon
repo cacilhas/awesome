@@ -105,7 +105,8 @@ screen.connect_signal "request::desktop_decoration", =>
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.hostname "nemo", (markup) -> @topbar.widgets.hostname.markup = markup
+                    assets.hostname "nemo", (markup) ->
+                        @topbar.widgets.hostname.markup = markup
             }
 
         speak: wibox.widget
