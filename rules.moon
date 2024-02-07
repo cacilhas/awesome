@@ -170,18 +170,6 @@ ruled.client.connect_signal "request::rules", ->
             skip_taskbar:        true
 
     ruled.client.append_rule
-        id: "emu"
-        rule_any:
-            class: {
-                "^Qemu-system"
-                "^Virt-manager"
-            }
-        properties:
-            fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
-            switch_to_tags: true
-
-    ruled.client.append_rule
         id: "audio"
         rule_any:
             class: {
@@ -386,6 +374,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^librewolf$"
                 "^Mailspring$"
                 "^obsidian"
+                "^thunderbird$"
                 "^Tor Browser$"
                 "^Vivaldi"
             }
