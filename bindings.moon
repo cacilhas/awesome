@@ -260,6 +260,13 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {}
+        key:       "XF86Mail"
+        on_press:  -> awful.spawn "prime-run thunderbird"
+        description: "open email"
+        group:       "launcher"
+
+    awful.key
+        modifiers: {}
         key:       "XFCalculator"
         on_press:  -> awful.spawn "xcalc"
         description: "open calculator"
