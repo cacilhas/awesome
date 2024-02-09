@@ -375,6 +375,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Mailspring$"
                 "^obsidian"
                 "^thunderbird$"
+                "^Slimjet$"
                 "^Tor Browser$"
                 "^Vivaldi"
             }
