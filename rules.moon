@@ -376,6 +376,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^librewolf$"
                 "^Mailspring$"
                 "^obsidian"
+                "^QtTube$"
                 "^thunderbird$"
                 "^Slimjet$"
                 "^Tor Browser$"
