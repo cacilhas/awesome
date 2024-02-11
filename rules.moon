@@ -42,6 +42,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^java-lang-"
                 "^memory$"
                 "^Nemo$"
+                "^Pavucontrol$"
                 "^plasma%.emojier$"
                 "^processing-core-"
                 "^Toplevel$"

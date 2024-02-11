@@ -126,6 +126,9 @@ screen.connect_signal "request::desktop_decoration", =>
                     assets.audio "mute", (markup) ->
                         @topbar.widgets.audio.markup = markup
 
+                awful.button {}, 2, ->
+                    awful.spawn "pavucontrol"
+
                 awful.button {}, 4, ->
                     assets.audio "dec", (markup) ->
                         @topbar.widgets.audio.markup = markup
