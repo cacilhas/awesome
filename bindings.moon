@@ -171,7 +171,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod4"}
         key:       "u"
-        on_press: -> awful.spawn "ibus emoji"
+        on_press: -> awful.spawn "rofimoji"
         description: "show emoji"
         group:       "launcher"
 
@@ -217,7 +217,8 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod1"}
         key:       " "
         on_press: ->
-            awful.spawn "prime-run rofi -show-icons -modes drun -show drun -theme iggy -display-drun 'NVIDIA' -dpi 64"
+            awful.spawn "prime-run rofi -show-icons -modes drun -show drun -theme docu -display-drun 'NVIDIA' -dpi 64"
+            --awful.spawn "prime-run rofi -show-icons -modes drun -show drun -theme iggy -display-drun 'NVIDIA' -dpi 64"
         description: "call application on NVIDIA card"
         group:       "launcher"
 
@@ -233,7 +234,8 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod4"}
         key:       " "
         on_press: ->
-            awful.spawn "rofi -modes run -show run -theme Indego -display-run 'Mesa Intel'"
+            awful.spawn "rofi -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel'"
+            --awful.spawn "rofi -modes run -show run -theme Indego -display-run 'Mesa Intel'"
         description: "run command on Mesa Intel card"
         group:       "launcher"
 
