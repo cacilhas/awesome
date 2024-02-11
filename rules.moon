@@ -343,8 +343,9 @@ ruled.client.connect_signal "request::rules", ->
         rule_any:
             class: {
                 "$cool-retro-term"
-                "org%.wezfurlong%.wezterm"
                 "kitty"
+                "org%.wezfurlong%.wezterm"
+                "st-256color"
             }
         properties:
             fullscreen:     true
