@@ -6,7 +6,7 @@ theme   = require"beautiful"
 wibox   = require"wibox"
 import apply_dpi from require"beautiful.xresources"
 import filesystem from require"gears"
-import ddgo, moonprompt, reload, reloadscripts, redditsearch, terminal, wezterm, xprop from require"helpers"
+import ddgo, moonprompt, reload, reloadscripts, redditsearch, terminal, kitty, xprop from require "helpers"
 
 
 --------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ mainmenu = awful.menu
                 {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
                 {"Reddit", redditsearch, theme.reddit_icon}
                 { "Command", moonprompt, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
-                {"Settings", "wezterm start --cwd #{filesystem.get_configuration_dir!} -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
+                {"Settings", "kitty -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload, "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
                 {"Exit", -> awesome.quit!, "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
@@ -39,7 +39,7 @@ mainmenu = awful.menu
             {
                 {"Xev", "#{terminal} -e xev"}
                 {"Xprop", xprop}
-                {"Terminal", wezterm}
+                {"Terminal", kitty}
                 {"dconf Editor", "dconf-editor"}
                 {"Reload compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
                 {"XKill", "xkill"}

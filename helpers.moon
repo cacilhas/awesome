@@ -192,5 +192,5 @@ terminal = "st"
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     :ddgo, :redditsearch, :geo, :xprop
-    wezterm: "call-terminal.sh"
+    kitty: "call-terminal.sh"
 }

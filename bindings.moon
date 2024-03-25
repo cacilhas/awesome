@@ -3,7 +3,7 @@ local *
 awful  = require"awful"
 assets = require"assets"
 import show_help from require"awful.hotkeys_popup"
-import ddgo, moonprompt, nexttag, prevtag, reload, wezterm from require"helpers"
+import ddgo, moonprompt, nexttag, prevtag, reload, kitty from require"helpers"
 import mainmenu from require"menus"
 
 -- Mod1    = Meta/Alt_L
@@ -242,7 +242,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {"Mod4", "Control"}
         key:       "Return"
-        on_press: -> awful.spawn wezterm
+        on_press: -> awful.spawn kitty
         description: "start terminal"
         group:       "launcher"
 
