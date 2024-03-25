@@ -83,8 +83,8 @@ if os.execute"pgrep -f 'picom --daemon'" != 0
     awful.spawn "dex --autostart --environment awesome"
     -- FIXME: workaround over wrong picom startup
     os.execute "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"
-    os.execute "pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 100%"    -- sound boxes
-    os.execute "pactl set-sink-volume alsa_output.platform-snd_aloop.0.analog-stereo 75%" -- headphones
+    os.execute "pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 80%"     -- sound boxes
+    os.execute "pactl set-sink-volume alsa_output.platform-snd_aloop.0.analog-stereo 60%" -- headphones
     awful.spawn "play /usr/share/sounds/Oxygen-Sys-Log-In-Short.ogg"
 
 if os.execute"pgrep f.lux" != 0
