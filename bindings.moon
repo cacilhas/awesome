@@ -306,8 +306,22 @@ awful.keyboard.append_global_keybindings {
         group:       "client"
 
     awful.key
+        modifiers: {"Mod4"}
+        key:       "Right"
+        on_press: -> awful.client.focus.byidx 1
+        description: "focus next window"
+        group:       "client"
+
+    awful.key
         modifiers: {"Shift", "Mod1"}
         key:       "Tab"
+        on_press: -> awful.client.focus.byidx -1
+        description: "focus previous window"
+        group:       "client"
+
+    awful.key
+        modifiers: {"Mod4"}
+        key:       "Left"
         on_press: -> awful.client.focus.byidx -1
         description: "focus previous window"
         group:       "client"

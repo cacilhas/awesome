@@ -196,16 +196,6 @@ ruled.client.connect_signal "request::rules", ->
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "game"
-        rule_any:
-            class: {
-                "^doѕbox"
-                "^stella$"
-                "^roblox"
-                "^tic80$"
-                "^org%.tuxemon%.Tuxemon"
-
-    ruled.client.append_rule
         id: "cheese"
         rule:
             class: "^Cheese$"
@@ -214,6 +204,19 @@ ruled.client.connect_signal "request::rules", ->
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
 
+
+    ruled.client.append_rule
+        id: "games"
+        rule_any:
+            class: {
+                "^Dfarc"
+                "^doѕbox"
+                "^freedink$"
+                "^Nonogram$"
+                "^stella$"
+                "^roblox"
+                "^tic80$"
+                "^org%.tuxemon%.Tuxemon"
             }
         properties:
             fullscreen:     true
@@ -373,6 +376,7 @@ ruled.client.connect_signal "request::rules", ->
         id: "wwww-browser"
         rule_any:
             class: {
+                "^betterbird$"
                 "^librewolf$"
                 "^Mailspring$"
                 "^obsidian"
