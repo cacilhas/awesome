@@ -263,7 +263,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       "XF86Mail"
-        on_press:  -> awful.spawn "prime-run thunderbird"
+        on_press:  -> awful.spawn "prime-run betterbird -purgecaches -p default-release"
         description: "open email"
         group:       "launcher"
 
