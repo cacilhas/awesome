@@ -16,6 +16,9 @@ import mainlauncher from require"menus"
 -- Keyboard map indicator and switcher
 --keyboardlayout = awful.widget.keyboardlayout!
 
+stop_timer = => @\stop! if @ and @.started
+
+
 screen.connect_signal "request::desktop_decoration", =>
     awful.tag {
         " "
@@ -248,6 +251,7 @@ screen.connect_signal "request::desktop_decoration", =>
     @topbar.timers or= {}
     timer\stop! for _, timer in pairs @topbar.timers
 
+    stop_timer @topbar.timers.speak
     @topbar.timers.speak = gears.timer
         autostart: true
         call_now:  true
@@ -256,6 +260,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.speak nil, (markup) ->
                 @topbar.widgets.speak.markup = markup
 
+    stop_timer @topbar.timers.audio
     @topbar.timers.audio = gears.timer
         autostart: true
         call_now:  true
@@ -264,6 +269,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.audio nil, (markup) ->
                 @topbar.widgets.audio.markup = markup
 
+    stop_timer @topbar.timers.mic
     @topbar.timers.mic = gears.timer
         autostart: true
         call_now:  true
@@ -272,6 +278,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.mic nil, (markup) ->
                 @topbar.widgets.mic.markup = markup
 
+    stop_timer @topbar.timers
     @topbar.timers.eth = gears.timer
         autostart: true
         call_now:  true
@@ -280,6 +287,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.eth nil, (markup) ->
                 @topbar.widgets.eth.markup = markup
 
+    stop_timer @topbar.timers.webconn
     @topbar.timers.webconn = gears.timer
         autostart: true
         call_now:  true
@@ -288,6 +296,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.webconn nil, (text) ->
                 @topbar.widgets.webconn.text = text
 
+    stop_timer @topbar.timers.vpn
     @topbar.timers.vpn = gears.timer
         autostart: true
         call_now:  true
@@ -296,6 +305,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.vpn nil, (markup) ->
                 @topbar.widgets.vpn.markup = markup
 
+    stop_timer @topbar.timers.hostname
     @topbar.timers.hostname = gears.timer
         autostart: true
         call_now:  true
@@ -423,6 +433,7 @@ screen.connect_signal "request::desktop_decoration", =>
     @bottombar.timers or= {}
     timer\stop! for _, timer in pairs @bottombar.timers
 
+    stop_timer @bottombar.timers.bright
     @bottombar.timers.bright = gears.timer
         autostart: true
         call_now:  true
@@ -431,6 +442,7 @@ screen.connect_signal "request::desktop_decoration", =>
             assets.bright nil, (text) ->
                 @bottombar.widgets.bright.text = text
 
+    stop_timer @bottombar.timers.loadavg
     @bottombar.timers.loadavg = gears.timer
         autostart: true
         call_now:  true
