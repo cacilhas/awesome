@@ -257,7 +257,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^ecode%.bin$"
                 "^FreeCAD$"
                 "^Gambas3$"
-                "^jetbrains-idea"
+                "^jetbrains-"
                 "^Processing$"
                 "^Whireshark$"
             }
