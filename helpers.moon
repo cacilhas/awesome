@@ -74,12 +74,12 @@ moonprompt = -> awful.prompt.run
             on_press: => "#{@}#{selection!}", false
     }
     exe_callback: =>
-        awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", =>
-            res = tostring awful.util.eval "#{setup}#{@}"
+        awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", (output) ->
+            res = awful.util.eval"#{setup}#{output}" or ""
             naughty.notify
                 title: "Moonscript response"
                 ontop:  true
-                text:   res
+                text:   tostring res
                 timeout: 10
             awful.spawn.with_shell "printf %s '#{res}' | xclip -i -selection clipboard"
 
