@@ -234,7 +234,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {"Mod4"}
         key:       " "
         on_press: ->
-            awful.spawn "rofi -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel'"
+            awful.spawn "rofi -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel' -terminal 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'"
             --awful.spawn "rofi -modes run -show run -theme Indego -display-run 'Mesa Intel'"
         description: "run command on Mesa Intel card"
         group:       "launcher"
