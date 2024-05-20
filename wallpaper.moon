@@ -45,7 +45,7 @@ for s in screen
             autostart: true
             call_now:  true
             timeout:   15*60
-            callback:  -> awful.screen.focused!\emit_signal "request::wallpaper"
+            callback:  -> s\emit_signal "request::wallpaper"
 
 _G.screentimer[i]\stop! for i = screen\count! + 1, #_G.screentimer
 _G.screentimer[i] = nil for i = screen\count! + 1, #_G.screentimer
