@@ -334,8 +334,10 @@ screen.connect_signal "request::desktop_decoration", =>
             }
 
         taskbar: awful.widget.tasklist
-            screen:  @,
-            filter:  awful.widget.tasklist.filter.currenttags,
+            screen:  @
+            filter:  awful.widget.tasklist.filter.currenttags
+            style:
+                shape: gears.shape.rounded_rect
             buttons: {
                 awful.button {}, 1, => @\activate context: "tasklist", action: "toggle_minimization"
                 awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}
