@@ -204,14 +204,15 @@ ruled.client.connect_signal "request::rules", ->
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
 
-
     ruled.client.append_rule
         id: "games"
         rule_any:
             class: {
+                "^airshipper$"
                 "^Dfarc"
                 "^doѕbox"
                 "^freedink$"
+                "^magnet-ball$"
                 "^Nonogram$"
                 "^stella$"
                 "^roblox"
@@ -222,6 +223,13 @@ ruled.client.connect_signal "request::rules", ->
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+
+    ruled.client.append_rule
+        id: "nanpure"
+        rule:
+            class: "^nanpure$"
+        properties:
+            floating: true
 
     ruled.client.append_rule
         id: "game-engine"
@@ -264,6 +272,16 @@ ruled.client.connect_signal "request::rules", ->
         properties:
             fullscreen:     true
             tag:            awful.tag.find_by_name nil, " "
+            switch_to_tags: true
+
+    ruled.client.append_rule
+        id: "lazarus"
+        rule:
+            class: "^Lazarus$"
+        properties:
+            fullscreen:     true
+            tag:            awful.tag.find_by_name nil, " "
+            layout:         awful.layout.suit.floating
             switch_to_tags: true
 
     ruled.client.append_rule
