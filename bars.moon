@@ -338,6 +338,10 @@ screen.connect_signal "request::desktop_decoration", =>
             filter:  awful.widget.tasklist.filter.currenttags
             style:
                 shape: gears.shape.rounded_rect
+                align: "center"
+            layout:
+                spacing: 2
+                layout: wibox.layout.flex.horizontal
             buttons: {
                 awful.button {}, 1, => @\activate context: "tasklist", action: "toggle_minimization"
                 awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}

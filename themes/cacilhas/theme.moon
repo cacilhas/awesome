@@ -80,6 +80,7 @@ fg_minimize = "#ffffff"
     titlebar_close_button: "true"
     menu_height: apply_dpi 24
     menu_width:  apply_dpi 200
+    tasklist_plain_task_name: true
 
         -- Define the image to load
     titlebar_close_button_normal: "#{themes_path}/cacilhas/titlebar/close_normal.png"
