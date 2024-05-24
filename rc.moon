@@ -86,7 +86,7 @@ if os.execute"pgrep -f 'picom --daemon'" != 0
     -- Pulse Audio startup volume
     os.execute "pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo    100%" -- sound boxes
     os.execute "pactl set-sink-volume alsa_output.platform-snd_aloop.0.analog-stereo 60%" -- headphones
-    os.execute "pactl set-sink-volume combined                                       80%" -- both
+    os.execute "pactl set-sink-volume combined                                       40%" -- master
     -- Log-in notification
     awful.spawn "play /usr/share/sounds/Oxygen-Sys-Log-In-Short.ogg"
 

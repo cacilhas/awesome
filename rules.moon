@@ -292,6 +292,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Franz$"
                 "^Hexchat$"
                 "^Pop$"
+                "^rambox$"
                 "^Slack$"
                 "^TelegramDesktop$"
                 "^Tuple$"
