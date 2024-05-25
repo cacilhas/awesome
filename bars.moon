@@ -387,7 +387,7 @@ screen.connect_signal "request::desktop_decoration", =>
             buttons:  {awful.button {}, 1, -> awful.spawn "kodumaro-clock"}
 
         quitbt: wibox.widget
-            markup: '<span size="large" color="red">⏻ </span>'
+            markup: ' <span size="large" color="red">⏻ </span> '
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, -> awesome.quit!,
@@ -400,7 +400,12 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @bottombar.bar = awful.wibar
         position: "bottom"
-        opacity:  0.8
+        opacity:  1
+        width:    1536
+        height:   52
+        x:        768
+        y:        1078
+        ontop:    true
         screen:   @
         widget:   {
             layout: wibox.layout.align.horizontal
@@ -420,10 +425,10 @@ screen.connect_signal "request::desktop_decoration", =>
                 @bottombar.widgets.bright
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.loadavg
-                wibox.widget.textbox"┊"
-                @bottombar.widgets.pstclock
-                wibox.widget.textbox"┊"
-                @bottombar.widgets.cstclock
+                --wibox.widget.textbox"┊"
+                --@bottombar.widgets.pstclock
+                --wibox.widget.textbox"┊"
+                --@bottombar.widgets.cstclock
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.utcclock
                 wibox.widget.textbox"┊"
@@ -432,6 +437,28 @@ screen.connect_signal "request::desktop_decoration", =>
                 @bottombar.widgets.quitbt
             }
         }
+
+    --
+    -- Hide and show bottom bar
+    --
+
+    @bottombar.bar\connect_signal "mouse::enter", () ->
+        @bottombar.bar.y = 1028
+
+    @bottombar.bar\connect_signal "mouse::leave", () ->
+        @bottombar.bar.y = 1078
+
+    @bottombar.bar\connect_signal "property::visible", () ->
+        @bottombar.bar.y = 1078
+
+    client.connect_signal "property::fullscreen", (c) ->
+        @bottombar.bar.visible = not c.fullscreen if c.focus
+
+    client.connect_signal "focus", (c) ->
+        @bottombar.bar.visible = not c.fullscreen
+
+    client.connect_signal "unfocus", () ->
+        @bottombar.bar.visible = true
 
     -----------------------
     -- Bottom bar update --
