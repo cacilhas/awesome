@@ -36,6 +36,9 @@ screen.connect_signal "request::wallpaper", =>
             widget: wibox.widget.imagebox
     }
 
+    -- Force iDesk to reload whenever the wallpaper changes
+    awful.spawn "#{gears.filesystem.get_configuration_dir!}/assets/reload-idesk"
+
 for s in screen
     if _G.screentimer[s.index]
         _G.screentimer[s.index]\again!
