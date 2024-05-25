@@ -412,3 +412,34 @@ ruled.client.connect_signal "request::rules", ->
             titlebars_enabled: false
             tag:               awful.tag.find_by_name nil, " "
             switch_to_tags:    true
+
+
+--------------------------------------------------------------------------------
+--- Maximisation and fullscreen rules
+
+client.connect_signal "property::maximized", =>
+    if @maximized
+        s = @screen
+        @\geometry
+            x:      s.geometry.x
+            y:      s.geometry.y
+            width:  s.geometry.width
+            height: 1080 - s.geometry.y
+
+client.connect_signal "property::fullscreen", =>
+    s = @screen
+    s.bottombar.bar.visible = not @fullscreen if @focus
+
+client.connect_signal "focus", =>
+    s = @screen
+    s.bottombar.bar.visible = not @fullscreen
+    if @maximized
+        @\geometry
+            x:      s.geometry.x
+            y:      s.geometry.y
+            width:  s.geometry.width
+            height: 1080 - s.geometry.y
+
+client.connect_signal "unfocus", =>
+    s = @screen
+    s.bottombar.bar.visible = true

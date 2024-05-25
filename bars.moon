@@ -451,15 +451,6 @@ screen.connect_signal "request::desktop_decoration", =>
     @bottombar.bar\connect_signal "property::visible", () ->
         @bottombar.bar.y = 1078
 
-    client.connect_signal "property::fullscreen", (c) ->
-        @bottombar.bar.visible = not c.fullscreen if c.focus
-
-    client.connect_signal "focus", (c) ->
-        @bottombar.bar.visible = not c.fullscreen
-
-    client.connect_signal "unfocus", () ->
-        @bottombar.bar.visible = true
-
     -----------------------
     -- Bottom bar update --
 
