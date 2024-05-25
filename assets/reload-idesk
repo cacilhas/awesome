@@ -1,0 +1,8 @@
+#!/bin/sh
+
+pkill -x idesk
+sleep 0.5
+if ! pgrep -x idesk
+then
+	prime-run idesk & disown
+fi

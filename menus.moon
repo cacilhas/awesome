@@ -41,7 +41,11 @@ mainmenu = awful.menu
                 {"Xprop", xprop}
                 {"Terminal", kitty}
                 {"dconf Editor", "dconf-editor"}
-                {"Reload compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
+                {widget: wibox.widget.separator}
+                {"Font Selector", "sel-font.sh"}
+                {"Reload Desktop Icons", "#{filesystem.get_configuration_dir!}/assets/reload-idesk"}
+                {"Reload Compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
+                {widget: wibox.widget.separator}
                 {"XKill", "xkill"}
             }
             theme.xorg_icon
