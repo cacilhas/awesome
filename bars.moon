@@ -455,12 +455,16 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @bottombar.bar\connect_signal "mouse::enter", () ->
         @bottombar.bar.y = bb_y
+        @bottombar.bar.opacity = 100
 
     @bottombar.bar\connect_signal "mouse::leave", () ->
         @bottombar.bar.y = 1078
+        @bottombar.bar.opacity = 1
 
     @bottombar.bar\connect_signal "property::visible", () ->
-        @bottombar.bar.y = bb_y
+        if @bottombar.bar.visible
+            @bottombar.bar.y = bb_y
+            @bottombar.bar.opacity = 100
 
     -----------------------
     -- Bottom bar update --
