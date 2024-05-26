@@ -433,12 +433,12 @@ client.connect_signal "property::fullscreen", =>
 client.connect_signal "focus", =>
     s = @screen
     s.bottombar.bar.visible = not @fullscreen
+    x = s.geometry.x
+    y = s.geometry.y + 38
+    width = s.geometry.width
+    height = 1080 - y
     if @maximized
-        @\geometry
-            x:      s.geometry.x
-            y:      s.geometry.y
-            width:  s.geometry.width
-            height: 1080 - s.geometry.y
+        @\geometry :x, :y, :width, :height
 
 client.connect_signal "unfocus", =>
     s = @screen

@@ -406,6 +406,7 @@ screen.connect_signal "request::desktop_decoration", =>
         x:        768
         y:        1078
         ontop:    true
+        shape: gears.shape.rounded_rect
         screen:   @
         widget:   {
             layout: wibox.layout.align.horizontal
