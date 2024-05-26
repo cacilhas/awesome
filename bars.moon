@@ -360,34 +360,37 @@ screen.connect_signal "request::desktop_decoration", =>
 
         localclock: wibox.widget
             format:  '<span color="#ffaa88">%a %F %H:%MBRT</span>'
-            refresh: 60
+            refresh: 10
             widget:  wibox.widget.textclock
 
         calendar: awful.widget.calendar_popup.month!
 
-        pstclock: wibox.widget
-            format:   '<span size="small">%H:%MPST</span>'
-            timezone: 'US/Pacific'
-            refresh:  60
-            widget:   wibox.widget.textclock
-            buttons:  {awful.button {}, 1, -> showpopup"US/Pacific".visible = true}
+        --pstclock: wibox.widget
+        --    format:   '<span size="small">%H:%MPST</span>'
+        --    timezone: 'US/Pacific'
+        --    refresh:  10
+        --    widget:   wibox.widget.textclock
+        --    buttons:  {awful.button {}, 1, -> showpopup"US/Pacific".visible = true}
 
-        cstclock: wibox.widget
-            format:   '<span size="small">%H:%MCST</span>'
-            timezone: 'US/Central'
-            refresh:  60
-            widget:   wibox.widget.textclock
-            buttons:  {awful.button {}, 1, -> showpopup"US/Central".visible = true}
+        --cstclock: wibox.widget
+        --    format:   '<span size="small">%H:%MCST</span>'
+        --    timezone: 'US/Central'
+        --    refresh:  10
+        --    widget:   wibox.widget.textclock
+        --    buttons:  {awful.button {}, 1, -> showpopup"US/Central".visible = true}
 
         utcclock: wibox.widget
             format:   '<span color="#00aa55">%H:%MZ</span>'
             timezone: 'UTC'
-            refresh:  60
+            refresh:  10
             widget:   wibox.widget.textclock
             buttons:  {awful.button {}, 1, -> awful.spawn "kodumaro-clock"}
 
         quitbt: wibox.widget
-            markup: ' <span size="large" color="red">⏻ </span> '
+            markup: '<span color="red">⏻ </span>'
+            font:   'Bellota 32'
+            align:  'center'
+            valign: 'center'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, -> awesome.quit!,
@@ -398,13 +401,15 @@ screen.connect_signal "request::desktop_decoration", =>
         .calendar\attach .localclock, "br", on_hover: false
         .localclock.buttons = {awful.button {}, 1, -> .calendar\toggle!}
 
+    bb_height = 64
+    bb_y = 1080 - bb_height
     @bottombar.bar = awful.wibar
         position: "bottom"
         opacity:  1
-        width:    1536
-        height:   52
+        width:    1920 * 0.75
+        height:   bb_height
         x:        768
-        y:        1078
+        y:        bb_y
         ontop:    true
         shape: gears.shape.rounded_rect
         screen:   @
@@ -435,6 +440,11 @@ screen.connect_signal "request::desktop_decoration", =>
                 wibox.widget.textbox"┊"
                 @bottombar.widgets.localclock
                 wibox.widget.textbox"┊"
+                wibox.widget
+                    text:   " "
+                    color:  theme.bg_normal
+                    bg:     theme.bg_normal
+                    widget: wibox.widget.textbox" "
                 @bottombar.widgets.quitbt
             }
         }
@@ -444,13 +454,13 @@ screen.connect_signal "request::desktop_decoration", =>
     --
 
     @bottombar.bar\connect_signal "mouse::enter", () ->
-        @bottombar.bar.y = 1028
+        @bottombar.bar.y = bb_y
 
     @bottombar.bar\connect_signal "mouse::leave", () ->
         @bottombar.bar.y = 1078
 
     @bottombar.bar\connect_signal "property::visible", () ->
-        @bottombar.bar.y = 1078
+        @bottombar.bar.y = bb_y
 
     -----------------------
     -- Bottom bar update --

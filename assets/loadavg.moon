@@ -17,7 +17,7 @@ import terminal from require"helpers"
         avg5  = tonumber it!
         avg15 = tonumber it!
 
-        res = '<span face="Fira Code" size="x-small">'
+        res = '<span face="Fira Code" size="xx-small">'
         res ..= if math.max(avg1, math.max(avg5, avg15)) >= 5
             '<span foreground="red"> </span>'
         else

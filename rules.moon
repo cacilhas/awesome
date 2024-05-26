@@ -434,7 +434,7 @@ client.connect_signal "focus", =>
     s = @screen
     s.bottombar.bar.visible = not @fullscreen
     x = s.geometry.x
-    y = s.geometry.y + 38
+    y = s.geometry.y + s.topbar.bar.height
     width = s.geometry.width
     height = 1080 - y
     if @maximized

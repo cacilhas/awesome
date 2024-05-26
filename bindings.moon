@@ -147,7 +147,7 @@ awful.keyboard.append_global_keybindings {
             for s in screen
                 s.topbar.bar.ontop = true
                 s.bottombar.bar.visible = true
-                s.bottombar.bar.y = 1028
+                s.bottombar.bar.y = 1080 - s.bottombar.bar.height
         on_release: ->
             for s in screen
                 s.topbar.bar.ontop = false
