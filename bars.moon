@@ -19,30 +19,30 @@ import mainlauncher from require"menus"
 stop_timer = => @\stop! if @ and @.started
 
 
-screen.connect_signal "request::desktop_decoration", =>
+screen.connect_signal 'request::desktop_decoration', =>
     awful.tag {
-        " "
-        " "
-        " "
-        " "
-        " "
-        " "
-        " " -- 
-        " "
-        " "
-        " "
-        " "
-        " "
-        " "
-        " " -- 
-        " "
+        ' '
+        ' '
+        ' '
+        ' '
+        ' '
+        ' '
+        ' ' -- 
+        ' '
+        ' '
+        ' '
+        ' '
+        ' '
+        ' '
+        ' ' -- 
+        ' '
     }, @, awful.layout.suit.fair
 
-    awful.tag.find_by_name(s, " ").layout = awful.layout.suit.max
-    awful.tag.find_by_name(s, " ").layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, " ").layout = awful.layout.suit.max
-    awful.tag.find_by_name(s, " ").layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, " ").layout = awful.layout.suit.max.fullscreen
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
 
 
     ----------------------------------------------------------------------------
@@ -58,9 +58,9 @@ screen.connect_signal "request::desktop_decoration", =>
             filter:  awful.widget.taglist.filter.noempty
             buttons: {
                 awful.button {},       1, => @\view_only!
-                awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
+                awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
                 awful.button {},       3, awful.tag.viewtoggle
-                awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
+                awful.button {'Mod4'}, 3, (=> client.focus\toggle_tag @ if client.focus)
                 awful.button {},       4, => prevtag @screen
                 awful.button {},       5, => nexttag @screen
             }
@@ -71,9 +71,9 @@ screen.connect_signal "request::desktop_decoration", =>
             filter:  awful.widget.taglist.filter.all
             buttons: {
                 awful.button {},       1, => @\view_only!
-                awful.button {"Mod4"}, 1, (=> client.focus\move_to_tag @ if client.focus)
+                awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
                 awful.button {},       3, awful.tag.viewtoggle
-                awful.button {"Mod4"}, 3, (=> client.focus\toggle_tag @ if client.focus)
+                awful.button {'Mod4'}, 3, (=> client.focus\toggle_tag @ if client.focus)
                 awful.button {},       4, => awful.tag.viewprev @screen
                 awful.button {},       5, => awful.tag.viewnext @screen
             }
@@ -114,67 +114,67 @@ screen.connect_signal "request::desktop_decoration", =>
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.hostname "nemo", (markup) ->
+                    assets.hostname 'nemo', (markup) ->
                         @topbar.widgets.hostname.markup = markup
             }
 
         speak: wibox.widget
-            markup: ""
+            markup: ''
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.speak "switch", (markup) ->
+                    assets.speak 'switch', (markup) ->
                         @topbar.widgets.speak.markup = markup
             }
 
         audio: wibox.widget
-            markup:  ""
+            markup:  ''
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.audio "mute", (markup) ->
+                    assets.audio 'mute', (markup) ->
                         @topbar.widgets.audio.markup = markup
 
                 awful.button {}, 2, ->
-                    awful.spawn "pavucontrol"
+                    awful.spawn 'pavucontrol'
 
                 awful.button {}, 4, ->
-                    assets.audio "dec", (markup) ->
+                    assets.audio 'dec', (markup) ->
                         @topbar.widgets.audio.markup = markup
 
                 awful.button {}, 5, ->
-                    assets.audio "inc", (markup) ->
+                    assets.audio 'inc', (markup) ->
                         @topbar.widgets.audio.markup = markup
             }
 
         mic: wibox.widget
-            markup:  ""
+            markup:  ''
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.mic "mute", (markup) ->
+                    assets.mic 'mute', (markup) ->
                         @topbar.widgets.mic.markup = markup
             }
 
         eth: wibox.widget
-            markup:  ""
+            markup:  ''
             widget:  wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.eth "show", (markup) ->
+                    assets.eth 'show', (markup) ->
                         @topbar.widgets.eth.markup = markup
 
                 awful.button {}, 3, ->
-                    assets.eth "reset", (markup) ->
+                    assets.eth 'reset', (markup) ->
                         @topbar.widgets.eth.markup = markup
             }
 
         webconn: wibox.widget
-            text: "‼️"
+            text: '‼️'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.webconn "show", (text) ->
+                    assets.webconn 'show', (text) ->
                         @topbar.widgets.webconn.text = text
             }
 
@@ -183,13 +183,13 @@ screen.connect_signal "request::desktop_decoration", =>
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 1, ->
-                    assets.vpn "status", (markup) -> @topbar.widgets.vpn.markup = markup
+                    assets.vpn 'status', (markup) -> @topbar.widgets.vpn.markup = markup
                 awful.button {}, 2, ->
-                    assets.vpn "disconnect", (markup) -> @topbar.widgets.vpn.markup = markup
+                    assets.vpn 'disconnect', (markup) -> @topbar.widgets.vpn.markup = markup
                 awful.button {}, 4, ->
-                    assets.vpn "us", (markup) -> @topbar.widgets.vpn.markup = markup
+                    assets.vpn 'us', (markup) -> @topbar.widgets.vpn.markup = markup
                 awful.button {}, 5, ->
-                    assets.vpn "br", (markup) -> @topbar.widgets.vpn.markup = markup
+                    assets.vpn 'br', (markup) -> @topbar.widgets.vpn.markup = markup
             }
 
         layoutbox: awful.widget.layoutbox {
@@ -202,8 +202,13 @@ screen.connect_signal "request::desktop_decoration", =>
             }
         }
 
+    tsep = {
+        markup: "<span color=\"#{theme.bg_focus}\">┊</span>"
+        widget: wibox.widget.textbox
+    }
+
     @topbar.bar = awful.wibar
-        position: "top"
+        position: 'top'
         opacity:  0.8
         screen:   @
         widget:   {
@@ -222,21 +227,21 @@ screen.connect_signal "request::desktop_decoration", =>
             {
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.archlogolauncher
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.hostname
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.speak
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.audio
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.mic
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.webconn
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.eth
-                wibox.widget.textbox"┊"
+                tsep
                 @topbar.widgets.vpn
-                wibox.widget.textbox"┊"
+                tsep
                 wibox.widget.systray!
                 @topbar.widgets.layoutbox
             }
@@ -321,15 +326,15 @@ screen.connect_signal "request::desktop_decoration", =>
 
     @bottombar.widgets =
         bright: wibox.widget
-            text: "🔆‼️%"
+            text: '🔆‼️%'
             widget: wibox.widget.textbox
             buttons: {
                 awful.button {}, 4, =>
-                    assets.bright "dec", (text) ->
+                    assets.bright 'dec', (text) ->
                         @text = text
 
                 awful.button {}, 5, =>
-                    assets.bright "inc", (text) ->
+                    assets.bright 'inc', (text) ->
                         @text = text
             }
 
@@ -338,12 +343,12 @@ screen.connect_signal "request::desktop_decoration", =>
             filter:  awful.widget.tasklist.filter.currenttags
             style:
                 shape: gears.shape.rounded_rect
-                align: "center"
+                align: 'center'
             layout:
                 spacing: 2
                 layout: wibox.layout.flex.horizontal
             buttons: {
-                awful.button {}, 1, => @\activate context: "tasklist", action: "toggle_minimization"
+                awful.button {}, 1, => @\activate context: 'tasklist', action: 'toggle_minimization'
                 awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}
                 awful.button {}, 4, -> awful.client.focus.byidx -1
                 awful.button {}, 5, -> awful.client.focus.byidx  1
@@ -384,7 +389,7 @@ screen.connect_signal "request::desktop_decoration", =>
             timezone: 'UTC'
             refresh:  10
             widget:   wibox.widget.textclock
-            buttons:  {awful.button {}, 1, -> awful.spawn "kodumaro-clock"}
+            buttons:  {awful.button {}, 1, -> awful.spawn 'kodumaro-clock'}
 
         quitbt: wibox.widget
             markup: '<span color="red">⏻ </span>'
@@ -398,13 +403,19 @@ screen.connect_signal "request::desktop_decoration", =>
             }
 
     with @bottombar.widgets
-        .calendar\attach .localclock, "br", on_hover: false
+        .calendar\attach .localclock, 'br', on_hover: false
         .localclock.buttons = {awful.button {}, 1, -> .calendar\toggle!}
 
     bb_height = 64
     bb_y = 1080 - bb_height
+    bsep = {
+        markup: "<span color=\"#{theme.bg_focus}\">┊</span>"
+        font:   'Bellota 32'
+        widget: wibox.widget.textbox
+    }
+
     @bottombar.bar = awful.wibar
-        position: "bottom"
+        position: 'bottom'
         opacity:  1
         width:    1920 * 0.75
         height:   bb_height
@@ -418,33 +429,33 @@ screen.connect_signal "request::desktop_decoration", =>
             {
                 layout: wibox.layout.fixed.horizontal
                 mainlauncher
-                wibox.widget.textbox" "
+                wibox.widget.textbox' '
             }
             @bottombar.widgets.taskbar
             {
                 layout: wibox.layout.fixed.horizontal
                 wibox.widget
-                    text:   " "
+                    text:   ' '
                     color:  theme.bg_normal
                     bg:     theme.bg_normal
-                    widget: wibox.widget.textbox" "
+                    widget: wibox.widget.textbox
                 @bottombar.widgets.bright
-                wibox.widget.textbox"┊"
+                bsep
                 @bottombar.widgets.loadavg
-                --wibox.widget.textbox"┊"
+                --bsep
                 --@bottombar.widgets.pstclock
-                --wibox.widget.textbox"┊"
+                --bsep
                 --@bottombar.widgets.cstclock
-                wibox.widget.textbox"┊"
+                bsep
                 @bottombar.widgets.utcclock
-                wibox.widget.textbox"┊"
+                bsep
                 @bottombar.widgets.localclock
-                wibox.widget.textbox"┊"
+                bsep
                 wibox.widget
-                    text:   " "
+                    text:   ' '
                     color:  theme.bg_normal
                     bg:     theme.bg_normal
-                    widget: wibox.widget.textbox" "
+                    widget: wibox.widget.textbox
                 @bottombar.widgets.quitbt
             }
         }
@@ -453,15 +464,15 @@ screen.connect_signal "request::desktop_decoration", =>
     -- Hide and show bottom bar
     --
 
-    @bottombar.bar\connect_signal "mouse::enter", () ->
+    @bottombar.bar\connect_signal 'mouse::enter', () ->
         @bottombar.bar.y = bb_y
         @bottombar.bar.opacity = 100
 
-    @bottombar.bar\connect_signal "mouse::leave", () ->
+    @bottombar.bar\connect_signal 'mouse::leave', () ->
         @bottombar.bar.y = 1078
         @bottombar.bar.opacity = 1
 
-    @bottombar.bar\connect_signal "property::visible", () ->
+    @bottombar.bar\connect_signal 'property::visible', () ->
         if @bottombar.bar.visible
             @bottombar.bar.y = bb_y
             @bottombar.bar.opacity = 100
