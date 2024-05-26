@@ -57,7 +57,7 @@ mainmenu = awful.menu
     hide_on_unfocus: 5
 
 mainlauncher = awful.widget.launcher
-    image: theme.awesome_icon
+    image: theme.system_logo
     menu:  mainmenu
 
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
