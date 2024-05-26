@@ -37,7 +37,7 @@ screen.connect_signal "request::wallpaper", =>
     }
 
     -- Force iDesk to reload whenever the wallpaper changes
-    awful.spawn "#{gears.filesystem.get_configuration_dir!}/assets/reload-idesk"
+    --awful.spawn.with_shell "#{gears.filesystem.get_configuration_dir!}/assets/reload-idesk"
 
 for s in screen
     if _G.screentimer[s.index]
