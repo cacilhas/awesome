@@ -43,6 +43,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^memory$"
                 "^Nemo$"
                 "^Pavucontrol$"
+                "^Pcmanfm$"
                 "^plasma%.emojier$"
                 "^processing-core-"
                 "^Toplevel$"
@@ -427,19 +428,23 @@ client.connect_signal "property::maximized", =>
             height: 1080 - s.geometry.y
 
 client.connect_signal "property::fullscreen", =>
-    s = @screen
-    s.bottombar.bar.visible = not @fullscreen if @focus
+    @screen.bottombar.bar.visible = not @fullscreen if @focus
 
 client.connect_signal "focus", =>
     s = @screen
-    s.bottombar.bar.visible = not @fullscreen
-    x = s.geometry.x
-    y = s.geometry.y + s.topbar.bar.height
-    width = s.geometry.width
-    height = 1080 - y
+    if @fullscreen
+        s.bottombar.bar.visible = false
+    else
+        s.bottombar.bar.visible = true
+        s.bottombar.bar.y = 1078
     if @maximized
+        x = s.geometry.x
+        y = s.geometry.y + s.topbar.bar.height
+        width = s.geometry.width
+        height = 1080 - y
         @\geometry :x, :y, :width, :height
 
 client.connect_signal "unfocus", =>
     s = @screen
     s.bottombar.bar.visible = true
+    s.bottombar.bar.y = 1078

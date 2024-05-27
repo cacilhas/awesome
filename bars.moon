@@ -460,9 +460,8 @@ screen.connect_signal 'request::desktop_decoration', =>
             }
         }
 
-    --
-    -- Hide and show bottom bar
-    --
+    -----------------------
+    -- Bottom bar update --
 
     @bottombar.bar\connect_signal 'mouse::enter', () ->
         @bottombar.bar.y = bb_y
@@ -476,9 +475,6 @@ screen.connect_signal 'request::desktop_decoration', =>
         if @bottombar.bar.visible
             @bottombar.bar.y = bb_y
             @bottombar.bar.opacity = 100
-
-    -----------------------
-    -- Bottom bar update --
 
     @bottombar.timers or= {}
     timer\stop! for _, timer in pairs @bottombar.timers
