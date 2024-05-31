@@ -20,7 +20,8 @@ rnotification.connect_signal "request::rules", ->
 taglist_square_size = apply_dpi 4
 bg_focus    = "#2aa198"
 bg_normal   = "#002b36"
-bg_button   = "#05303b"
+--bg_button   = "#08241b"
+bg_button   = "#101940"
 bg_urgent   = "#900000"
 bg_minimize = "#5f676a"
 bg_systray  = bg_normal

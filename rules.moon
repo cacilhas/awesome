@@ -40,6 +40,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Guake"
                 "^i3quitdialog"
                 "^java-lang-"
+                "^llama-desktop"
                 "^memory$"
                 "^Nemo$"
                 "^Pavucontrol$"
@@ -59,7 +60,7 @@ ruled.client.connect_signal "request::rules", ->
                 "utility"
             }
             name: {
-                "Event Tester"  -- xev.
+                "Event Tester"  -- xev
             }
             role: {"pop-up"}
         except_any:
