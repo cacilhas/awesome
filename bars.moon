@@ -10,6 +10,26 @@ import nexttag, prevtag, reload, showpopup from require"helpers"
 import mainlauncher from require"menus"
 
 
+margin = (m) => wibox.widget {
+    @
+    top:    m.top
+    bottom: m.bottom
+    left:   m.left
+    right:  m.right
+    widget: wibox.container.margin
+}
+
+rounded = => wibox.widget {
+    @
+    shape:      gears.shape.rounded_rect
+    shape_clip: true
+    bg:         theme.bg_button
+    widget: wibox.container.background
+}
+
+wrap = =>
+    margin(rounded(margin @, left: 8, right: 8), top: 8, bottom: 8, left: 4)
+
 --------------------------------------------------------------------------------
 --- Wibar
 
@@ -408,11 +428,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     bb_height = 64
     bb_y = 1080 - bb_height
-    bsep = {
-        markup: "<span color=\"#{theme.bg_focus}\">┊</span>"
-        font:   'Bellota 32'
-        widget: wibox.widget.textbox
-    }
 
     @bottombar.bar = awful.wibar
         position: 'bottom'
@@ -428,35 +443,22 @@ screen.connect_signal 'request::desktop_decoration', =>
             layout: wibox.layout.align.horizontal
             {
                 layout: wibox.layout.fixed.horizontal
-                mainlauncher
-                wibox.widget.textbox' '
+                margin mainlauncher, left: 8, right: 8
             }
-            @bottombar.widgets.taskbar
+            margin @bottombar.widgets.taskbar, left: 4, top: 8, bottom: 8
             {
                 layout: wibox.layout.fixed.horizontal
-                wibox.widget
-                    text:   ' '
-                    color:  theme.bg_normal
-                    bg:     theme.bg_normal
-                    widget: wibox.widget.textbox
-                @bottombar.widgets.bright
-                bsep
-                @bottombar.widgets.loadavg
-                --bsep
-                --@bottombar.widgets.pstclock
-                --bsep
-                --@bottombar.widgets.cstclock
-                bsep
-                @bottombar.widgets.utcclock
-                bsep
-                @bottombar.widgets.localclock
-                bsep
-                wibox.widget
-                    text:   ' '
-                    color:  theme.bg_normal
-                    bg:     theme.bg_normal
-                    widget: wibox.widget.textbox
-                @bottombar.widgets.quitbt
+                wrap @bottombar.widgets.bright
+                wrap @bottombar.widgets.loadavg
+                --wrap @bottombar.widgets.pstclock
+                --wrap @bottombar.widgets.cstclock
+                wrap @bottombar.widgets.utcclock
+                wrap @bottombar.widgets.localclock
+                wibox.widget {
+                    @bottombar.widgets.quitbt
+                    left:  12
+                    widget: wibox.container.margin
+                }
             }
         }
 
