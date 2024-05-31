@@ -146,12 +146,14 @@ awful.keyboard.append_global_keybindings {
         on_press: ->
             for s in screen
                 s.topbar.bar.ontop = true
+                s.topbar.bar.opacity = 1
                 s.bottombar.bar.visible = true
                 s.bottombar.bar.y = 1080 - s.bottombar.bar.height
                 s.bottombar.bar.opacity = 100
         on_release: ->
             for s in screen
                 s.topbar.bar.ontop = false
+                s.topbar.bar.opacity = 0.8
                 s.bottombar.bar.y = 1078
                 s.bottombar.bar.opacity = 1
                 s.bottombar.bar.visible = not awful.screen.focused!.fullscreen

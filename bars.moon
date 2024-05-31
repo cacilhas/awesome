@@ -30,6 +30,10 @@ rounded = => wibox.widget {
 wrap = =>
     margin(rounded(margin @, left: 8, right: 8), top: 8, bottom: 8, left: 4)
 
+twrap = =>
+    margin(rounded(margin @, left: 8, right: 8), top: 4, bottom: 4, left: 4)
+
+
 --------------------------------------------------------------------------------
 --- Wibar
 
@@ -222,8 +226,9 @@ screen.connect_signal 'request::desktop_decoration', =>
             }
         }
 
-    tsep = {
-        markup: "<span color=\"#{theme.bg_focus}\">┊</span>"
+    sep = {
+        text:   ' '
+        font:   'monospace 12'
         widget: wibox.widget.textbox
     }
 
@@ -247,21 +252,14 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.archlogolauncher
-                tsep
-                @topbar.widgets.hostname
-                tsep
-                @topbar.widgets.speak
-                tsep
-                @topbar.widgets.audio
-                tsep
-                @topbar.widgets.mic
-                tsep
-                @topbar.widgets.webconn
-                tsep
-                @topbar.widgets.eth
-                tsep
-                @topbar.widgets.vpn
-                tsep
+                twrap @topbar.widgets.hostname
+                twrap @topbar.widgets.speak
+                twrap @topbar.widgets.audio
+                twrap @topbar.widgets.mic
+                twrap @topbar.widgets.webconn
+                twrap @topbar.widgets.eth
+                --twrap @topbar.widgets.vpn
+                sep
                 wibox.widget.systray!
                 @topbar.widgets.layoutbox
             }
