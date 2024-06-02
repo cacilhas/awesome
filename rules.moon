@@ -29,9 +29,9 @@ ruled.client.connect_signal "request::rules", ->
                 "^archlogo$"
                 "^Audacious$"
                 "^Clock$"
-                "^Cairo-dock"
+                "^Cairo%-dock"
                 "^Catclock$"
-                "^dde-calendar$"
+                "^dde%-calendar$"
                 "^Display$"
                 "^Droidcam"
                 "^FLTK$"
@@ -39,14 +39,13 @@ ruled.client.connect_signal "request::rules", ->
                 "^GDevelop"
                 "^Guake"
                 "^i3quitdialog"
-                "^java-lang-"
-                "^llama-desktop"
+                "^java%-lang%-"
                 "^memory$"
                 "^Nemo$"
                 "^Pavucontrol$"
                 "^Pcmanfm$"
                 "^plasma%.emojier$"
-                "^processing-core-"
+                "^processing%-core%-"
                 "^Toplevel$"
                 "^XCalc$"
                 "^XEyes$"
@@ -79,9 +78,9 @@ ruled.client.connect_signal "request::rules", ->
                 "^archlogo$"
                 "^Audacious$"
                 "^Clock$"
-                "^Cairo-dock"
+                "^Cairo%-dock"
                 "^Catclock$"
-                "^dde-calendar$"
+                "^dde%-calendar$"
                 "^Display$"
                 "^Guake"
                 "^i3quitdialog"
@@ -109,9 +108,9 @@ ruled.client.connect_signal "request::rules", ->
                 "^archlogo$"
                 "^Audacious$"
                 "^Clock$"
-                "^Cairo-dock"
+                "^Cairo%-dock"
                 "^Catclock$"
-                "^dde-calendar$"
+                "^dde%-calendar$"
                 "^Display$"
                 "^Guake"
                 "^i3quitdialog"
@@ -144,6 +143,7 @@ ruled.client.connect_signal "request::rules", ->
             class: "^i3lock$"
         properties:
             fullscreen: true
+
 
     ----------------------------------------------------------------------------
     -- Per-application properties
@@ -189,8 +189,8 @@ ruled.client.connect_signal "request::rules", ->
         id: "emu"
         rule_any:
             class: {
-                "^Qemu-system"
-                "^Virt-manager"
+                "^Qemu%-system"
+                "^Virt%-manager"
             }
         properties:
             fullscreen:     true
@@ -214,7 +214,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^Dfarc"
                 "^doѕbox"
                 "^freedink$"
-                "^magnet-ball$"
+                "^magnet%-ball$"
                 "^Nonogram$"
                 "^stella$"
                 "^roblox"
@@ -241,7 +241,7 @@ ruled.client.connect_signal "request::rules", ->
                 "^GDevelop"
                 "^Godot"
                 "^TrenchBroom$"
-                "^turbowarp-desktop$"
+                "^turbowarp%-desktop$"
                 "^UnrealEditor"
             }
         properties:
@@ -262,12 +262,12 @@ ruled.client.connect_signal "request::rules", ->
         rule_any:
             class: {
                 "^Code$"
-                "^code-oss$"
+                "^code%-oss$"
                 "^DrRacket$"
                 "^ecode%.bin$"
                 "^FreeCAD$"
                 "^Gambas3$"
-                "^jetbrains-"
+                "^jetbrains%-"
                 "^Processing$"
                 "^Whireshark$"
             }
@@ -366,10 +366,10 @@ ruled.client.connect_signal "request::rules", ->
         id: "terminal"
         rule_any:
             class: {
-                "$cool-retro-term"
+                "^cool%-retro%-term"
                 "kitty"
                 "org%.wezfurlong%.wezterm"
-                "st-256color"
+                "st%-256color"
             }
         properties:
             fullscreen:     true
@@ -413,6 +413,15 @@ ruled.client.connect_signal "request::rules", ->
             border_width:      0
             titlebars_enabled: false
             tag:               awful.tag.find_by_name nil, " "
+            switch_to_tags:    true
+
+    ruled.client.append_rule
+        id: "LLM"
+        rule:
+            class: "^llama%-desktop"
+        properties:
+            fullscreen:        true
+            tag:               awful.tag.find_by_name nil, "🦙"
             switch_to_tags:    true
 
 
