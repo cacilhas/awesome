@@ -27,7 +27,7 @@ mainmenu = awful.menu
                 {"Manual", "www-browser https://awesomewm.org/doc/api/", theme.awesome_icon}
                 {"Reddit", redditsearch, theme.reddit_icon}
                 { "Command", moonprompt, "/usr/share/icons/breeze/apps/64/utilities-terminal.svg"}
-                {"Settings", "kitty -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
+                --{"Settings", "kitty -- nvim -cNvimTreeFocus", "/usr/share/icons/breeze/apps/48/systemsettings.svg"}
                 {widget: wibox.widget.separator}
                 {"Reload Awesome", reload, "/usr/share/icons/breeze-dark/actions/32/edit-redo.svg"}
                 {"Exit", -> awesome.quit!, "/usr/share/icons/breeze/actions/24/gtk-quit.svg"}
