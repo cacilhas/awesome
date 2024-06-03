@@ -2,7 +2,19 @@
 
 pkill -x idesk
 sleep 0.5
-if ! pgrep -x idesk
+if pgrep -x idesk &>/dev/null
 then
-	prime-run idesk & disown
+  exit 1
 fi
+
+prime-run idesk & disown
+while ! pgrep -x idesk &>/dev/null
+do
+	sleep .1
+done
+
+for id in $(xwininfo -root -children | grep '\<48x48\+' | grep 'has no name' | sed 's/^ *//' | cut -d' ' -f1)
+do
+	xprop -id $id -f WM_CLASS 8u -set WM_CLASS idesk
+	xprop -id $id -f WM_NAME 8u -set WM_NAME idesk
+done
