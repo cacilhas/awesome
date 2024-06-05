@@ -20,6 +20,16 @@ ruled.client.connect_signal "request::rules", ->
             screen:    awful.screen.preferred
             placement: awful.placement.no_overlap + awful.placement.no_offscreen
 
+    ruled.client.append_rule
+        id: "desktop"
+        rule:
+            type: "desktop"
+        properties:
+            sticky: true
+            placement: awful.placement.top_right
+            border_width:      0
+            titlebars_enabled: false
+
     -- Floating clients.
     ruled.client.append_rule
         id: "floating"
