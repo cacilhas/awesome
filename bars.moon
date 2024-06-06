@@ -349,22 +349,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar.widgets =
         bright: plugins.bright!
         loadavg: plugins.loadavg!
-
-        taskbar: awful.widget.tasklist
-            screen:  @
-            filter:  awful.widget.tasklist.filter.currenttags
-            style:
-                shape: gears.shape.rounded_rect
-                align: 'center'
-            layout:
-                spacing: 2
-                layout: wibox.layout.flex.horizontal
-            buttons: {
-                awful.button {}, 1, => @\activate context: 'tasklist', action: 'toggle_minimization'
-                awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}
-                awful.button {}, 4, -> awful.client.focus.byidx -1
-                awful.button {}, 5, -> awful.client.focus.byidx  1
-            }
+        taskbar: plugins.taskbar @
 
         localclock: wibox.widget
             format:  '<span color="#ffaa88">%a %F %H:%MBRT</span>'
