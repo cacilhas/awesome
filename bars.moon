@@ -390,20 +390,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
         calendar: awful.widget.calendar_popup.month!
 
-        --pstclock: wibox.widget
-        --    format:   '<span size="small">%H:%MPST</span>'
-        --    timezone: 'US/Pacific'
-        --    refresh:  10
-        --    widget:   wibox.widget.textclock
-        --    buttons:  {awful.button {}, 1, -> showpopup"US/Pacific".visible = true}
-
-        --cstclock: wibox.widget
-        --    format:   '<span size="small">%H:%MCST</span>'
-        --    timezone: 'US/Central'
-        --    refresh:  10
-        --    widget:   wibox.widget.textclock
-        --    buttons:  {awful.button {}, 1, -> showpopup"US/Central".visible = true}
-
         utcclock: wibox.widget
             format:   '<span color="#00aa55">%H:%MZ</span>'
             timezone: 'UTC'
@@ -450,8 +436,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                 layout: wibox.layout.fixed.horizontal
                 wrap @bottombar.widgets.bright
                 wrap @bottombar.widgets.loadavg
-                --wrap @bottombar.widgets.pstclock
-                --wrap @bottombar.widgets.cstclock
                 wrap @bottombar.widgets.utcclock
                 wrap @bottombar.widgets.localclock
                 wibox.widget {
