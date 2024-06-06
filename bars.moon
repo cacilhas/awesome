@@ -114,20 +114,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                         @topbar.widgets.webconn.text = text
             }
 
-        vpn: wibox.widget
-            markup: '<span color="yellow">Connecting…</span>'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.vpn 'status', (markup) -> @topbar.widgets.vpn.markup = markup
-                awful.button {}, 2, ->
-                    assets.vpn 'disconnect', (markup) -> @topbar.widgets.vpn.markup = markup
-                awful.button {}, 4, ->
-                    assets.vpn 'us', (markup) -> @topbar.widgets.vpn.markup = markup
-                awful.button {}, 5, ->
-                    assets.vpn 'br', (markup) -> @topbar.widgets.vpn.markup = markup
-            }
-
         layoutbox: awful.widget.layoutbox {
             screen:  @
             buttons: {
@@ -168,7 +154,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap @topbar.widgets.mic
                 wrap @topbar.widgets.webconn
                 wrap @topbar.widgets.eth
-                --wrap @topbar.widgets.vpn
                 sep
                 wibox.widget.systray!
                 @topbar.widgets.layoutbox
@@ -225,15 +210,6 @@ screen.connect_signal 'request::desktop_decoration', =>
         callback:  ->
             assets.webconn nil, (text) ->
                 @topbar.widgets.webconn.text = text
-
-    stop_timer @topbar.timers.vpn
-    @topbar.timers.vpn = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   5
-        callback: ->
-            assets.vpn nil, (markup) ->
-                @topbar.widgets.vpn.markup = markup
 
 
     ----------------------------------------------------------------------------
