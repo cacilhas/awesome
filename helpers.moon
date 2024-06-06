@@ -3,6 +3,7 @@ local *
 gears   = require"gears"
 awful   = require"awful"
 naughty = require"naughty"
+theme   = require"beautiful"
 wibox   = require"wibox"
 import filesystem from gears
 
@@ -178,6 +179,35 @@ prevtag = (screen=awful.screen.focused!) =>
     -- No other non-empty tag, quitting silently
 
 --------------------------------------------------------------------------------
+withmargin = (m) => wibox.widget {
+    @
+    top:    m.top
+    bottom: m.bottom
+    left:   m.left
+    right:  m.right
+    widget: wibox.container.margin
+}
+
+
+--------------------------------------------------------------------------------
+rounded = => wibox.widget {
+    @
+    shape:      gears.shape.rounded_rect
+    shape_clip: true
+    bg:         theme.bg_button
+    widget: wibox.container.background
+}
+
+
+wrap = (t = {}) =>
+    top    = t.top or t.margin or 4
+    bottom = t.bottom or t.margin or 4
+    right  = t.right or 0
+    left   = t.left or 4
+    withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
+
+
+--------------------------------------------------------------------------------
 xprop = ->
     awful.spawn.easy_async_with_shell "xprop", showpopup
 
@@ -192,5 +222,6 @@ terminal = "st"
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     :ddgo, :redditsearch, :geo, :xprop
+    :withmargin, :wrap
     kitty: "call-terminal.sh"
 }

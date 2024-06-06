@@ -8,32 +8,8 @@ assets = require"assets"
 plugins = require"plugins"
 
 import filesystem from gears
-import nexttag, prevtag from require"helpers"
+import nexttag, prevtag, withmargin, wrap from require"helpers"
 import mainlauncher from require"menus"
-
-
-margin = (m) => wibox.widget {
-    @
-    top:    m.top
-    bottom: m.bottom
-    left:   m.left
-    right:  m.right
-    widget: wibox.container.margin
-}
-
-rounded = => wibox.widget {
-    @
-    shape:      gears.shape.rounded_rect
-    shape_clip: true
-    bg:         theme.bg_button
-    widget: wibox.container.background
-}
-
-wrap = =>
-    margin(rounded(margin @, left: 8, right: 8), top: 8, bottom: 8, left: 4)
-
-twrap = =>
-    margin(rounded(margin @, left: 8, right: 8), top: 4, bottom: 4, left: 4)
 
 
 --------------------------------------------------------------------------------
@@ -256,13 +232,13 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 @topbar.widgets.archlogolauncher
-                twrap @topbar.widgets.hostname
-                twrap @topbar.widgets.speak
-                twrap @topbar.widgets.audio
-                twrap @topbar.widgets.mic
-                twrap @topbar.widgets.webconn
-                twrap @topbar.widgets.eth
-                --twrap @topbar.widgets.vpn
+                wrap @topbar.widgets.hostname
+                wrap @topbar.widgets.speak
+                wrap @topbar.widgets.audio
+                wrap @topbar.widgets.mic
+                wrap @topbar.widgets.webconn
+                wrap @topbar.widgets.eth
+                --wrap @topbar.widgets.vpn
                 sep
                 wibox.widget.systray!
                 @topbar.widgets.layoutbox
@@ -371,15 +347,15 @@ screen.connect_signal 'request::desktop_decoration', =>
             layout: wibox.layout.align.horizontal
             {
                 layout: wibox.layout.fixed.horizontal
-                margin mainlauncher, left: 8, right: 8
+                withmargin mainlauncher, left: 8, right: 8
             }
-            margin @bottombar.widgets.taskbar, left: 4, top: 8, bottom: 8
+            withmargin @bottombar.widgets.taskbar, left: 4, top: 8, bottom: 8
             {
                 layout: wibox.layout.fixed.horizontal
-                wrap @bottombar.widgets.bright
-                wrap @bottombar.widgets.loadavg
-                wrap @bottombar.widgets.utcclock
-                wrap @bottombar.widgets.localclock
+                wrap @bottombar.widgets.bright, margin: 8
+                wrap @bottombar.widgets.loadavg, margin: 8
+                wrap @bottombar.widgets.utcclock, margin: 8
+                wrap @bottombar.widgets.localclock, margin: 8
                 @bottombar.widgets.quitbt
             }
         }
