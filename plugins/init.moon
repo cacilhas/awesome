@@ -1,10 +1,21 @@
-{
-    archlogo:  assert require"plugins.archlogo"
-    bright:    assert require"plugins.bright"
-    bt_quit:   assert require"plugins.bt_quit"
-    clock:     assert require"plugins.clock"
-    loadavg:   assert require"plugins.loadavg"
-    taglist:   assert require"plugins.taglist"
-    taskbar:   assert require"plugins.taskbar"
-    utc:       assert require"plugins.utc"
-}
+local *
+
+import filesystem from require"gears"
+
+plugins = "#{filesystem.get_configuration_dir!}/plugins"
+
+module = {}
+status, list = pcall io.popen, "ls #{plugins}/*.lua"
+
+if status
+    for filename in list\lines!
+        key = filename\sub 1, #filename - 4
+        key = key\gsub '^.*/', ''
+        name = "plugins.#{key}"
+        key = key\gsub '%-', '_'
+        pcall -> module[key] = assert require name
+    list\close!
+
+
+--------------------------------------------------------------------------------
+module
