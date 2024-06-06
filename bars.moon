@@ -54,15 +54,6 @@ screen.connect_signal 'request::desktop_decoration', =>
     @topbar = {}
 
     @topbar.widgets =
-        hostname: wibox.widget
-            markup:  '<span color="red">_@_</span>'
-            widget:  wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.hostname 'nemo', (markup) ->
-                        @topbar.widgets.hostname.markup = markup
-            }
-
         speak: wibox.widget
             markup: ''
             widget:  wibox.widget.textbox
@@ -171,7 +162,7 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 plugins.archlogo!
-                wrap @topbar.widgets.hostname
+                wrap plugins.hostname!
                 wrap @topbar.widgets.speak
                 wrap @topbar.widgets.audio
                 wrap @topbar.widgets.mic
@@ -244,14 +235,6 @@ screen.connect_signal 'request::desktop_decoration', =>
             assets.vpn nil, (markup) ->
                 @topbar.widgets.vpn.markup = markup
 
-    stop_timer @topbar.timers.hostname
-    @topbar.timers.hostname = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   15*60
-        callback: ->
-            assets.hostname nil, (markup) ->
-                @topbar.widgets.hostname.markup = markup
 
     ----------------------------------------------------------------------------
     -- Bottom bar

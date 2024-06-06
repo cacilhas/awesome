@@ -10,8 +10,9 @@ import filesystem from gears
 
 --------------------------------------------------------------------------------
 trim = =>
-    res = @\gsub "^%s+", ""
-    res = res\gsub "%s+$", ""
+    return '' if not trim
+    res = @\gsub '^%s+', ''
+    res = res\gsub '%s+$', ''
     res
 
 --------------------------------------------------------------------------------
@@ -204,7 +205,11 @@ wrap = (t = {}) =>
     bottom = t.bottom or t.margin or 4
     right  = t.right or 0
     left   = t.left or 4
-    withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
+    wrapper = withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
+    -- Hijack button behaviour from inner widget
+    wrapper.buttons = @buttons
+    @buttons = {}
+    wrapper
 
 
 --------------------------------------------------------------------------------
