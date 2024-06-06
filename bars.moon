@@ -8,7 +8,7 @@ assets = require"assets"
 plugins = require"plugins"
 
 import filesystem from gears
-import nexttag, prevtag, reload, showpopup from require"helpers"
+import nexttag, prevtag from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -352,17 +352,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         taskbar: plugins.taskbar @
         localclock: plugins.clock!
         utcclock: plugins.utc!
-
-        quitbt: wibox.widget
-            markup: '<span color="red">⏻ </span>'
-            font:   'Bellota 32'
-            align:  'center'
-            valign: 'center'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, -> awesome.quit!,
-                awful.button {}, 3, reload,
-            }
+        quitbt: plugins.bt_quit!
 
     bb_height = 64
     bb_y = 1080 - bb_height
@@ -390,11 +380,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap @bottombar.widgets.loadavg
                 wrap @bottombar.widgets.utcclock
                 wrap @bottombar.widgets.localclock
-                wibox.widget {
-                    @bottombar.widgets.quitbt
-                    left:  12
-                    widget: wibox.container.margin
-                }
+                @bottombar.widgets.quitbt
             }
         }
 
