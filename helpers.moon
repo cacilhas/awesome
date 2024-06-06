@@ -207,8 +207,13 @@ wrap = (t = {}) =>
     left   = t.left or 4
     wrapper = withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
     -- Hijack button behaviour from inner widget
+    for button in *@buttons
+        {:press, :release} = button
+        button.press   = -> press   @ if press
+        button.release = -> release @ if release
     wrapper.buttons = @buttons
     @buttons = {}
+    --
     wrapper
 
 
