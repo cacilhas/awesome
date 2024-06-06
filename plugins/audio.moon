@@ -1,0 +1,63 @@
+local *
+
+awful = require'awful'
+wibox = require'wibox'
+gears = require'gears'
+import trim from require'helpers'
+
+playpop    = 'play /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga'
+togglemute = 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+setvol     = 'pactl set-sink-volume @DEFAULT_SINK@'
+
+callback = (stdout) =>
+    return unless stdout and #stdout > 0
+    info = {}
+
+    fp = stdout\gmatch'[^\n]+'
+    info.mute = 1 == tonumber fp!
+
+    it = fp!\gmatch'%d+'
+    left = it! or 0
+    right = it! or left
+    left = tonumber left
+    right = tonumber right
+    info.vol = math.floor ((left + right) / 2) + .5
+
+    if info.mute
+        @markup = '<span color="red"> %3d%%</span>'\format(info.vol)
+
+    elseif info.vol == 0
+        @markup = '<span color="#444400">   0%</span>'
+
+    elseif info.vol == 100
+        @markup = '<span color="#44ffff"> %3d%%</span>'\format(info.vol)
+
+    elseif info.vol > 100
+        @markup = '<span color="#ffff22"> %3d%%</span>'\format(info.vol)
+
+    elseif info.vol >= 80
+        color = math.floor info.vol * 256 / 100
+        @markup = '<span color="#4444%02x"> %3d%%</span>'\format(color, info.vol)
+
+    else
+        color = math.floor info.vol * 256 / 100
+        @markup = '<span color="#4444%02x"> %3d%%</span>'\format(color, info.vol)
+
+
+--------------------------------------------------------------------------------
+-> wibox.widget {
+    awful.widget.watch 'sh -c "pulsemixer --get-mute; pulsemixer --get-volume"', 3, callback
+
+    bg: '#00000000'
+    widget: wibox.container.background
+    buttons: {
+        awful.button {}, 1, ->
+            awful.spawn.with_shell "#{togglemute}; #{playpop}"
+        awful.button {}, 2, ->
+            awful.spawn 'pavucontrol'
+        awful.button {}, 4, ->
+            awful.spawn.with_shell "#{setvol} -10%; #{playpop}"
+        awful.button {}, 5, ->
+            awful.spawn.with_shell "#{setvol} +10%; #{playpop}"
+    }
+}
