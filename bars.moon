@@ -350,13 +350,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         bright: plugins.bright!
         loadavg: plugins.loadavg!
         taskbar: plugins.taskbar @
-
-        localclock: wibox.widget
-            format:  '<span color="#ffaa88">%a %F %H:%MBRT</span>'
-            refresh: 10
-            widget:  wibox.widget.textclock
-
-        calendar: awful.widget.calendar_popup.month!
+        localclock: plugins.clock!
 
         utcclock: wibox.widget
             format:   '<span color="#00aa55">%H:%MZ</span>'
@@ -375,10 +369,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                 awful.button {}, 1, -> awesome.quit!,
                 awful.button {}, 3, reload,
             }
-
-    with @bottombar.widgets
-        .calendar\attach .localclock, 'br', on_hover: false
-        .localclock.buttons = {awful.button {}, 1, -> .calendar\toggle!}
 
     bb_height = 64
     bb_y = 1080 - bb_height
@@ -429,6 +419,3 @@ screen.connect_signal 'request::desktop_decoration', =>
         if @bottombar.bar.visible
             @bottombar.bar.y = bb_y
             @bottombar.bar.opacity = 100
-
-    @bottombar.timers or= {}
-    timer\stop! for _, timer in pairs @bottombar.timers
