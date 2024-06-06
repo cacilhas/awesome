@@ -5,6 +5,8 @@ awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
 assets = require"assets"
+plugins = require"plugins"
+
 import filesystem from gears
 import nexttag, prevtag, reload, showpopup from require"helpers"
 import mainlauncher from require"menus"
@@ -345,18 +347,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar = {}
 
     @bottombar.widgets =
-        bright: wibox.widget
-            text: '🔆‼️%'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 4, =>
-                    assets.bright 'dec', (text) ->
-                        @text = text
-
-                awful.button {}, 5, =>
-                    assets.bright 'inc', (text) ->
-                        @text = text
-            }
+        bright: plugins.bright!
 
         taskbar: awful.widget.tasklist
             screen:  @
@@ -464,15 +455,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @bottombar.timers or= {}
     timer\stop! for _, timer in pairs @bottombar.timers
-
-    stop_timer @bottombar.timers.bright
-    @bottombar.timers.bright = gears.timer
-        autostart: true
-        call_now:  true
-        timeout: 5
-        callback: ->
-            assets.bright nil, (text) ->
-                @bottombar.widgets.bright.text = text
 
     stop_timer @bottombar.timers.loadavg
     @bottombar.timers.loadavg = gears.timer
