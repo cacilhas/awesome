@@ -1,3 +1,4 @@
 {
-    bright: assert require"plugins.bright"
+    bright:  assert require"plugins.bright"
+    loadavg: assert require"plugins.loadavg"
 }

@@ -28,7 +28,7 @@ setbright = =>
 
 callback = (stdout) =>
     unless stdout and #stdout > 0
-        @set_text '🔆‼️%'
+        @.text = '🔆‼️%'
         return
     bri = readbri stdout
 
@@ -37,8 +37,8 @@ callback = (stdout) =>
             line = trim line
             if line\match'^Brightness:'
                 realbri = tonumber line\gmatch'[%d%.]+'!
-                @set_text "🔆#{math.floor .5 + (bri * realbri * 100)}%"
-        stderr: -> @set_text '🔆‼️%'
+                @.text = "🔆#{math.floor .5 + (bri * realbri * 100)}%"
+        stderr: -> @.text = '🔆‼️%'
 
 
 --------------------------------------------------------------------------------

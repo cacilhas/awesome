@@ -348,6 +348,7 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @bottombar.widgets =
         bright: plugins.bright!
+        loadavg: plugins.loadavg!
 
         taskbar: awful.widget.tasklist
             screen:  @
@@ -363,15 +364,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                 awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}
                 awful.button {}, 4, -> awful.client.focus.byidx -1
                 awful.button {}, 5, -> awful.client.focus.byidx  1
-            }
-
-        loadavg: wibox.widget
-            markup: '<span foreground="yellow"> </span>'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.loadavg "show", (markup) ->
-                        @bottombar.widgets.loadavg.markup = markup
             }
 
         localclock: wibox.widget
@@ -455,12 +447,3 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @bottombar.timers or= {}
     timer\stop! for _, timer in pairs @bottombar.timers
-
-    stop_timer @bottombar.timers.loadavg
-    @bottombar.timers.loadavg = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   5
-        callback:  ->
-            assets.loadavg nil, (markup) ->
-                @bottombar.widgets.loadavg.markup = markup
