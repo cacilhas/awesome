@@ -66,7 +66,7 @@ setup ..= "if not s then s = awful.screen.focused() end "
 
 moonprompt = -> awful.prompt.run
     prompt: " <span color=\"#4444ff\">AWM&gt;</span> "
-    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    textbox: awful.screen.focused!.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/history"
     hook: {
         awful.key

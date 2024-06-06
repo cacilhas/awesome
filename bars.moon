@@ -153,6 +153,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         widget: wibox.widget.textbox
     }
 
+    @prompt = awful.widget.prompt!
     @topbar.bar = awful.wibar
         position: 'top'
         opacity:  0.8
@@ -162,7 +163,7 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 plugins.taglist @
-                awful.widget.prompt!
+                @prompt
             }
             wibox.widget
                 color: theme.bg_normal
