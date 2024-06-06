@@ -7,7 +7,6 @@ theme = require"beautiful"
 assets = require"assets"
 plugins = require"plugins"
 
-import filesystem from gears
 import withmargin, wrap from require"helpers"
 import mainlauncher from require"menus"
 
@@ -55,14 +54,6 @@ screen.connect_signal 'request::desktop_decoration', =>
     @topbar = {}
 
     @topbar.widgets =
-        archlogolauncher: wibox.widget
-            markup:  '<span color="brown"> </span><span color="black"> </span><span color="#0044ff"> </span>'
-            widget:  wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    awful.spawn "#{filesystem.get_configuration_dir!}/assets/archlogo"
-            }
-
         hostname: wibox.widget
             markup:  '<span color="red">_@_</span>'
             widget:  wibox.widget.textbox
@@ -178,7 +169,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 widget: wibox.widget.separator
             {
                 layout: wibox.layout.fixed.horizontal
-                @topbar.widgets.archlogolauncher
+                plugins.archlogo!
                 wrap @topbar.widgets.hostname
                 wrap @topbar.widgets.speak
                 wrap @topbar.widgets.audio
