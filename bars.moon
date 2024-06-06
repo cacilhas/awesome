@@ -351,13 +351,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         loadavg: plugins.loadavg!
         taskbar: plugins.taskbar @
         localclock: plugins.clock!
-
-        utcclock: wibox.widget
-            format:   '<span color="#00aa55">%H:%MZ</span>'
-            timezone: 'UTC'
-            refresh:  10
-            widget:   wibox.widget.textclock
-            buttons:  {awful.button {}, 1, -> awful.spawn 'kodumaro-clock'}
+        utcclock: plugins.utc!
 
         quitbt: wibox.widget
             markup: '<span color="red">⏻ </span>'
