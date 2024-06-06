@@ -8,7 +8,7 @@ assets = require"assets"
 plugins = require"plugins"
 
 import filesystem from gears
-import nexttag, prevtag, withmargin, wrap from require"helpers"
+import withmargin, wrap from require"helpers"
 import mainlauncher from require"menus"
 
 
@@ -55,56 +55,6 @@ screen.connect_signal 'request::desktop_decoration', =>
     @topbar = {}
 
     @topbar.widgets =
-        prompt: awful.widget.prompt!
-
-        taglist: awful.widget.taglist {
-            screen:  @
-            filter:  awful.widget.taglist.filter.noempty
-            buttons: {
-                awful.button {},       1, => @\view_only!
-                awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
-                awful.button {},       3, awful.tag.viewtoggle
-                awful.button {'Mod4'}, 3, (=> client.focus\toggle_tag @ if client.focus)
-                awful.button {},       4, => prevtag @screen
-                awful.button {},       5, => nexttag @screen
-            }
-        }
-
-        taglist_full: awful.widget.taglist {
-            screen:  @
-            filter:  awful.widget.taglist.filter.all
-            buttons: {
-                awful.button {},       1, => @\view_only!
-                awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
-                awful.button {},       3, awful.tag.viewtoggle
-                awful.button {'Mod4'}, 3, (=> client.focus\toggle_tag @ if client.focus)
-                awful.button {},       4, => awful.tag.viewprev @screen
-                awful.button {},       5, => awful.tag.viewnext @screen
-            }
-        }
-
-        et1: wibox.widget
-            markup: ' <span color="#00c838"></span>'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    @topbar.widgets.taglist.visible = false
-                    @topbar.widgets.taglist_full.visible = true
-                    @topbar.widgets.et1.visible = false
-                    @topbar.widgets.et2.visible = true
-            }
-
-        et2: wibox.widget
-            markup: '| <span color="#ffbd2f"></span>'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    @topbar.widgets.taglist.visible = true
-                    @topbar.widgets.taglist_full.visible = false
-                    @topbar.widgets.et1.visible = true
-                    @topbar.widgets.et2.visible = false
-            }
-
         archlogolauncher: wibox.widget
             markup:  '<span color="brown"> </span><span color="black"> </span><span color="#0044ff"> </span>'
             widget:  wibox.widget.textbox
@@ -220,11 +170,8 @@ screen.connect_signal 'request::desktop_decoration', =>
             layout: wibox.layout.align.horizontal
             {
                 layout: wibox.layout.fixed.horizontal
-                @topbar.widgets.taglist
-                @topbar.widgets.taglist_full
-                @topbar.widgets.et1
-                @topbar.widgets.et2
-                @topbar.widgets.prompt
+                plugins.taglist @
+                awful.widget.prompt!
             }
             wibox.widget
                 color: theme.bg_normal
@@ -244,9 +191,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                 @topbar.widgets.layoutbox
             }
         }
-
-    @topbar.widgets.taglist_full.visible = false
-    @topbar.widgets.et2.visible = false
 
     ---------------------
     -- Top bar updates --
