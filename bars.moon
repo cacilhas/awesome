@@ -49,18 +49,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @topbar = {}
 
-    @topbar.widgets =
-
-        layoutbox: awful.widget.layoutbox {
-            screen:  @
-            buttons: {
-                awful.button {}, 1, -> awful.layout.inc  1
-                awful.button {}, 3, -> awful.layout.inc -1
-                awful.button {}, 4, -> awful.layout.inc -1
-                awful.button {}, 5, -> awful.layout.inc  1
-            }
-        }
-
     sep = {
         text:   ' '
         font:   'monospace 12'
@@ -93,7 +81,15 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap plugins.ethernet!
                 sep
                 wibox.widget.systray!
-                @topbar.widgets.layoutbox
+                awful.widget.layoutbox {
+                    screen:  @
+                    buttons: {
+                        awful.button {}, 1, -> awful.layout.inc  1
+                        awful.button {}, 3, -> awful.layout.inc -1
+                        awful.button {}, 4, -> awful.layout.inc -1
+                        awful.button {}, 5, -> awful.layout.inc  1
+                    }
+                }
             }
         }
 
