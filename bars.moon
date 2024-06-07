@@ -115,3 +115,20 @@ screen.connect_signal 'request::desktop_decoration', =>
                 plugins.bt_quit!
             }
         }
+
+
+    -----------------------
+    -- Bottom bar update --
+
+    @bottombar\connect_signal 'mouse::enter', () ->
+        @bottombar.y = bb_y
+        @bottombar.opacity = 100
+
+    @bottombar\connect_signal 'mouse::leave', () ->
+        @bottombar.y = 1078
+        @bottombar.opacity = 1
+
+    @bottombar\connect_signal 'property::visible', () ->
+        if @bottombar.visible
+            @bottombar.y = bb_y
+            @bottombar.opacity = 100
