@@ -1,8 +1,8 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
-import reload from require"helpers"
+awful = require'awful'
+wibox = require'wibox'
+import reload from require'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ import reload from require"helpers"
     left:  12
     widget: wibox.container.margin
     buttons: {
-        awful.button {}, 1, -> awesome.quit!,
+        awful.button {}, 1, awesome.quit,
         awful.button {}, 3, reload,
     }
 }

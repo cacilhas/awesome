@@ -1,8 +1,8 @@
 local *
 
-awful = require"awful"
+awful = require'awful'
 wibox = require'wibox'
-import prevtag, nexttag from require"helpers"
+import prevtag, nexttag from require'helpers'
 
 
 --------------------------------------------------------------------------------

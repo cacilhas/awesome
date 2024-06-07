@@ -1,8 +1,8 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
-import filesystem from require"gears"
+awful = require'awful'
+wibox = require'wibox'
+import filesystem from require'gears'
 
 nospeak_cache = "#{filesystem.get_xdg_cache_home!}/.nospeak"
 _G.nospeak = true == filesystem.file_readable nospeak_cache if _G.nospeak == nil

@@ -1,6 +1,6 @@
 local *
 
-import filesystem from require"gears"
+import filesystem from require'gears'
 
 plugins = "#{filesystem.get_configuration_dir!}/plugins"
 

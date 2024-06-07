@@ -1,7 +1,7 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
+awful = require'awful'
+wibox = require'wibox'
 
 
 --------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ wibox = require"wibox"
     calendar = awful.widget.calendar_popup.month!
 
     calendar\attach clock, 'br', on_hover: false
-    clock.buttons = {awful.button {}, 1, -> calendar\toggle!}
+    clock.buttons = {awful.button {}, 1, calendar\toggle}
     clock.calendar = calendar
 
     clock

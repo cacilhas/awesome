@@ -1,9 +1,9 @@
 local *
 
-gears = require"gears"
-awful = require"awful"
-wibox = require"wibox"
-theme = require"beautiful"
+gears = require'gears'
+awful = require'awful'
+wibox = require'wibox'
+theme = require'beautiful'
 
 
 --------------------------------------------------------------------------------

@@ -1,21 +1,21 @@
 local *
 
-awful   = require"awful"
-naughty = require"naughty"
-ruled   = require"ruled"
-import filesystem from require"gears"
-import say from require"helpers"
+awful   = require'awful'
+naughty = require'naughty'
+ruled   = require'ruled'
+import filesystem from require'gears'
+import say from require'helpers'
 
 --------------------------------------------------------------------------------
 --- Notifications
 
 naughty.config.icon_dirs = {
     "#{filesystem.get_xdg_data_home!}icons/hicolor"
-    "/usr/share/pixmaps"
-    "/usr/share/icons/hicolor"
+    '/usr/share/pixmaps'
+    '/usr/share/icons/hicolor'
 }
 
-ruled.notification.connect_signal "request::rules", ->
+ruled.notification.connect_signal 'request::rules', ->
     ruled.notification.append_rule
         rule: {}
         properties:
@@ -23,14 +23,14 @@ ruled.notification.connect_signal "request::rules", ->
             implicit_timeout: 5
 
     ruled.notification.append_rule
-        rule: urgency: "critical"
+        rule: urgency: 'critical'
         properties:
-            bg: "#ff0000"
-            fg: "#ffffff"
+            bg: '#ff0000'
+            fg: '#ffffff'
             timeout: 0
 
-naughty.connect_signal "request::display", =>
+naughty.connect_signal 'request::display', =>
     pcall ->
         message = if @title and #@title > 0 then @title else @message
-        say message, @urgency == "critical"
+        say message, @urgency == 'critical'
     naughty.layout.box notification: @

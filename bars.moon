@@ -1,13 +1,13 @@
 local *
 
-gears = require"gears"
-awful = require"awful"
-wibox = require"wibox"
-theme = require"beautiful"
-plugins = require"plugins"
+gears = require'gears'
+awful = require'awful'
+wibox = require'wibox'
+theme = require'beautiful'
+plugins = require'plugins'
 
-import withmargin, wrap from require"helpers"
-import mainlauncher from require"menus"
+import withmargin, wrap from require'helpers'
+import mainlauncher from require'menus'
 
 
 --------------------------------------------------------------------------------
@@ -23,31 +23,20 @@ screen.connect_signal 'request::desktop_decoration', =>
         ' '
         ' '
         ' '
-        ' '
         ' ' -- 
-        ' '
         ' '
-        ' '
-        ' '
         ' '
         ' '
-        ' ' -- 
-        ' '
-        '🦙'
     }, @, awful.layout.suit.fair
 
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, '🦙').layout = awful.layout.suit.max.fullscreen
 
 
     ----------------------------------------------------------------------------
     -- Top bar
-
-    @topbar = {}
 
     sep = {
         text:   ' '
@@ -56,7 +45,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     }
 
     @prompt = awful.widget.prompt!
-    @topbar.bar = awful.wibar
+    @topbar = awful.wibar
         position: 'top'
         opacity:  0.8
         screen:   @
@@ -97,20 +86,10 @@ screen.connect_signal 'request::desktop_decoration', =>
     ----------------------------------------------------------------------------
     -- Bottom bar
 
-    @bottombar = {}
-
-    @bottombar.widgets =
-        bright: plugins.bright!
-        loadavg: plugins.loadavg!
-        taskbar: plugins.taskbar @
-        localclock: plugins.clock!
-        utcclock: plugins.utc!
-        quitbt: plugins.bt_quit!
-
     bb_height = 64
     bb_y = 1080 - bb_height
 
-    @bottombar.bar = awful.wibar
+    @bottombar = awful.wibar
         position: 'bottom'
         opacity:  1
         width:    1920 * 0.75
@@ -126,29 +105,13 @@ screen.connect_signal 'request::desktop_decoration', =>
                 layout: wibox.layout.fixed.horizontal
                 withmargin mainlauncher, left: 8, right: 8
             }
-            withmargin @bottombar.widgets.taskbar, left: 4, top: 8, bottom: 8
+            withmargin plugins.taskbar(@), left: 4, top: 8, bottom: 8
             {
                 layout: wibox.layout.fixed.horizontal
-                wrap @bottombar.widgets.bright, margin: 8
-                wrap @bottombar.widgets.loadavg, margin: 8
-                wrap @bottombar.widgets.utcclock, margin: 8
-                wrap @bottombar.widgets.localclock, margin: 8
-                @bottombar.widgets.quitbt
+                wrap plugins.bright!, margin: 8
+                wrap plugins.loadavg!, margin: 8
+                wrap plugins.utc!, margin: 8
+                wrap plugins.clock!, margin: 8
+                plugins.bt_quit!
             }
         }
-
-    -----------------------
-    -- Bottom bar update --
-
-    @bottombar.bar\connect_signal 'mouse::enter', () ->
-        @bottombar.bar.y = bb_y
-        @bottombar.bar.opacity = 100
-
-    @bottombar.bar\connect_signal 'mouse::leave', () ->
-        @bottombar.bar.y = 1078
-        @bottombar.bar.opacity = 1
-
-    @bottombar.bar\connect_signal 'property::visible', () ->
-        if @bottombar.bar.visible
-            @bottombar.bar.y = bb_y
-            @bottombar.bar.opacity = 100

@@ -1,7 +1,7 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
+awful = require'awful'
+wibox = require'wibox'
 
 
 --------------------------------------------------------------------------------

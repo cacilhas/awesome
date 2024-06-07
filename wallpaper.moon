@@ -1,9 +1,9 @@
 local *
 
-gears = require"gears"
-awful = require"awful"
-theme = require"beautiful"
-wibox = require"wibox"
+gears = require'gears'
+awful = require'awful'
+theme = require'beautiful'
+wibox = require'wibox'
 
 _G.screentimer or= {}
 
@@ -19,7 +19,7 @@ do
         \close!
         wallpapers = files if #files > 0
 
-screen.connect_signal "request::wallpaper", =>
+screen.connect_signal 'request::wallpaper', =>
     @wallpaper_index = if @wallpaper_index
         w = @wallpaper_index + 1
         w = 1 if w > #wallpapers
@@ -31,8 +31,8 @@ screen.connect_signal "request::wallpaper", =>
         screen: @
         widget:
             image: wallpapers[@wallpaper_index]
-            horizontal_fit_policy: "fit"
-            vertical_fit_policy:   "fit"
+            horizontal_fit_policy: 'fit'
+            vertical_fit_policy:   'fit'
             widget: wibox.widget.imagebox
     }
 
@@ -48,7 +48,7 @@ for s in screen
             autostart: true
             call_now:  true
             timeout:   15*60
-            callback:  -> s\emit_signal "request::wallpaper"
+            callback:  -> s\emit_signal 'request::wallpaper'
 
 _G.screentimer[i]\stop! for i = screen\count! + 1, #_G.screentimer
 _G.screentimer[i] = nil for i = screen\count! + 1, #_G.screentimer

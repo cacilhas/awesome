@@ -1,8 +1,8 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
-import filesystem from require"gears"
+awful = require'awful'
+wibox = require'wibox'
+import filesystem from require'gears'
 
 
 --------------------------------------------------------------------------------

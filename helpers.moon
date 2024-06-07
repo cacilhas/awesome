@@ -23,6 +23,7 @@ trim = =>
     res = res\gsub '%s+$', ''
     res
 
+
 --------------------------------------------------------------------------------
 -- XXX: ¡¡BLOCKING FUNCTION!! prefer using awful.spawn.easy_async_with_shell instead
 shell = =>
@@ -30,6 +31,7 @@ shell = =>
         res = \read'*a'
         \close!
         return trim res
+
 
 --------------------------------------------------------------------------------
 -- XXX: reload MUST be a blocking function
@@ -60,6 +62,7 @@ reload = ->
         urgency: 'critical'
         title:   'Awesome reload failed'
         message: err
+
 
 --------------------------------------------------------------------------------
 setup = ''
@@ -93,6 +96,7 @@ moonprompt = -> awful.prompt.run
                 timeout: 10
             awful.spawn.easy_async_with_shell "printf %s '#{res}' | xclip -i -selection clipboard"
 
+
 --------------------------------------------------------------------------------
 ddgo = -> awful.prompt.run
     prompt: ' <span color="#884400">DuckDuckGo&gt;</span> '
@@ -100,6 +104,7 @@ ddgo = -> awful.prompt.run
     history_path: "#{filesystem.get_cache_dir!}/ddgo"
     exe_callback: =>
         awful.spawn "prime-run www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
+
 
 --------------------------------------------------------------------------------
 redditsearch = -> awful.prompt.run
@@ -109,9 +114,11 @@ redditsearch = -> awful.prompt.run
     exe_callback: =>
         awful.spawn "prime-run www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
 
+
 --------------------------------------------------------------------------------
 reloadscripts = ->
     awful.spawn "dex #{filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+
 
 --------------------------------------------------------------------------------
 geo =
@@ -129,7 +136,6 @@ with f = io.open "#{filesystem.get_xdg_config_home!}/redshift.conf"
         \close!
 
 
-
 --------------------------------------------------------------------------------
 showpopup = =>
     lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch'[^\n]+']
@@ -144,6 +150,7 @@ showpopup = =>
         ontop:     true
     popup\connect_signal 'mouse::leave', => @visible = false
     popup
+
 
 --------------------------------------------------------------------------------
 nexttag = (screen=awful.screen.focused!) =>
@@ -165,6 +172,7 @@ nexttag = (screen=awful.screen.focused!) =>
             tag\view_only!
             return
     -- No other non-empty tag, quitting silently
+
 
 --------------------------------------------------------------------------------
 prevtag = (screen=awful.screen.focused!) =>
@@ -281,7 +289,7 @@ xprop = ->
 
 --------------------------------------------------------------------------------
 {
-    :terminal, :trim, :moonprompt
+    :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     :link, :say

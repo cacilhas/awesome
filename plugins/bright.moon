@@ -2,7 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-import trim from require"helpers"
+import trim from require'helpers'
 
 readbri = =>
     it = @gmatch'[%d%.]+'
