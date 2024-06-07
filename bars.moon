@@ -4,7 +4,6 @@ gears = require"gears"
 awful = require"awful"
 wibox = require"wibox"
 theme = require"beautiful"
-assets = require"assets"
 plugins = require"plugins"
 
 import withmargin, wrap from require"helpers"
@@ -16,9 +15,6 @@ import mainlauncher from require"menus"
 
 -- Keyboard map indicator and switcher
 --keyboardlayout = awful.widget.keyboardlayout!
-
-stop_timer = => @\stop! if @ and @.started
-
 
 screen.connect_signal 'request::desktop_decoration', =>
     awful.tag {
@@ -54,19 +50,6 @@ screen.connect_signal 'request::desktop_decoration', =>
     @topbar = {}
 
     @topbar.widgets =
-
-        eth: wibox.widget
-            markup:  ''
-            widget:  wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.eth 'show', (markup) ->
-                        @topbar.widgets.eth.markup = markup
-
-                awful.button {}, 3, ->
-                    assets.eth 'reset', (markup) ->
-                        @topbar.widgets.eth.markup = markup
-            }
 
         layoutbox: awful.widget.layoutbox {
             screen:  @
@@ -107,27 +90,12 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap plugins.audio!
                 wrap plugins.mic!
                 wrap plugins.connectivity!
-                wrap @topbar.widgets.eth
+                wrap plugins.ethernet!
                 sep
                 wibox.widget.systray!
                 @topbar.widgets.layoutbox
             }
         }
-
-    ---------------------
-    -- Top bar updates --
-
-    @topbar.timers or= {}
-    timer\stop! for _, timer in pairs @topbar.timers
-
-    stop_timer @topbar.timers
-    @topbar.timers.eth = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   5
-        callback:  ->
-            assets.eth nil, (markup) ->
-                @topbar.widgets.eth.markup = markup
 
 
     ----------------------------------------------------------------------------

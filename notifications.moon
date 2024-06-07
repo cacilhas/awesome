@@ -3,8 +3,8 @@ local *
 awful   = require"awful"
 naughty = require"naughty"
 ruled   = require"ruled"
-say     = require"assets.say"
 import filesystem from require"gears"
+import say from require"helpers"
 
 --------------------------------------------------------------------------------
 --- Notifications

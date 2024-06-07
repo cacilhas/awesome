@@ -25,7 +25,6 @@ callback = (stdout, _, reason, exitcode) =>
     widget: wibox.container.background
     buttons: {
         awful.button {}, 1, ->
-            link.init!
             link.show => showpopup(@).visible = true
     }
 }
