@@ -21,13 +21,13 @@ callback = (stdout) =>
 
 --------------------------------------------------------------------------------
 -> wibox.widget {
-    awful.widget.watch 'sh -c "cat /etc/hostname"', 30, callback
+    awful.widget.watch 'cat /etc/hostname', 30, callback
 
     bg: '#00000000'
     widget: wibox.container.background
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn "prime-run nemo Desktop"
+            awful.spawn 'prime-run nemo Desktop'
                 floating: true
                 focus:    true
                 sticky:   true

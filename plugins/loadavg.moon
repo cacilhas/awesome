@@ -49,7 +49,7 @@ callback = (stdout) =>
 
 --------------------------------------------------------------------------------
 -> wibox.widget {
-    awful.widget.watch 'sh -c "cat /proc/loadavg"', 5, callback
+    awful.widget.watch 'cat /proc/loadavg', 5, callback
 
     bg: '#00000000'
     widget: wibox.container.background
