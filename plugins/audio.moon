@@ -42,15 +42,22 @@ callback = (stdout) =>
 
 
 --------------------------------------------------------------------------------
--> wibox.widget {
-    awful.widget.watch 'sh -c "pulsemixer --get-mute; pulsemixer --get-volume"', 3, callback
+->
+    watch, timer = awful.widget.watch 'sh -c "pulsemixer --get-mute; pulsemixer --get-volume"', 3, callback
 
-    bg: '#00000000'
-    widget: wibox.container.background
-    buttons: {
-        awful.button {}, 1, sink.togglemute
-        awful.button {}, 2, -> awful.spawn 'pavucontrol'
-        awful.button {}, 4, -> sink.volume '-10%'
-        awful.button {}, 5, -> sink.volume '+10%'
+    wibox.widget {
+        watch
+
+        bg: '#00000000'
+        widget: wibox.container.background
+        buttons: {
+            awful.button {}, 1, sink.togglemute
+            awful.button {}, 2, -> awful.spawn 'pavucontrol'
+            awful.button {}, 4, ->
+                sink.volume '-10%'
+                timer\emit_signal 'timeout'
+            awful.button {}, 5, ->
+                sink.volume '+10%'
+                timer\emit_signal 'timeout'
+        }
     }
-}
