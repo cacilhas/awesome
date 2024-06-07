@@ -2,7 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-import prevtag, nexttag from require'helpers'
+import prevtag, nexttag, withmargin from require'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ import prevtag, nexttag from require'helpers'
     wibox.widget {
         taglist.short
         taglist.long
-        taglist.button
+        withmargin taglist.button, margin: 4, right: 8, hijack: true
 
         layout: wibox.layout.align.horizontal
     }

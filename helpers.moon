@@ -245,14 +245,27 @@ link.init!
 
 
 --------------------------------------------------------------------------------
-withmargin = (m) => wibox.widget {
-    @
-    top:    m.top
-    bottom: m.bottom
-    left:   m.left
-    right:  m.right
-    widget: wibox.container.margin
-}
+withmargin = (kwargs = {}) =>
+    top = kwargs.top or kwargs.margin
+    bottom = kwargs.bottom or kwargs.margin
+    left = kwargs.left or kwargs.margin
+    right = kwargs.right or kwargs.margin
+
+    wrapper = wibox.widget {
+        @
+        :top, :bottom, :left, :right
+        widget: wibox.container.margin
+    }
+
+    if kwargs.hijack
+        for button in *@buttons
+            {:press, :release} = button
+            button.press   = -> press   @ if press
+            button.release = -> release @ if release
+        wrapper.buttons = @buttons
+        @buttons = {}
+
+    wrapper
 
 
 --------------------------------------------------------------------------------
@@ -265,11 +278,11 @@ rounded = => wibox.widget {
 }
 
 
-wrap = (t = {}) =>
-    top    = t.top or t.margin or 4
-    bottom = t.bottom or t.margin or 4
-    right  = t.right or 0
-    left   = t.left or 4
+wrap = (kwargs = {}) =>
+    top    = kwargs.top or kwargs.margin or 4
+    bottom = kwargs.bottom or kwargs.margin or 4
+    right  = kwargs.right or 0
+    left   = kwargs.left or 4
     wrapper = withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
     -- Hijack button behaviour from inner widget
     for button in *@buttons
