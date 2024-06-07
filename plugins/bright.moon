@@ -2,7 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-import trim from require'helpers'
+import trim, wait from require'helpers'
 
 readbri = =>
     it = @gmatch'[%d%.]+'
@@ -42,13 +42,20 @@ callback = (stdout) =>
 
 
 --------------------------------------------------------------------------------
--> wibox.widget {
-    awful.widget.watch 'sh -c "xgamma 2>&1"', 5, callback
+->
+    watch, timer = awful.widget.watch 'sh -c "xgamma 2>&1"', 5, callback
 
-    bg: '#00000000'
-    widget: wibox.container.background
-    buttons: {
-        awful.button {}, 4, -> setbright 'dec'
-        awful.button {}, 5, -> setbright 'inc'
+    wibox.widget {
+        watch
+
+        bg: '#00000000'
+        widget: wibox.container.background
+        buttons: {
+            awful.button {}, 4, ->
+                setbright 'dec'
+                wait .25, -> timer\emit_signal 'timeout'
+            awful.button {}, 5, ->
+                setbright 'inc'
+                wait .25, -> timer\emit_signal 'timeout'
+        }
     }
-}
