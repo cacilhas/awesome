@@ -1,10 +1,10 @@
 local *
 
-awful  = require"awful"
-assets = require"assets"
-import show_help from require"awful.hotkeys_popup"
-import ddgo, moonprompt, nexttag, prevtag, reload, kitty from require"helpers"
-import mainmenu from require"menus"
+awful  = require'awful'
+pactl  = require'plugins.audio.pactl'
+import show_help from require'awful.hotkeys_popup'
+import ddgo, moonprompt, nexttag, prevtag, reload, kitty from require'helpers'
+import mainmenu from require'menus'
 
 -- Mod1    = Meta/Alt_L
 -- Mod2    = Num_Lock
@@ -24,73 +24,52 @@ import mainmenu from require"menus"
 awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
-        key:       "XF86AudioMute"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.audio
-                assets.audio "mute", (markup) ->
-                    .markup = markup
-        description: "mute/umute audio"
-        group:       "awesome"
+        key:       'XF86AudioMute'
+        on_press: -> pactl.sink.tooglemute!
+        description: 'mute/umute audio'
+        group:       'awesome'
 
     awful.key
         modifiers: {}
-        key:       "XF86AudioLowerVolume"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.audio
-                assets.audio "dec", (markup) ->
-                    .markup = markup
-        description: "lower volume"
-        group:       "awesome"
+        key:       'XF86AudioLowerVolume'
+        on_press: -> pactl.sink.volume '-10%'
+        description: 'lower volume'
+        group:       'awesome'
 
     awful.key
-        modifiers: {"Mod4"}
-        key:       "F2"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.audio
-                assets.audio "dec", (markup) ->
-                    .markup = markup
-        description: "lower volume"
-        group:       "awesome"
+        modifiers: {'Mod4'}
+        key:       'F2'
+        on_press: -> pactl.sink.volume '-10%'
+        description: 'lower volume'
+        group:       'awesome'
 
     awful.key
         modifiers: {}
-        key:       "XF86AudioRaiseVolume"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.audio
-                assets.audio "inc", (markup) ->
-                    .markup = markup
-        description: "raise volume"
-        group:       "awesome"
+        key:       'XF86AudioRaiseVolume'
+        on_press: -> pactl.sink.volume '+10%'
+        description: 'raise volume'
+        group:       'awesome'
 
     awful.key
-        modifiers: {"Mod4"}
-        key:       "F3"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.audio
-                assets.audio "inc", (markup) ->
-                    .markup = markup
-        description: "raise volume"
-        group:       "awesome"
+        modifiers: {'Mod4'}
+        key:       'F3'
+        on_press: -> pactl.sink.volume '+10%'
+        description: 'raise volume'
+        group:       'awesome'
 
     awful.key
         modifiers: {}
-        key:       "XF86AudioMicMute"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.mic
-                assets.mic "mute", (markup) ->
-                    .markup = markup
-        description: "mute/unmute mic"
-        group:       "awesome"
+        key:      'XF86AudioMicMute'
+        on_press: -> pactl.source.togglemute!
+        description: 'mute/unmute mic'
+        group:       'awesome'
 
     awful.key
-        modifiers: {"Mod4"}
-        key:       "F4"
-        on_press: ->
-            with awful.screen.focused!.topbar.widgets.mic
-                assets.mic "mute", (markup) ->
-                    .markup = markup
-        description: "mute/unmute mic"
-        group:       "awesome"
+        modifiers: {'Mod4'}
+        key:       'F4'
+        on_press: -> pactl.source.togglemute!
+        description: 'mute/unmute mic'
+        group:       'awesome'
 
 }
 
@@ -99,41 +78,18 @@ awful.keyboard.append_global_keybindings {
 --------------------
 awful.keyboard.append_global_keybindings {
     awful.key
-        modifiers: {"Mod4"}
-        key:       "/"
+        modifiers: {'Mod4'}
+        key:       '/'
         on_press:  ddgo
-        description: "search on DuckDuckGo"
-        group:       "awesome"
+        description: 'search on DuckDuckGo'
+        group:       'awesome'
 
     awful.key
-        modifiers: {"Mod4"}
-        key:       "d"
+        modifiers: {'Mod4'}
+        key:       'd'
         on_press: moonprompt
-        description: "run Moon command"
-        group:       "awesome"
-}
-
-----------------
--- Brightness --
-----------------
-awful.keyboard.append_global_keybindings {
-    awful.key
-        modifiers:  {"Mod4"}
-        key:        "F7"
-        on_press: ->
-            -- os.execute"brighcli -"
-            with awful.screen.focused!.bottombar.widgets.bright
-                assets.bright "dec", (text) ->
-                    .text = text
-
-    awful.key
-        modifiers:  {"Mod4"}
-        key:        "F8"
-        on_press: ->
-            -- os.execute"brighcli +"
-            with awful.screen.focused!.bottombar.widgets.bright
-                assets.bright "inc", (text) ->
-                    .text = text
+        description: 'run Moon command'
+        group:       'awesome'
 }
 
 --------------------

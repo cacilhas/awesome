@@ -55,15 +55,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @topbar.widgets =
 
-        mic: wibox.widget
-            markup:  ''
-            widget:  wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.mic 'mute', (markup) ->
-                        @topbar.widgets.mic.markup = markup
-            }
-
         eth: wibox.widget
             markup:  ''
             widget:  wibox.widget.textbox
@@ -123,7 +114,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap plugins.hostname!
                 wrap plugins.speak!
                 wrap plugins.audio!
-                wrap @topbar.widgets.mic
+                wrap plugins.mic!
                 wrap @topbar.widgets.webconn
                 wrap @topbar.widgets.eth
                 sep
@@ -137,15 +128,6 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     @topbar.timers or= {}
     timer\stop! for _, timer in pairs @topbar.timers
-
-    stop_timer @topbar.timers.mic
-    @topbar.timers.mic = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   1
-        callback:  ->
-            assets.mic nil, (markup) ->
-                @topbar.widgets.mic.markup = markup
 
     stop_timer @topbar.timers
     @topbar.timers.eth = gears.timer
