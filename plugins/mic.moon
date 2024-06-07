@@ -2,6 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
+import wait from require'helpers'
 import source from require'plugins.audio.pactl'
 
 callback = (stdout) =>
@@ -12,12 +13,17 @@ callback = (stdout) =>
 
 
 --------------------------------------------------------------------------------
--> wibox.widget {
-    awful.widget.watch 'pactl get-source-mute @DEFAULT_SOURCE@', 5, callback
+->
+    watch, timer = awful.widget.watch 'pactl get-source-mute @DEFAULT_SOURCE@', 5, callback
 
-    bg: '#00000000'
-    widget: wibox.container.background
-    buttons: {
-        awful.button {}, 1, source.togglemute
+    wibox.widget {
+        watch
+
+        bg: '#00000000'
+        widget: wibox.container.background
+        buttons: {
+            awful.button {}, 1, ->
+                source.togglemute!
+                wait .25, -> timer\emit_signal 'timeout'
+        }
     }
-}

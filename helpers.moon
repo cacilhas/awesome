@@ -245,6 +245,11 @@ link.init!
 
 
 --------------------------------------------------------------------------------
+-- FIXME: use awful assets to wait
+wait = (t, cb) -> awful.spawn.easy_async_with_shell "wait #{t}", cb
+
+
+--------------------------------------------------------------------------------
 withmargin = (kwargs = {}) =>
     top = kwargs.top or kwargs.margin
     bottom = kwargs.bottom or kwargs.margin
@@ -305,7 +310,7 @@ xprop = ->
     :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
-    :link, :say
+    :link, :say, :wait
     :ddgo, :redditsearch, :geo, :xprop
     :withmargin, :wrap
     terminal: 'st'
