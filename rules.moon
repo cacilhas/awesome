@@ -1,18 +1,18 @@
 local *
 
-awful = require"awful"
-ruled = require"ruled"
+awful = require'awful'
+ruled = require'ruled'
 
 
 --------------------------------------------------------------------------------
 --- Rules
 
-ruled.client.connect_signal "request::rules", ->
+ruled.client.connect_signal 'request::rules', ->
     ----------------------------------------------------------------------------
     -- All clients’ rules
 
     ruled.client.append_rule
-        id: "global"
+        id: 'global'
         rule: {}
         properties:
             focus:     awful.client.focus.filter
@@ -21,9 +21,9 @@ ruled.client.connect_signal "request::rules", ->
             placement: awful.placement.no_overlap + awful.placement.no_offscreen
 
     ruled.client.append_rule
-        id: "desktop"
+        id: 'desktop'
         rule:
-            type: "desktop"
+            type: 'desktop'
         properties:
             sticky: true
             placement: awful.placement.top_right
@@ -32,115 +32,115 @@ ruled.client.connect_signal "request::rules", ->
 
     -- Floating clients.
     ruled.client.append_rule
-        id: "floating"
+        id: 'floating'
         rule_any:
-            --instance: {"copyq", "pinentry"}
+            --instance: {'copyq', 'pinentry'}
             class: {
-                "^archlogo$"
-                "^Audacious$"
-                "^Clock$"
-                "^Cairo%-dock"
-                "^Catclock$"
-                "^dde%-calendar$"
-                "^Display$"
-                "^Droidcam"
-                "^FLTK$"
-                "^Free42$"
-                "^GDevelop"
-                "^Guake"
-                "^i3quitdialog"
-                "^java%-lang%-"
-                "^memory$"
-                "^Nemo$"
-                "^Pavucontrol$"
-                "^Pcmanfm$"
-                "^plasma%.emojier$"
-                "^processing%-core%-"
-                "^Toplevel$"
-                "^XCalc$"
-                "^XEyes$"
-                "^xchomp$"
-                "^XTerm$"
-                "^Yad$"
+                '^archlogo$'
+                '^Audacious$'
+                '^Clock$'
+                '^Cairo%-dock'
+                '^Catclock$'
+                '^dde%-calendar$'
+                '^Display$'
+                '^Droidcam'
+                '^FLTK$'
+                '^Free42$'
+                '^GDevelop'
+                '^Guake'
+                '^i3quitdialog'
+                '^java%-lang%-'
+                '^memory$'
+                '^Nemo$'
+                '^Pavucontrol$'
+                '^Pcmanfm$'
+                '^plasma%.emojier$'
+                '^processing%-core%-'
+                '^Toplevel$'
+                '^XCalc$'
+                '^XEyes$'
+                '^xchomp$'
+                '^XTerm$'
+                '^Yad$'
             }
             type: {
-                "dialog"
-                "splash"
-                "utility"
+                'dialog'
+                'splash'
+                'utility'
             }
             name: {
-                "Event Tester"  -- xev
+                'Event Tester'  -- xev
             }
-            role: {"pop-up"}
+            role: {'pop-up'}
         except_any:
             name: { -- Clock has its own management
-                "Kodumaro Clock"
-                "kodumaro-clock"
+                'Kodumaro Clock'
+                'kodumaro-clock'
             }
         properties:
             floating: true
             placement: awful.placement.centered
 
     ruled.client.append_rule
-        id: "unframed"
+        id: 'unframed'
         rule_any:
             class: {
-                "^archlogo$"
-                "^Audacious$"
-                "^Clock$"
-                "^Cairo%-dock"
-                "^Catclock$"
-                "^dde%-calendar$"
-                "^Display$"
-                "^Guake"
-                "^i3quitdialog"
-                "^XEyes$"
+                '^archlogo$'
+                '^Audacious$'
+                '^Clock$'
+                '^Cairo%-dock'
+                '^Catclock$'
+                '^dde%-calendar$'
+                '^Display$'
+                '^Guake'
+                '^i3quitdialog'
+                '^XEyes$'
             }
-            type: {"splash"}
+            type: {'splash'}
             name: {
-                "Kodumaro Clock"
-                "kodumaro-clock"
+                'Kodumaro Clock'
+                'kodumaro-clock'
             }
-            role: {"pop-up"}
+            role: {'pop-up'}
         properties:
             border_width:      0
             titlebars_enabled: false
 
     ruled.client.append_rule
-        id: "titlebars"
+        id: 'titlebars'
         rule_any:
             type: {
-                "normal"
-                "dialog"
+                'normal'
+                'dialog'
             }
         except_any:
             class: {
-                "^archlogo$"
-                "^Audacious$"
-                "^Clock$"
-                "^Cairo%-dock"
-                "^Catclock$"
-                "^dde%-calendar$"
-                "^Display$"
-                "^Guake"
-                "^i3quitdialog"
-                "^XEyes$"
+                '^archlogo$'
+                '^Audacious$'
+                '^Clock$'
+                '^Cairo%-dock'
+                '^Catclock$'
+                '^dde%-calendar$'
+                '^Display$'
+                '^Guake'
+                '^i3quitdialog'
+                '^XEyes$'
             }
             name: {
-                "Kodumaro Clock"
-                "kodumaro-clock"
+                'Kodumaro Clock'
+                'kodumaro-clock'
             }
-            role: {"pop-up"}
-            type: {"splash"}
+            role: {'pop-up'}
+            type: {'splash'}
         properties:
             titlebars_enabled: true
 
     ruled.client.append_rule
-        id: "clock"
+        id: 'clock'
         rule_any:
             name: {
-                "Kodumaro Clock"
-                "kodumaro-clock"
+                'Kodumaro Clock'
+                'kodumaro-clock'
             }
         properties:
             floating: true
@@ -148,9 +148,9 @@ ruled.client.connect_signal "request::rules", ->
             placement: awful.placement.top_right
 
     ruled.client.append_rule
-        id: "xlock"
+        id: 'xlock'
         rule:
-            class: "^i3lock$"
+            class: '^i3lock$'
         properties:
             fullscreen: true
 
@@ -159,286 +159,304 @@ ruled.client.connect_signal "request::rules", ->
     -- Per-application properties
 
     ruled.client.append_rule
-        id: "astro"
+        id: 'astro'
         rule_any:
             class: {
-                "^Celestia$"
-                "^kstars$"
-                "^stellarium$"
-                "^XEphem$"
+                '^Celestia$'
+                '^kstars$'
+                '^stellarium$'
+                '^XEphem$'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.max.fullscreen
+                volatile: true
 
     ruled.client.append_rule
-        id: "audacious"
+        id: 'audacious'
         rule:
-            class: "Audacious"
+            class: 'Audacious'
         properties:
             request_no_titlebar: true
-            tag:                 awful.tag.find_by_name nil, " "
+            tag:                 awful.tag.find_by_name nil, ' '
             switch_to_tags:      true
             skip_taskbar:        true
 
     ruled.client.append_rule
-        id: "audio"
+        id: 'audio'
         rule_any:
             class: {
-                "^Audacity$"
-                "^Hydrogen$"
-                "^Spotify"
+                '^Audacity$'
+                '^Hydrogen$'
+                '^Spotify'
             }
         properties:
             maximized:      true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "emu"
+        id: 'emu'
         rule_any:
             class: {
-                "^Qemu%-system"
-                "^Virt%-manager"
+                '^Qemu%-system'
+                '^Virt%-manager'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.fair
+                volatile: true
 
     ruled.client.append_rule
-        id: "cheese"
+        id: 'cheese'
         rule:
-            class: "^Cheese$"
+            class: '^Cheese$'
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "games"
+        id: 'games'
         rule_any:
             class: {
-                "^airshipper$"
-                "^Dfarc"
-                "^doѕbox"
-                "^freedink$"
-                "^magnet%-ball$"
-                "^Nonogram$"
-                "^stella$"
-                "^roblox"
-                "^tic80$"
-                "^org%.tuxemon%.Tuxemon"
+                '^airshipper$'
+                '^Dfarc'
+                '^doѕbox'
+                '^freedink$'
+                '^magnet%-ball$'
+                '^Nonogram$'
+                '^stella$'
+                '^roblox'
+                '^tic80$'
+                '^org%.tuxemon%.Tuxemon'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.max.fullscreen
+                volatile: true
 
     ruled.client.append_rule
-        id: "nanpure"
+        id: 'nanpure'
         rule:
-            class: "^nanpure$"
+            class: '^nanpure$'
         properties:
             floating: true
 
     ruled.client.append_rule
-        id: "game-engine"
+        id: 'game-engine'
         rule_any:
             class: {
-                "^com%.defold%.editor"
-                "^GDevelop"
-                "^Godot"
-                "^TrenchBroom$"
-                "^turbowarp%-desktop$"
-                "^UnrealEditor"
+                '^com%.defold%.editor'
+                '^GDevelop'
+                '^Godot'
+                '^TrenchBroom$'
+                '^turbowarp%-desktop$'
+                '^UnrealEditor'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "HP15C"
+        id: 'HP15C'
         rule:
-            name: "H E W L E T T .*P A C K A R D 15C"
+            name: 'H E W L E T T .*P A C K A R D 15C'
         properties:
             floating:  true
             placement: awful.placement.centered
 
     ruled.client.append_rule
-        id: "ide"
+        id: 'ide'
         rule_any:
             class: {
-                "^Code$"
-                "^code%-oss$"
-                "^DrRacket$"
-                "^ecode%.bin$"
-                "^FreeCAD$"
-                "^Gambas3$"
-                "^jetbrains%-"
-                "^Processing$"
-                "^Whireshark$"
+                '^Code$'
+                '^code%-oss$'
+                '^DrRacket$'
+                '^ecode%.bin$'
+                '^FreeCAD$'
+                '^Gambas3$'
+                '^jetbrains%-'
+                '^Processing$'
+                '^Whireshark$'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "lazarus"
+        id: 'lazarus'
         rule:
-            class: "^Lazarus$"
+            class: '^Lazarus$'
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             layout:         awful.layout.suit.floating
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "im"
+        id: 'im'
         rule_any:
             class: {
-                "^discord$"
-                "^Franz$"
-                "^Hexchat$"
-                "^Pop$"
-                "^rambox$"
-                "^Slack$"
-                "^TelegramDesktop$"
-                "^Tuple$"
-                "^Whalebird$"
-                "^Whatsapp"
-                "^whatsapp"
-                "^Youp$"
-                "^zoom$"
+                '^discord$'
+                '^Franz$'
+                '^Hexchat$'
+                '^Pop$'
+                '^rambox$'
+                '^Slack$'
+                '^TelegramDesktop$'
+                '^Tuple$'
+                '^Whalebird$'
+                '^Whatsapp'
+                '^whatsapp'
+                '^Youp$'
+                '^zoom$'
             }
         properties:
             floating:       false
             fullscreen:     false
             maximized:      false
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "image-manipulation"
+        id: 'image-manipulation'
         rule_any:
             class: {
-                "^Gimp"
-                "^kryta$"
-                "^Inkscape$"
-                "^Spriter$"
+                '^Gimp'
+                '^kryta$'
+                '^Inkscape$'
+                '^Spriter$'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
             switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.fair
+                volatile: true
 
     ruled.client.append_rule
-        id: "office"
+        id: 'office'
         rule_any:
             class: {
-                "^Abiword$"
-                "^Google Docs$"
-                "^Gnumeric$"
-                "^ONLYOFFICE"
-                "^tm$"
+                '^Abiword$'
+                '^Google Docs$'
+                '^Gnumeric$'
+                '^ONLYOFFICE'
+                '^tm$'
             }
         properties:
             maximized:      true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "squeak"
+        id: 'squeak'
         rule:
-            class: "^Squeak$"
+            class: '^Squeak$'
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " " -- 
             switch_to_tags: true
+            new_tag:
+                name:     ' ' -- 
+                layout:   awful.layout.suit.max.fullscreen
+                volatile: true
 
     ruled.client.append_rule
-        id: "steam"
+        id: 'steam'
         rule_any:
             class: {
-                "^itch$"
-                "^Steam"
-                "^steam"
+                '^itch$'
+                '^Steam'
+                '^steam'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: "terminal"
+        id: 'terminal'
         rule_any:
             class: {
-                "^cool%-retro%-term"
-                "kitty"
-                "org%.wezfurlong%.wezterm"
-                "st%-256color"
+                '^cool%-retro%-term'
+                'kitty'
+                'org%.wezfurlong%.wezterm'
+                'st%-256color'
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
-            switch_to_tags: true
-            placement: awful.placement.centered
-
-    ruled.client.append_rule
-        id: "video"
-        rule_any:
-            class: {
-                "^Blender$"
-                "^Cheese$"
-                "^Droidcam$"
-                "^kdenlive$"
-                "^obs$"
-            }
-        properties:
-            fullscreen:     true
-            tag:            awful.tag.find_by_name nil, " "
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
             placement: awful.placement.centered
 
     ruled.client.append_rule
-        id: "wwww-browser"
+        id: 'video'
         rule_any:
             class: {
-                "^betterbird$"
-                "^librewolf$"
-                "^Mailspring$"
-                "^obsidian"
-                "^QtTube$"
-                "^thunderbird$"
-                "^Slimjet$"
-                "^Tor Browser$"
-                "^Vivaldi"
+                '^Blender$'
+                '^Cheese$'
+                '^Droidcam$'
+                '^kdenlive$'
+                '^obs$'
             }
-            role: {"^browser$"}
+        properties:
+            fullscreen:     true
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
+            placement: awful.placement.centered
+
+    ruled.client.append_rule
+        id: 'wwww-browser'
+        rule_any:
+            class: {
+                '^betterbird$'
+                '^librewolf$'
+                '^Mailspring$'
+                '^obsidian'
+                '^QtTube$'
+                '^thunderbird$'
+                '^Slimjet$'
+                '^Tor Browser$'
+                '^Vivaldi'
+            }
+            role: {'^browser$'}
         properties:
             maximized:         true
             border_width:      0
             titlebars_enabled: false
-            tag:               awful.tag.find_by_name nil, " "
+            tag:               awful.tag.find_by_name nil, ' '
             switch_to_tags:    true
 
     ruled.client.append_rule
-        id: "LLM"
+        id: 'LLM'
         rule:
-            class: "^llama%-desktop"
+            class: '^llama%-desktop'
         properties:
-            fullscreen:        true
-            tag:               awful.tag.find_by_name nil, "🦙"
-            switch_to_tags:    true
+            fullscreen:     true
+            switch_to_tags: true
+            new_tag:
+                name:     '🦙'
+                layout:   awful.layout.suit.max.fullscreen
+                volatile: true
 
 
 --------------------------------------------------------------------------------
 --- Maximisation and fullscreen rules
 
-client.connect_signal "property::maximized", =>
+client.connect_signal 'property::maximized', =>
     if @maximized
         s = @screen
         @\geometry
@@ -447,24 +465,24 @@ client.connect_signal "property::maximized", =>
             width:  s.geometry.width
             height: 1080 - s.geometry.y
 
-client.connect_signal "property::fullscreen", =>
-    @screen.bottombar.bar.visible = not @fullscreen if @focus
+client.connect_signal 'property::fullscreen', =>
+    @screen.bottombar.visible = not @fullscreen if @focus
 
-client.connect_signal "focus", =>
+client.connect_signal 'focus', =>
     s = @screen
     if @fullscreen
-        s.bottombar.bar.visible = false
+        s.bottombar.visible = false
     else
-        s.bottombar.bar.visible = true
-        s.bottombar.bar.y = 1078
+        s.bottombar.visible = true
+        s.bottombar.y = 1078
     if @maximized
         x = s.geometry.x
-        y = s.geometry.y + s.topbar.bar.height
+        y = s.geometry.y + s.topbar.height
         width = s.geometry.width
         height = 1080 - y
         @\geometry :x, :y, :width, :height
 
-client.connect_signal "unfocus", =>
+client.connect_signal 'unfocus', =>
     s = @screen
-    s.bottombar.bar.visible = true
-    s.bottombar.bar.y = 1078
+    s.bottombar.visible = true
+    s.bottombar.y = 1078

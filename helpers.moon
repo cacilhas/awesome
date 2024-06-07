@@ -1,25 +1,37 @@
 local *
 
-gears   = require"gears"
-awful   = require"awful"
-naughty = require"naughty"
-wibox   = require"wibox"
+awful   = require'awful'
+gears   = require'gears'
+naughty = require'naughty'
+theme   = require'beautiful'
+wibox   = require'wibox'
 import filesystem from gears
 
 
 --------------------------------------------------------------------------------
+process = =>
+    res = ""
+    for word in @\gmatch"%S+"
+        res ..= " " .. word unless word\match"%w+%.%w+" or word\match"/"
+    trim res
+
+
+--------------------------------------------------------------------------------
 trim = =>
-    res = @\gsub "^%s+", ""
-    res = res\gsub "%s+$", ""
+    return '' if not trim
+    res = @\gsub '^%s+', ''
+    res = res\gsub '%s+$', ''
     res
+
 
 --------------------------------------------------------------------------------
 -- XXX: ¡¡BLOCKING FUNCTION!! prefer using awful.spawn.easy_async_with_shell instead
 shell = =>
     with io.popen @
-        res = \read"*a"
+        res = \read'*a'
         \close!
         return trim res
+
 
 --------------------------------------------------------------------------------
 -- XXX: reload MUST be a blocking function
@@ -27,81 +39,86 @@ reload = ->
     stderr = os.tmpname!
 
     if os.execute"cd #{filesystem.get_configuration_dir!} && make &> #{stderr}" != 0
-        err = with io.open stderr, "r"
-            content = \read"*a"
+        err = with io.open stderr, 'r'
+            content = \read'*a'
             \close!
             return content
         os.remove stderr
         return naughty.notification
-            urgency: "critical"
-            title:   "Awesome reload failed"
+            urgency: 'critical'
+            title:   'Awesome reload failed'
             message: err
 
     if os.execute"awesome -k &> #{stderr}" == 0
         os.remove stderr
         return awesome.restart!
 
-    err = with io.open stderr, "r"
-        content = \read"*a"
+    err = with io.open stderr, 'r'
+        content = \read'*a'
         \close!
         return content
     os.remove stderr
     naughty.notification
-        urgency: "critical"
-        title:   "Awesome reload failed"
+        urgency: 'critical'
+        title:   'Awesome reload failed'
         message: err
 
+
 --------------------------------------------------------------------------------
-setup = ""
+setup = ''
 setup ..= "if not #{req} then #{req} = require[[#{req}]] end " for req in *{
-    "awful"
-    "gears"
-    "wibox"
-    "ruled"
-    "naughty"
-    "inspect"
+    'awful'
+    'gears'
+    'wibox'
+    'ruled'
+    'naughty'
+    'inspect'
 }
-setup ..= "if not s then s = awful.screen.focused() end "
+setup ..= 'if not s then s = awful.screen.focused() end '
 
 moonprompt = -> awful.prompt.run
-    prompt: " <span color=\"#4444ff\">AWM&gt;</span> "
-    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    prompt: ' <span color="#4444ff">AWM&gt;</span> '
+    textbox: awful.screen.focused!.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/history"
     hook: {
         awful.key
-            modifier: {"Mod4"}
-            key:      "c"
+            modifier: {'Mod4'}
+            key:      'c'
             on_press: => "#{@}#{selection!}", false
     }
     exe_callback: =>
         awful.spawn.easy_async_with_shell "echo '#{@}' | moonc --", (output) ->
-            res = awful.util.eval"#{setup}#{output}" or ""
+            res = awful.util.eval"#{setup}#{output}" or ''
             naughty.notify
                 title: "Moonscript response"
                 ontop:  true
                 text:   tostring res
                 timeout: 10
-            awful.spawn.with_shell "printf %s '#{res}' | xclip -i -selection clipboard"
+            awful.spawn.easy_async_with_shell "printf %s '#{res}' | xclip -i -selection clipboard"
+
 
 --------------------------------------------------------------------------------
 ddgo = -> awful.prompt.run
-    prompt: " <span color=\"#884400\">DuckDuckGo&gt;</span> "
-    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    prompt: ' <span color="#884400">DuckDuckGo&gt;</span> '
+    textbox: awful.screen.focused!.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/ddgo"
     exe_callback: =>
         awful.spawn "prime-run www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
 
+
 --------------------------------------------------------------------------------
 redditsearch = -> awful.prompt.run
-    prompt: " <span color=\"#884400\">Reddit&gt;</span> "
-    textbox: awful.screen.focused!.topbar.widgets.prompt.widget
+    prompt: ' <span color="#884400">Reddit&gt;</span> '
+    textbox: awful.screen.focused!.prompt.widget
     history_path: "#{filesystem.get_cache_dir!}/reddit"
     exe_callback: =>
         awful.spawn "prime-run www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
 
+
 --------------------------------------------------------------------------------
 reloadscripts = ->
     awful.spawn "dex #{filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+
 
 --------------------------------------------------------------------------------
 geo =
@@ -111,18 +128,17 @@ geo =
 with f = io.open "#{filesystem.get_xdg_config_home!}/redshift.conf"
     if f
         for line in \lines!
-            geo.lat = line\gsub "^lat%s*=%s*", "" if line\match"^lat%s*="
-            geo.lon = line\gsub "^lon%s*=%s*", "" if line\match"^lon%s*="
-            geo.temp = line\gsub "^temp.*=%s*", "" if line\match"^temp.*="
+            geo.lat = line\gsub '^lat%s*=%s*', '' if line\match'^lat%s*='
+            geo.lon = line\gsub '^lon%s*=%s*', '' if line\match'^lon%s*='
+            geo.temp = line\gsub '^temp.*=%s*', '' if line\match'^temp.*='
         geo.lat = tonumber geo.lat
         geo.lon = tonumber geo.lon
         \close!
 
 
-
 --------------------------------------------------------------------------------
 showpopup = =>
-    lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch"[^\n]+"]
+    lines = [{:text, widget: wibox.widget.textbox} for text in @\gmatch'[^\n]+']
     lines.layout = wibox.layout.fixed.vertical
     popup = awful.popup
         widget: {
@@ -132,8 +148,9 @@ showpopup = =>
         placement: awful.placement.under_mouse + awful.placement.no_offscreen
         shape:     gears.shape.rounded_rec
         ontop:     true
-    popup\connect_signal "mouse::leave", => @visible = false
+    popup\connect_signal 'mouse::leave', => @visible = false
     popup
+
 
 --------------------------------------------------------------------------------
 nexttag = (screen=awful.screen.focused!) =>
@@ -156,6 +173,7 @@ nexttag = (screen=awful.screen.focused!) =>
             return
     -- No other non-empty tag, quitting silently
 
+
 --------------------------------------------------------------------------------
 prevtag = (screen=awful.screen.focused!) =>
     tags = screen.tags
@@ -177,20 +195,106 @@ prevtag = (screen=awful.screen.focused!) =>
             return
     -- No other non-empty tag, quitting silently
 
---------------------------------------------------------------------------------
-xprop = ->
-    awful.spawn.easy_async_with_shell "xprop", showpopup
 
 --------------------------------------------------------------------------------
---terminal = "sakura"
-terminal = "st"
+say = (urgent) =>
+    return if _G.nospeak
+
+    if @\match "^%[%["
+        voice = if urgent then "Demonic -k1" else "belinda -k20"
+        awful.spawn "espeak -ven+#{voice} -s140 \"#{@}\""
+    else
+        awful.spawn.easy_async_with_shell "#{filesystem.get_configuration_dir!}/assets/langit \"#{process @}\"", (res) ->
+            res = "English" unless res and #res > 0
+            it = res\gmatch"[^\n]+"
+            res = it!
+            voice = if urgent
+                "Demonic -k1"
+            elseif res == "Portuguese"
+                "anika -k20"
+            else
+                "belinda -k20"
+            lang = switch res
+                when "Portuguese"
+                    "pt-BR"
+                when "French"
+                    "fr"
+                else
+                    "en"
+            message = @\gsub '"', ""
+            awful.spawn "espeak -v#{lang}+#{voice} -s140 \"#{message}\""
+
+
+--------------------------------------------------------------------------------
+link =
+    dev: 'lo'
+
+    init: ->
+        return unless link.dev == 'lo'
+        awful.spawn.easy_async_with_shell 'ip addr', (res) ->
+            for line in res\gmatch'[^\n]+'
+                data = [e for e in line\gsub('^%s+', '')\gmatch'[^%s]+']
+                if data[1] == 'inet' and data[6] == 'global'
+                    link.dev = data[7]
+                    return
+
+    show: (cb) ->
+        awful.spawn.easy_async_with_shell "ip link show dev #{link.dev}", cb
+
+link.init!
+
+
+--------------------------------------------------------------------------------
+withmargin = (m) => wibox.widget {
+    @
+    top:    m.top
+    bottom: m.bottom
+    left:   m.left
+    right:  m.right
+    widget: wibox.container.margin
+}
+
+
+--------------------------------------------------------------------------------
+rounded = => wibox.widget {
+    @
+    shape:      gears.shape.rounded_rect
+    shape_clip: true
+    bg:         theme.bg_button
+    widget: wibox.container.background
+}
+
+
+wrap = (t = {}) =>
+    top    = t.top or t.margin or 4
+    bottom = t.bottom or t.margin or 4
+    right  = t.right or 0
+    left   = t.left or 4
+    wrapper = withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
+    -- Hijack button behaviour from inner widget
+    for button in *@buttons
+        {:press, :release} = button
+        button.press   = -> press   @ if press
+        button.release = -> release @ if release
+    wrapper.buttons = @buttons
+    @buttons = {}
+    --
+    wrapper
+
+
+--------------------------------------------------------------------------------
+xprop = ->
+    awful.spawn.easy_async_with_shell 'xprop', showpopup
 
 
 --------------------------------------------------------------------------------
 {
-    :terminal, :trim, :moonprompt
+    :trim, :moonprompt
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
+    :link, :say
     :ddgo, :redditsearch, :geo, :xprop
-    kitty: "call-terminal.sh"
+    :withmargin, :wrap
+    terminal: 'st'
+    kitty: 'call-terminal.sh'
 }

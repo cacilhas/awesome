@@ -1,13 +1,13 @@
 local *
 
-awful = require"awful"
+awful = require'awful'
 
 
 --------------------------------------------------------------------------------
 -- Tag layout
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-tag.connect_signal "request::default_layouts", ->
+tag.connect_signal 'request::default_layouts', ->
     with awful.layout
         .append_default_layouts with .suit
             return {

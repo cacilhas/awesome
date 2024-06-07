@@ -1,23 +1,24 @@
 local *
 
-awful = require"awful"
-wibox = require"wibox"
+awful = require'awful'
+wibox = require'wibox'
 
 
 --------------------------------------------------------------------------------
 --- Titlebars
-client.connect_signal "request::titlebars", =>
-    if @maximized
+client.connect_signal 'request::titlebars', =>
+    if @maximized or @fullscreen
         @titlebars_enabled = false
         awful.titlebar(@).enabled = false
 
     else
-        @titlebars_enabled = true unless @fullscreen
+        @titlebars_enabled = true
+        awful.titlebar(@).enabled = true
 
         -- buttons for the titlebar
         buttons = {
-            awful.button {}, 1, -> @\activate context: "titlebar", action: "mouse_move"
-            awful.button {}, 3, -> @\activate context: "titlebar", action: "mouse_resize"
+            awful.button {}, 1, -> @\activate context: 'titlebar', action: 'mouse_move'
+            awful.button {}, 3, -> @\activate context: 'titlebar', action: 'mouse_resize'
         }
 
         awful.titlebar(@).widget = {
@@ -32,7 +33,7 @@ client.connect_signal "request::titlebars", =>
             }
             {
                 {
-                    halign: "center"
+                    halign: 'center'
                     widget: awful.titlebar.widget.titlewidget @
                 }
                 :buttons
