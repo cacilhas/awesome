@@ -68,15 +68,6 @@ screen.connect_signal 'request::desktop_decoration', =>
                         @topbar.widgets.eth.markup = markup
             }
 
-        webconn: wibox.widget
-            text: '‼️'
-            widget: wibox.widget.textbox
-            buttons: {
-                awful.button {}, 1, ->
-                    assets.webconn 'show', (text) ->
-                        @topbar.widgets.webconn.text = text
-            }
-
         layoutbox: awful.widget.layoutbox {
             screen:  @
             buttons: {
@@ -115,7 +106,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap plugins.speak!
                 wrap plugins.audio!
                 wrap plugins.mic!
-                wrap @topbar.widgets.webconn
+                wrap plugins.connectivity!
                 wrap @topbar.widgets.eth
                 sep
                 wibox.widget.systray!
@@ -137,15 +128,6 @@ screen.connect_signal 'request::desktop_decoration', =>
         callback:  ->
             assets.eth nil, (markup) ->
                 @topbar.widgets.eth.markup = markup
-
-    stop_timer @topbar.timers.webconn
-    @topbar.timers.webconn = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   10
-        callback:  ->
-            assets.webconn nil, (text) ->
-                @topbar.widgets.webconn.text = text
 
 
     ----------------------------------------------------------------------------
