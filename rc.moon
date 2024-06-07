@@ -78,6 +78,11 @@ assert require'notifications'
 
 
 --------------------------------------------------------------------------------
+--- Desktop icons
+assert require'desktopicons'
+
+
+--------------------------------------------------------------------------------
 -- Startup apps
 if os.execute'pgrep -f "picom --daemon"' != 0
     awful.spawn 'dex --autostart --environment awesome'
