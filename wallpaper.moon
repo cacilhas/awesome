@@ -52,3 +52,6 @@ for s in screen
 
 _G.screentimer[i]\stop! for i = screen\count! + 1, #_G.screentimer
 _G.screentimer[i] = nil for i = screen\count! + 1, #_G.screentimer
+
+awesome.connect_signal 'request::wallpaper', ->
+    s\emit_signal'request::wallpaper' for s in screen

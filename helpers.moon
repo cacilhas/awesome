@@ -274,11 +274,11 @@ withmargin = (kwargs = {}) =>
 
 
 --------------------------------------------------------------------------------
-rounded = => wibox.widget {
+rounded = (bg) => wibox.widget {
     @
     shape:      gears.shape.rounded_rect
     shape_clip: true
-    bg:         theme.bg_button
+    bg:         bg
     widget: wibox.container.background
 }
 
@@ -288,7 +288,9 @@ wrap = (kwargs = {}) =>
     bottom = kwargs.bottom or kwargs.margin or 4
     right  = kwargs.right or 0
     left   = kwargs.left or 4
-    wrapper = withmargin rounded(withmargin @, left: 8, right: 8), :top, :bottom, :left, :right
+    bg = kwargs.bg or theme.bg_button
+    wrapper = withmargin rounded(withmargin(@, left: 8, right: 8), bg),
+        :top, :bottom, :left, :right
     -- Hijack button behaviour from inner widget
     for button in *@buttons
         {:press, :release} = button

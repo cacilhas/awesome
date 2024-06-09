@@ -7,10 +7,18 @@ import mainmenu, desktopmenu from require'menus'
 --------------------------------------------------------------------------------
 --- Mouse bindings
 awful.mouse.append_global_mousebindings {
-    awful.button {}, 2, -> mainmenu\toggle!
-    awful.button {}, 3, -> desktopmenu\toggle!
-    awful.button {}, 4, awful.tag.viewprev
-    awful.button {}, 5, awful.tag.viewnext
+    awful.button {}, 2, ->
+        mainmenu\toggle!
+        :x, :y = mouse.coords!
+        mainmenu.x = x
+        mainmenu.y = y
+    awful.button {}, 3, ->
+        desktopmenu\toggle!
+        :x, :y = mouse.coords!
+        desktopmenu.x = x
+        desktopmenu.y = y
+    awful.button {}, 4, -> awful.tag.viewprev!
+    awful.button {}, 5, -> awful.tag.viewnext!
 }
 
 client.connect_signal 'request::default_mousebindings', ->
