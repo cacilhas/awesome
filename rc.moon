@@ -79,7 +79,7 @@ assert require'notifications'
 
 --------------------------------------------------------------------------------
 --- Desktop icons
-assert require'desktopicons'
+assert require'desktop'
 
 
 --------------------------------------------------------------------------------

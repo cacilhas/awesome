@@ -31,11 +31,14 @@ fg_normal   = "#888888"
 fg_urgent   = "#ffff00"
 fg_minimize = "#ffffff"
 
+fg_icon = "white"
+bg_icon = "#0e0e0e80"
+
 {
     -- BASICS
     font: "Bellota 14"
     :bg_focus, :bg_normal, :bg_urgent, :bg_minimize, :bg_systray, :bg_button
-    :fg_focus, :fg_normal, :fg_urgent, :fg_minimize
+    :fg_focus, :fg_normal, :fg_urgent, :fg_minimize, :fg_icon, :bg_icon
 
     useless_gap:  apply_dpi 0
     border_width: apply_dpi 2
