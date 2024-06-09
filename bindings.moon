@@ -105,13 +105,11 @@ awful.keyboard.append_global_keybindings {
                 s.topbar.opacity = 1
                 s.bottombar.visible = true
                 s.bottombar.y = 1080 - s.bottombar.height
-                s.bottombar.opacity = 100
         on_release: ->
             for s in screen
                 s.topbar.ontop = false
                 s.topbar.opacity = 0.8
                 s.bottombar.y = 1078
-                s.bottombar.opacity = 1
                 s.bottombar.visible = not awful.screen.focused!.fullscreen
         description: 'raise bars using '
         group:       'awesome'
