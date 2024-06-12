@@ -334,18 +334,31 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'image-manipulation'
         rule_any:
             class: {
-                '^Gimp'
                 '^kryta$'
                 '^Inkscape$'
                 '^Spriter$'
             }
+            role: {
+                'gimp-image-window-1'
+            }
         properties:
+            floating:       false
             fullscreen:     true
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
-            new_tag:
-                name:     ' '
-                layout:   awful.layout.suit.fair
-                volatile: true
+
+    ruled.client.append_rule
+        id: 'gimp-windows'
+        rule:
+            class: '^Gimp'
+        except:
+            role: 'gimp-image-window-1'
+        properties:
+            floating:       true
+            fullscreen:     false
+            maximized:      false
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
 
     ruled.client.append_rule
         id: 'office'
