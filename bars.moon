@@ -87,7 +87,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     -- Bottom bar
 
     bb_height = 64
-    bb_y = 1080 - bb_height
+    bb_y = @geometry.height - bb_height
 
     @bottombar = awful.wibar
         position: 'bottom'
@@ -127,7 +127,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         @bottombar.y = bb_y
 
     @bottombar\connect_signal 'mouse::leave', () ->
-        @bottombar.y = 1078
+        @bottombar.y = @geometry.height - 2
 
     @bottombar\connect_signal 'property::visible', () ->
         if @bottombar.visible

@@ -464,7 +464,7 @@ client.connect_signal 'property::maximized', =>
             x:      s.geometry.x
             y:      topbargeom.height
             width:  s.geometry.width
-            height: 1080 - topbargeom.height
+            height: s.geometry.height - topbargeom.height
 
 client.connect_signal 'property::fullscreen', =>
     @screen.bottombar.visible = not @fullscreen if @focus
@@ -475,15 +475,15 @@ client.connect_signal 'focus', =>
         s.bottombar.visible = false
     else
         s.bottombar.visible = true
-        s.bottombar.y = 1078
+        s.bottombar.y = s.geometry.height - 2
     if @maximized
         x = s.geometry.x
         y = s.geometry.y + s.topbar.height
         width = s.geometry.width
-        height = 1080 - y
+        height = s.geometry.height - y
         @\geometry :x, :y, :width, :height
 
 client.connect_signal 'unfocus', =>
     s = @screen
     s.bottombar.visible = true
-    s.bottombar.y = 1078
+    s.bottombar.y = s.geometry.height - 2
