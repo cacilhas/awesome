@@ -92,14 +92,14 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar = awful.wibar
         position: 'bottom'
         opacity:  1
-        width:    1920 * 0.75
+        width:    @geometry.width * 0.75
         height:   bb_height
-        x:        768
+        x:        @geometry.width * 0.375
         y:        bb_y
         ontop:    true
-        shape: gears.shape.rounded_rect
+        shape:    gears.shape.rounded_rect
         screen:   @
-        struts: ->
+        struts:   ->
             top: 0, bottom: 0
             left: 0, right: 0
         widget:   {
