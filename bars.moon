@@ -99,6 +99,9 @@ screen.connect_signal 'request::desktop_decoration', =>
         ontop:    true
         shape: gears.shape.rounded_rect
         screen:   @
+        struts: ->
+            top: 0, bottom: 0
+            left: 0, right: 0
         widget:   {
             layout: wibox.layout.align.horizontal
             {

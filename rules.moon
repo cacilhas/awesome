@@ -459,11 +459,12 @@ ruled.client.connect_signal 'request::rules', ->
 client.connect_signal 'property::maximized', =>
     if @maximized
         s = @screen
+        topbargeom = s.topbar\geometry!
         @\geometry
             x:      s.geometry.x
-            y:      s.geometry.y
+            y:      topbargeom.height
             width:  s.geometry.width
-            height: 1080 - s.geometry.y
+            height: 1080 - topbargeom.height
 
 client.connect_signal 'property::fullscreen', =>
     @screen.bottombar.visible = not @fullscreen if @focus
