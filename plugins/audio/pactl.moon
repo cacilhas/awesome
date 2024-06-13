@@ -15,7 +15,11 @@ setvolume  = 'pactl set-sink-volume @DEFAULT_SINK@'
     sink:
         togglemute: ->
             awful.spawn.with_shell "#{setsinkm} toggle; #{playpop}"
+            s = awful.screen.focused!
+            s.audiotimer\emit_signal 'timeout' if s.audiotimer
 
         volume: (vol) ->
             awful.spawn.with_shell "#{setvolume} #{vol}; #{playpop}"
+            s = awful.screen.focused!
+            s.audiotimer\emit_signal 'timeout' if s.audiotimer
 }

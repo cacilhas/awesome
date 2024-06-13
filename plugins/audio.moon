@@ -44,6 +44,7 @@ callback = (stdout) =>
 --------------------------------------------------------------------------------
 ->
     watch, timer = awful.widget.watch 'sh -c "pulsemixer --get-mute; pulsemixer --get-volume"', 3, callback
+    s.audiotimer = timer for s in screen
 
     wibox.widget {
         watch
