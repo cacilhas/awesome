@@ -230,6 +230,8 @@ ruled.client.connect_signal 'request::rules', ->
                 '^Dfarc'
                 '^doѕbox'
                 '^freedink$'
+                '^kpat$'
+                '^kshisen$'
                 '^magnet%-ball$'
                 '^Nonogram$'
                 '^stella$'
