@@ -157,14 +157,14 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       'Print'
-        on_press: -> awful.spawn 'capture.sh'
+        on_press: -> awful.spawn.with_shell 'capture.sh'
         description: 'take a screenshot'
         group:       'screen'
 
     awful.key
         modifiers: {'Mod4'}
         key:       'Print'
-        on_press: -> awful.spawn 'capture.sh root'
+        on_press: -> awful.spawn.with_shell 'capture.sh root'
         description: 'take a root screenshot'
         group:       'screen'
 }
