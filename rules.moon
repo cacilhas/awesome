@@ -327,8 +327,8 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             floating:       false
-            fullscreen:     false
-            maximized:      true
+            fullscreen:     true
+            maximized:      false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 

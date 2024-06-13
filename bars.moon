@@ -32,7 +32,7 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
+    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
     awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.floating
 
