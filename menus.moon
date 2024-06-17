@@ -43,7 +43,6 @@ mainmenu = awful.menu
                 {'dconf Editor', 'dconf-editor'}
                 {widget: wibox.widget.separator}
                 {'Font Selector', 'sel-font.sh'}
-                {"Reload Desktop Icons", () -> awful.spawn.with_shell"#{filesystem.get_configuration_dir!}/assets/reload-idesk"}
                 {"Reload Compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
                 {widget: wibox.widget.separator}
                 {'XKill', 'xkill'}
