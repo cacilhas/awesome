@@ -47,6 +47,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^FLTK$'
                 '^Free42$'
                 '^GDevelop'
+                '^goneovim'
                 '^Guake'
                 '^i3quitdialog'
                 '^java%-lang%-'
