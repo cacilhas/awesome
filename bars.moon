@@ -66,6 +66,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 plugins.archlogo!
                 wrap plugins.hostname!
                 wrap plugins.speak!
+                wrap plugins.camera!
                 wrap plugins.audio!
                 wrap plugins.mic!
                 wrap plugins.connectivity!
