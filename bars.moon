@@ -72,6 +72,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap plugins.connectivity!
                 wrap plugins.ethernet!
                 sep
+                plugins.eidolon!
                 wibox.widget.systray!
                 awful.widget.layoutbox {
                     screen:  @
