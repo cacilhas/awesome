@@ -2,6 +2,7 @@ local *
 
 awful  = require'awful'
 pactl  = require'plugins.audio.pactl'
+import filesystem from require'gears'
 import show_help from require'awful.hotkeys_popup'
 import ddgo, moonprompt, nexttag, prevtag, reload, kitty from require'helpers'
 import mainmenu from require'menus'
@@ -19,6 +20,8 @@ CTRL  = 'Control'
 MENU  = 'Menu'
 SHIFT = 'Shift'
 SUPER = 'Mod4'
+
+rofi = "rofi -config #{filesystem.get_configuration_dir!}/rofi.rasi -replace -steal-focus"
 
 
 --------------------------------------------------------------------------------
@@ -183,7 +186,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {ALT}
         key:       ' '
         on_press: ->
-            awful.spawn 'prime-run rofi -replace -show-icons -modes combi -combi-modes window,drun -show combi -theme docu -matching glob -display-combi NVIDIA'
+            awful.spawn "prime-run #{rofi} -show-icons -modes combi -combi-modes window,drun -show combi -theme docu -matching glob -display-combi NVIDIA"
         description: 'call application on NVIDIA card'
         group:       'launcher'
 
@@ -191,7 +194,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER, ALT}
         key:       ' '
         on_press: ->
-            awful.spawn 'rofi -replace -show-icons -modes drun -show drun -theme sidebar-v2 -display-drun "Mesa Intel"'
+            awful.spawn "#{rofi} -show-icons -modes drun -show drun -theme sidebar-v2 -display-drun 'Mesa Intel'"
         description: 'call application on Mesa Intel card'
         group:       'launcher'
 
@@ -199,7 +202,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       ' '
         on_press: ->
-            awful.spawn 'rofi -replace -modes run,ssh -show run -theme fancy -display-run "Mesa Intel" -terminal "kitty --config=/home/cacilhas/.config/kitty/ssh.conf"'
+            awful.spawn "r#{ofi} -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel' -terminal 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'"
         description: 'run command on Mesa Intel card'
         group:       'launcher'
 
@@ -214,7 +217,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       'g'
         on_press: ->
-            awful.spawn 'prime-run rofi -replace -show-icons -modes drun -drun-categories Game,Games -show drun -theme docu -matching glob -display-drun Games'
+            awful.spawn "prime-run #{rofi} -show-icons -modes drun -drun-categories Game,Games -show drun -theme docu -matching glob -display-drun Games"
         description: 'call application on NVIDIA card'
         group:       'launcher'
 
@@ -268,7 +271,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       'Tab'
         on_press: ->
-            awful.spawn 'rofi -replace -show-icons -modes windowcd -show windowcd -display-windowcd App -theme sidebar-v2'
+            awful.spawn "#{rofi} -show-icons -modes windowcd -show windowcd -display-windowcd App -theme sidebar-v2"
         description: 'open between-clients navigation window'
         group:       'client'
 
