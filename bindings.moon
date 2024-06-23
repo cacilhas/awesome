@@ -183,7 +183,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {ALT}
         key:       ' '
         on_press: ->
-            awful.spawn 'prime-run rofi -show-icons -modes drun -show drun -theme docu -display-drun NVIDIA -dpi 64'
+            awful.spawn 'prime-run rofi -show-icons -modes combi -combi-modes window,drun -show combi -theme docu -display-drun NVIDIA -dpi 64'
         description: 'call application on NVIDIA card'
         group:       'launcher'
 
