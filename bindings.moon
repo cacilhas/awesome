@@ -202,7 +202,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       ' '
         on_press: ->
-            awful.spawn "r#{ofi} -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel' -terminal 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'"
+            awful.spawn "#{rofi} -modes run,ssh -show run -theme fancy -display-run 'Mesa Intel' -terminal 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'"
         description: 'run command on Mesa Intel card'
         group:       'launcher'
 
