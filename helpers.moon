@@ -9,7 +9,7 @@ import filesystem from gears
 
 
 --------------------------------------------------------------------------------
-rofi = "rofi -config #{filesystem.get_configuration_dir!}/rofi.rasi -replace -steal-focus"
+rofi = "rofi -replace -steal-focus"
 
 
 --------------------------------------------------------------------------------

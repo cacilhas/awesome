@@ -200,7 +200,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       ' '
         on_press: ->
-            awful.spawn "#{rofi} -modes run -show run -theme fancy -display-run 'Mesa Intel' -terminal kitty"
+            awful.spawn "#{rofi} -modes run -show run -theme fancy -display-run 'Mesa Intel' -terminal kitty -config ~/.config/rofi/term.rasi"
         description: 'run command on Mesa Intel card'
         group:       'launcher'
 
