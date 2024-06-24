@@ -242,10 +242,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             switch_to_tags: true
-            new_tag:
-                name:     ' '
-                layout:   awful.layout.suit.max.fullscreen
-                volatile: true
+            tag:            awful.tag.find_by_name nil, ' '
 
     ruled.client.append_rule
         id: 'nanpure'
@@ -267,8 +264,11 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.max.fullscreen
+                volatile: true
 
     ruled.client.append_rule
         id: 'HP15C'

@@ -313,7 +313,7 @@ xprop = ->
 
 --------------------------------------------------------------------------------
 showgames = ->
-    awful.tag.find_by_name(nil, ' ')\view_only!
+    awful.tag.find_by_name(nil, ' ')\view_only!
     awful.spawn "prime-run #{rofi} -show-icons -modes drun -drun-categories Game,Games -show drun -theme docu -matching glob -display-drun Games"
 
 
