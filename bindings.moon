@@ -4,7 +4,7 @@ awful  = require'awful'
 pactl  = require'plugins.audio.pactl'
 import filesystem from require'gears'
 import show_help from require'awful.hotkeys_popup'
-import ddgo, moonprompt, nexttag, prevtag, reload, kitty from require'helpers'
+import ddgo, moonprompt, nexttag, prevtag, reload, rofi, showgames, kitty from require'helpers'
 import mainmenu from require'menus'
 
 -- Mod1    = Meta/Alt_L
@@ -20,8 +20,6 @@ CTRL  = 'Control'
 MENU  = 'Menu'
 SHIFT = 'Shift'
 SUPER = 'Mod4'
-
-rofi = "rofi -config #{filesystem.get_configuration_dir!}/rofi.rasi -replace -steal-focus"
 
 
 --------------------------------------------------------------------------------
@@ -224,8 +222,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {SUPER}
         key:       'g'
-        on_press: ->
-            awful.spawn "prime-run #{rofi} -show-icons -modes drun -drun-categories Game,Games -show drun -theme docu -matching glob -display-drun Games"
+        on_press:    showgames
         description: 'call application on NVIDIA card'
         group:       'launcher'
 

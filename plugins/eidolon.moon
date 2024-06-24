@@ -3,6 +3,7 @@ local *
 awful = require'awful'
 wibox = require'wibox'
 import filesystem from require'gears'
+import showgames from require'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -11,7 +12,7 @@ import filesystem from require'gears'
     resize: true
     widget: wibox.widget.imagebox
     buttons: {
-        awful.button {}, 1, ->
-            awful.spawn.with_shell "prime-run eidolon menu"
+        awful.button {}, 1, showgames
+            --awful.spawn.with_shell "prime-run eidolon menu"
     }
 }

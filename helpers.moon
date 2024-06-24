@@ -9,6 +9,10 @@ import filesystem from gears
 
 
 --------------------------------------------------------------------------------
+rofi = "rofi -config #{filesystem.get_configuration_dir!}/rofi.rasi -replace -steal-focus"
+
+
+--------------------------------------------------------------------------------
 process = =>
     res = ""
     for word in @\gmatch"%S+"
@@ -308,8 +312,15 @@ xprop = ->
 
 
 --------------------------------------------------------------------------------
+showgames = ->
+    awful.tag.find_by_name(nil, ' ')\view_only!
+    awful.spawn "prime-run #{rofi} -show-icons -modes drun -drun-categories Game,Games -show drun -theme docu -matching glob -display-drun Games"
+
+
+--------------------------------------------------------------------------------
 {
     :trim, :moonprompt
+    :showgames, :rofi
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     :link, :say, :wait
