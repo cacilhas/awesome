@@ -8,7 +8,7 @@ import showgames from require'helpers'
 
 --------------------------------------------------------------------------------
 -> wibox.widget {
-    image: "#{filesystem.get_configuration_dir!}/assets/eidolon.png"
+    image: "#{filesystem.get_configuration_dir!}/assets/games.png"
     resize: true
     widget: wibox.widget.imagebox
     buttons: {
