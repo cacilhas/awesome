@@ -32,7 +32,7 @@ image = wibox.widget {
     }
 }
 
-timer = gears.timer
+image.timer or= gears.timer
     autostart: true
     call_now:  true
     timeout:   1
