@@ -117,7 +117,8 @@ awful.keyboard.append_global_keybindings {
                 s.topbar.ontop = false
                 s.topbar.opacity = 0.8
                 s.bottombar.y = s.geometry.height - 2
-                s.bottombar.visible = not client.focus.fullscreen
+                -- FIXME: Workaround
+                s.bottombar.visible = not (client and client.focus and client.focus.fullscreen)
         description: 'raise bars using '
         group:       'awesome'
 
