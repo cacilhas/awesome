@@ -2,22 +2,42 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
+gears = require'gears'
 import trim from require'helpers'
+import filesystem from gears
 
-callback = (stdout) =>
-    stdout = if stdout then trim stdout else ''
-    @markup = if #stdout == 0
-        '<span foreground="red"></span>'
-    elseif stdout == '0'
-        '<span>📷</span>'
-    else
-        '<span>📸</span>'
+
+command = "lsmod | sed -E 's/  */ /g' | awk '$1 ~ /^uvcvideo$/ { print $3; }'"
+
+callback = ->
+    awful.spawn.easy_async_with_shell command, (output) ->
+        output = if output then trim output else ''
+        with image
+            if output != '1'
+                .image = "#{filesystem.get_configuration_dir!}/assets/webcam-off.png"
+                \set_opacity 0.5
+            else
+                .image = "#{filesystem.get_configuration_dir!}/assets/webcam-on.png"
+                \set_opacity 1
 
 
 --------------------------------------------------------------------------------
--> wibox.widget {
-    awful.widget.watch "sh -c \"lsmod | sed -E 's/  */ /' | awk '\\$1 ~ /^uvcvideo\\$/ { print \\$3; }'\"", 0.5, callback
+image = wibox.widget {
+    image: "#{filesystem.get_configuration_dir!}/assets/webcam.png"
+    resize: true
+    widget: wibox.widget.imagebox
 
-    bg: '#00000000'
-    widget: wibox.container.background
+    buttons: {
+        awful.button {}, 1, callback
+    }
 }
+
+timer = gears.timer
+    autostart: true
+    call_now:  true
+    timeout:   1
+    :callback
+
+
+--------------------------------------------------------------------------------
+-> image
