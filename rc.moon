@@ -8,10 +8,18 @@ _, posix = xpcall (-> require'posix'), (-> os)
 assert require'wibox'
 assert require'ruled'     -- declarative object management
 awful = assert require'awful'
-import filesystem from assert require'gears'
+gears = assert require 'gears'
+import filesystem from gears
 
 assert require'awful.hotkeys_popup.keys' -- enable hotkeys help widget for VIM and other apps
 assert require'awful.autofocus'
+
+
+--------------------------------------------------------------------------------
+-- Inject gear string utils into string metatable
+do
+    smt = getmetatable''.__index
+    smt[key] = value for key, value in pairs gears.string
 
 
 --------------------------------------------------------------------------------
