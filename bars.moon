@@ -5,6 +5,7 @@ awful = require'awful'
 wibox = require'wibox'
 theme = require'beautiful'
 plugins = require'plugins'
+import call from gears.protected_call
 
 import withmargin, wrap from require'helpers'
 import mainlauncher from require'menus'
@@ -63,19 +64,19 @@ screen.connect_signal 'request::desktop_decoration', =>
                 widget: wibox.widget.separator
             {
                 layout: wibox.layout.fixed.horizontal
-                plugins.archlogo!
-                wrap plugins.hostname!
-                wrap plugins.speak!
-                wrap plugins.camera!
-                wrap plugins.audio!
-                wrap plugins.mic!
-                wrap plugins.connectivity!
-                wrap plugins.ethernet!
+                call plugins.archlogo
+                wrap call plugins.hostname
+                wrap call plugins.speak
+                wrap call plugins.camera
+                wrap call plugins.audio
+                wrap call plugins.mic
+                wrap call plugins.connectivity
+                wrap call plugins.ethernet
                 sep
-                plugins.games!
-                plugins.browser!
-                plugins.obsidian!
-                wibox.widget.systray!
+                call plugins.games
+                call plugins.browser
+                call plugins.obsidian
+                wibox.widget.systray
                 awful.widget.layoutbox {
                     screen:  @
                     buttons: {
@@ -117,11 +118,11 @@ screen.connect_signal 'request::desktop_decoration', =>
             withmargin plugins.taskbar(@), left: 4, top: 8, bottom: 8
             {
                 layout: wibox.layout.fixed.horizontal
-                wrap plugins.bright!, margin: 8
-                wrap plugins.loadavg!, margin: 8
-                wrap plugins.utc!, margin: 8
-                wrap plugins.clock!, margin: 8
-                plugins.bt_quit!
+                wrap call(plugins.bright), margin: 8
+                wrap call(plugins.loadavg), margin: 8
+                wrap call(plugins.utc), margin: 8
+                wrap call(plugins.clock), margin: 8
+                call plugins.bt_quit
             }
         }
 
