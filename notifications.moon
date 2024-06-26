@@ -3,6 +3,7 @@ local *
 awful   = require'awful'
 naughty = require'naughty'
 ruled   = require'ruled.notification'
+theme   = require'beautiful'
 import filesystem from require'gears'
 import aplay, say from require'helpers'
 
@@ -28,8 +29,8 @@ ruled.connect_signal 'request::rules', ->
     ruled.append_rule
         rule: urgency: 'critical'
         properties:
-            bg: '#ff0000'
-            fg: '#ffffff'
+            bg: theme.bg_urgent
+            fg: theme.fg_urgent
             timeout: 0
 
 naughty.connect_signal 'request::display', =>
