@@ -10,6 +10,7 @@ assert require'ruled'     -- declarative object management
 awful = assert require'awful'
 gears = assert require 'gears'
 import filesystem from gears
+import aplay from assert require'helpers'
 
 assert require'awful.hotkeys_popup.keys' -- enable hotkeys help widget for VIM and other apps
 assert require'awful.autofocus'
@@ -26,6 +27,7 @@ do
 --- Error handling
 naughty = assert require'naughty'   -- notification library
 naughty.connect_signal 'request::display_error', (startup) =>
+    aplay 'oxygen/stereo/dialog-error-critical.ogg'
     naughty.notification
         urgency: 'critical'
         title:   "Oops, an error happened#{startup and ' during startup' or ''}!"
@@ -90,7 +92,7 @@ assert require'notifications'
 if os.execute'pgrep -f "picom --daemon"' != 0
     awful.spawn 'dex --autostart --environment awesome'
     -- FIXME: workaround over wrong picom startup
-    os.execute "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"
+    awful.spawn "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"
     -- Pulse Audio startup volume
     os.execute 'pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo    100%' -- sound boxes
     os.execute 'pactl set-sink-volume alsa_output.platform-snd_aloop.0.analog-stereo 60%' -- headphones
@@ -103,5 +105,4 @@ if os.execute'pgrep f.lux' != 0
 
 --------------------------------------------------------------------------------
 -- Log-in notification
-import aplay from require'helpers'
 aplay 'Oxygen-Sys-Log-In-Short.ogg'

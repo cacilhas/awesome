@@ -2,9 +2,9 @@ local *
 
 awful   = require'awful'
 naughty = require'naughty'
-ruled   = require'ruled'
+ruled   = require'ruled.notification'
 import filesystem from require'gears'
-import say from require'helpers'
+import aplay, say from require'helpers'
 
 --------------------------------------------------------------------------------
 --- Notifications
@@ -15,14 +15,17 @@ naughty.config.icon_dirs = {
     '/usr/share/icons/hicolor'
 }
 
-ruled.notification.connect_signal 'request::rules', ->
-    ruled.notification.append_rule
+naughty.connect_signal 'request::display_error', ->
+    aplay 'oxygen/stereo/dialog-error-critical.ogg'
+
+ruled.connect_signal 'request::rules', ->
+    ruled.append_rule
         rule: {}
         properties:
             screen: awful.screen.preferred
             implicit_timeout: 5
 
-    ruled.notification.append_rule
+    ruled.append_rule
         rule: urgency: 'critical'
         properties:
             bg: '#ff0000'
