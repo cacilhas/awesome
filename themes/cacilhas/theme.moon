@@ -1,26 +1,20 @@
 local *
 
-theme_assets  = require"beautiful.theme_assets"
-rnotification = require"ruled.notification"
-import apply_dpi from require"beautiful.xresources"
+theme_assets = require"beautiful.theme_assets"
+ruled        = require"ruled.notification"
+import apply_dpi  from require"beautiful.xresources"
 import filesystem from require"gears"
 
--- themes_path = require"gears.filesystem".get_themes_dir!
+
+--------------------------------------------------------------------------------
+
 themes_path = filesystem.get_themes_dir!
 themes_path = filesystem.get_configuration_dir! .. "/themes" if themes_path\match"/usr"
 
--- Set different colors for urgent notifications.
-rnotification.connect_signal "request::rules", ->
-    rnotification.append_rule
-        rule: {urgency: "critical"}
-        properties:
-            bg: "#900000"
-            fg: "#ffffff"
-
 taglist_square_size = apply_dpi 4
+white       = "#ffffff"
 bg_focus    = "#2aa198"
 bg_normal   = "#002b36"
---bg_button   = "#08241b"
 bg_button   = "#101940"
 bg_urgent   = "#900000"
 bg_minimize = "#5f676a"
@@ -29,22 +23,55 @@ bg_systray  = bg_normal
 fg_focus    = "#1b0e00"
 fg_normal   = "#888888"
 fg_urgent   = "#ffff00"
-fg_minimize = "#ffffff"
+fg_minimize = white
 
-fg_icon = "white"
+border_color_normal = "#15514c"
+border_color_active = "#95d0cc"
+border_color_marked = "#2f343a"
+
+fg_icon = white
 bg_icon = "#0e0e0e80"
 
+
+--------------------------------------------------------------------------------
+
+ruled.connect_signal "request::rules", ->
+    ruled.append_rule
+        properties:
+            font: "Bellota Bold 16"
+            bg: bg_normal
+            fg: fg_normal
+            border_width: 3
+            border_color: bg_focus
+
+    ruled.append_rule
+        rule: {urgency: "low"}
+        properties:
+            bg: bg_normal
+            fg: fg_normal
+            border_width: 0
+            opacity: 0.6
+
+    ruled.append_rule
+        rule: {urgency: "critical"}
+        properties:
+            bg: bg_urgent
+            fg: white
+            border_color: fg_urgent
+
+
+--------------------------------------------------------------------------------
 {
     -- BASICS
-    font: "Bellota 14"
+    font: "Bellota Bold 14"
     :bg_focus, :bg_normal, :bg_urgent, :bg_minimize, :bg_systray, :bg_button
     :fg_focus, :fg_normal, :fg_urgent, :fg_minimize, :fg_icon, :bg_icon
 
     useless_gap:  apply_dpi 0
     border_width: apply_dpi 2
-    border_color_normal: "#15514c"
-    border_color_active: "#95d0cc"
-    border_color_marked: "#2f343a"
+    :border_color_normal
+    :border_color_active
+    :border_color_marked
 
     -- IMAGES
     layout_fairh: "#{themes_path}/cacilhas/layouts/fairh.png"
