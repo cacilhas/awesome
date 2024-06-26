@@ -13,6 +13,10 @@ rofi = "rofi -replace -steal-focus"
 
 
 --------------------------------------------------------------------------------
+aplay = => awful.spawn.with_shell "play /usr/share/sounds/#{@}"
+
+
+--------------------------------------------------------------------------------
 process = =>
     res = ""
     for word in @\gmatch"%S+"
@@ -319,6 +323,7 @@ showgames = ->
 
 --------------------------------------------------------------------------------
 {
+    :aplay
     :trim, :moonprompt
     :showgames, :rofi
     :showpopup, :reload, :reloadscripts
