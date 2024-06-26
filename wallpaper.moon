@@ -5,8 +5,6 @@ awful = require'awful'
 theme = require'beautiful'
 wibox = require'wibox'
 
-_G.screentimer or= {}
-
 
 --------------------------------------------------------------------------------
 --- Wallpaper
@@ -36,19 +34,16 @@ screen.connect_signal 'request::wallpaper', =>
             widget: wibox.widget.imagebox
     }
 
-for s in screen
-    if _G.screentimer[s.index]
-        _G.screentimer[s.index]\again!
+if _G.screentimer
+    _G.screentimer\again!
 
-    else
-        _G.screentimer[s.index] = gears.timer
-            autostart: true
-            call_now:  true
-            timeout:   15*60
-            callback:  -> s\emit_signal 'request::wallpaper'
-
-_G.screentimer[i]\stop! for i = screen\count! + 1, #_G.screentimer
-_G.screentimer[i] = nil for i = screen\count! + 1, #_G.screentimer
+else
+    _G.screentimer = gears.timer
+        autostart: true
+        call_now:  true
+        timeout:   15*60
+        callback:  ->
+            s\emit_signal 'request::wallpaper' for s in screen
 
 awesome.connect_signal 'request::wallpaper', ->
     s\emit_signal'request::wallpaper' for s in screen
