@@ -410,7 +410,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^cool%-retro%-term'
                 'kitty'
                 'org%.wezfurlong%.wezterm'
-                'st%-256color'
+                '^XTerm'
             }
         properties:
             fullscreen:     true

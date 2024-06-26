@@ -323,7 +323,7 @@ showgames = ->
 
 --------------------------------------------------------------------------------
 with require'menubar'.utils
-    .terminal     = 'st' -- Set the terminal for applications that require it
+    .terminal     = 'xterm' -- Set the terminal for applications that require it
     .alt_terminal = 'kitty.sh'
     .ssh_terminal = 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'
 
