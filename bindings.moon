@@ -4,7 +4,9 @@ awful  = require'awful'
 pactl  = require'plugins.audio.pactl'
 import filesystem from require'gears'
 import show_help from require'awful.hotkeys_popup'
-import ddgo, moonprompt, nexttag, prevtag, reload, rofi, showgames, kitty from require'helpers'
+import ddgo, moonprompt, nexttag, prevtag, reload, rofi, showgames from require'helpers'
+import ssh_terminal from require'menubar'.utils
+terminal = require'menubar.utils'.alt_terminal
 import mainmenu from require'menus'
 
 -- Mod1    = Meta/Alt_L
@@ -201,7 +203,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       ' '
         on_press: ->
-            awful.spawn "#{rofi} -modes run -show run -theme fancy -display-run 'Mesa Intel' -terminal kitty -config ~/.config/rofi/term.rasi"
+            awful.spawn "#{rofi} -modes run -show run -theme fancy -display-run 'Mesa Intel' -terminal #{terminal} -config ~/.config/rofi/term.rasi"
         description: 'run command on Mesa Intel card'
         group:       'launcher'
 
@@ -209,14 +211,14 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       's'
         on_press: ->
-            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-run SSH -terminal 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'"
+            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-run SSH -terminal '#{ssh_terminal}'"
         description: 'run ssh'
         group:       'launcher'
 
     awful.key
         modifiers: {SUPER, CTRL}
         key:       'Return'
-        on_press: -> awful.spawn kitty
+        on_press: -> awful.spawn terminal
         description: 'start terminal'
         group:       'launcher'
 

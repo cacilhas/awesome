@@ -1,12 +1,12 @@
 local *
 
-menubar = require'menubar'
 awful   = require'awful'
 theme   = require'beautiful'
 wibox   = require'wibox'
+import utils from require'menubar'
 import apply_dpi from require'beautiful.xresources'
 import filesystem from require'gears'
-import ddgo, moonprompt, reload, reloadscripts, redditsearch, terminal, kitty, xprop from require 'helpers'
+import ddgo, moonprompt, reload, reloadscripts, redditsearch, xprop from require 'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -27,7 +27,6 @@ mainmenu = awful.menu
                 {'Manual', 'www-browser https://awesomewm.org/doc/api/', theme.awesome_icon}
                 {'Reddit', redditsearch, theme.reddit_icon}
                 { 'Command', moonprompt, '/usr/share/icons/breeze/apps/64/utilities-terminal.svg'}
-                --{'Settings', 'kitty -- nvim -cNvimTreeFocus', '/usr/share/icons/breeze/apps/48/systemsettings.svg'}
                 {widget: wibox.widget.separator}
                 {'Reload Awesome', reload, '/usr/share/icons/breeze-dark/actions/32/edit-redo.svg'}
                 {'Exit', -> awesome.quit!, '/usr/share/icons/breeze/actions/24/gtk-quit.svg'}
@@ -37,9 +36,9 @@ mainmenu = awful.menu
         {
             'X11'
             {
-                {"Xev", "#{terminal} -e xev"}
+                {"Xev", "#{utils.terminal} -e xev"}
                 {'Xprop', xprop}
-                {'Terminal', kitty}
+                {'Terminal', utils.alt_terminal}
                 {'dconf Editor', 'dconf-editor'}
                 {widget: wibox.widget.separator}
                 {'Font Selector', 'sel-font.sh'}
@@ -58,8 +57,6 @@ mainmenu = awful.menu
 mainlauncher = awful.widget.launcher
     image: theme.system_logo
     menu:  mainmenu
-
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 desktopmenu = awful.menu
     theme:

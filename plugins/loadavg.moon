@@ -2,7 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-import terminal from require'helpers'
+import terminal from require'menubar.utils'
 
 
 callback = (stdout) =>

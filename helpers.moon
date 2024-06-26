@@ -322,6 +322,13 @@ showgames = ->
 
 
 --------------------------------------------------------------------------------
+with require'menubar'.utils
+    .terminal     = 'st' -- Set the terminal for applications that require it
+    .alt_terminal = 'kitty.sh'
+    .ssh_terminal = 'kitty --config=/home/cacilhas/.config/kitty/ssh.conf'
+
+
+--------------------------------------------------------------------------------
 {
     :aplay
     :trim, :moonprompt
@@ -331,6 +338,4 @@ showgames = ->
     :link, :say, :wait
     :ddgo, :redditsearch, :geo, :xprop
     :withmargin, :wrap
-    terminal: 'st'
-    kitty: 'call-terminal.sh'
 }
