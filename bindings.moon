@@ -203,7 +203,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       ' '
         on_press: ->
-            awful.spawn "#{rofi} -modes combi -combi-modes run,calc -show combi -theme fancy -display-combi 'Mesa Intel' -terminal #{terminal} -config ~/.config/rofi/term.rasi"
+            awful.spawn "#{rofi} -modes run,calc -show run -theme fancy -display-calc Calculate -display-run 'Mesa Intel' -terminal #{terminal} -config ~/.config/rofi/term.rasi"
         description: 'run command on Mesa Intel card'
         group:       'launcher'
 
@@ -211,7 +211,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       's'
         on_press: ->
-            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-run SSH -terminal '#{ssh_terminal}'"
+            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-ssh SSH -terminal '#{ssh_terminal}'"
         description: 'run ssh'
         group:       'launcher'
 
