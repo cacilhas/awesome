@@ -264,12 +264,8 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
-            new_tag:
-                name:     ' '
-                layout:   awful.layout.suit.max.fullscreen
-                index:    awful.tag.find_by_name(screen[1], ' ').index + 1
-                volatile: true
 
     ruled.client.append_rule
         id: 'HP15C'

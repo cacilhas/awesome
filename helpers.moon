@@ -292,6 +292,8 @@ rounded = (bg) => wibox.widget {
 
 
 wrap = (kwargs = {}) =>
+    return unless @
+
     top    = kwargs.top or kwargs.margin or 4
     bottom = kwargs.bottom or kwargs.margin or 4
     right  = kwargs.right or 0
