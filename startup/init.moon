@@ -5,11 +5,11 @@ import filesystem from require'gears'
 
 startup = "#{filesystem.get_configuration_dir!}/startup"
 
-showerror = =>
+showerror = => (message) ->
     naughty.notification
         urgency: 'critical'
-        title:   "error loading startup script"
-        message: @
+        title:   "error loading startup script #{@}"
+        :message
 
 status, list = pcall io.popen, "ls #{startup}/*.lua"
 
@@ -20,7 +20,7 @@ if status
         name = "startup.#{key}"
         key = key\gsub '%-', '_'
         startup = -> assert require name
-        xpcall startup, showerror
+        xpcall startup, showerror name
     list\close!
 
 else
