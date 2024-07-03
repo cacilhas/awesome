@@ -28,6 +28,7 @@ ruled.client.connect_signal 'request::rules', ->
             sticky: true
             placement: awful.placement.top_right
             border_width:      0
+            focus:             false
             titlebars_enabled: false
 
     -- Floating clients.
