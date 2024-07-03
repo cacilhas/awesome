@@ -90,17 +90,7 @@ assert require'notifications'
 --------------------------------------------------------------------------------
 -- Startup apps
 if os.execute'pgrep -f "picom --daemon"' != 0
-    awful.spawn 'dex --autostart --environment awesome'
-    -- FIXME: workaround over wrong picom startup
-    awful.spawn "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"
-    -- Pulse Audio startup volume
-    os.execute 'pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo    100%' -- sound boxes
-    os.execute 'pactl set-sink-volume alsa_output.platform-snd_aloop.0.analog-stereo 60%' -- headphones
-    os.execute 'pactl set-sink-volume combined                                       40%' -- master
-
-if os.execute'pgrep f.lux' != 0
-    import geo from require'helpers'
-    awful.spawn "f.lux -l #{geo.lat} -g #{geo.lon} -k #{geo.temp}"
+    assert require'startup'
 
 
 --------------------------------------------------------------------------------
