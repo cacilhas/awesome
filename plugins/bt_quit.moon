@@ -18,6 +18,7 @@ import reload from require'helpers'
     widget: wibox.container.margin
     buttons: {
         awful.button {}, 1, -> awesome.quit!,
-        awful.button {}, 3, reload,
+        awful.button {}, 3, awesome.restart,
+        --awful.button {}, 3, reload,
     }
 }
