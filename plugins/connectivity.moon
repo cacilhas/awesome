@@ -19,7 +19,8 @@ callback = (stdout, _, reason, exitcode) =>
 
 --------------------------------------------------------------------------------
 -> wibox.widget {
-    awful.widget.watch 'timeout 2 nc -zv one.one.one.one 80', 10, callback
+    --awful.widget.watch 'timeout 2 nc -zv one.one.one.one 80', 10, callback
+    awful.widget.watch 'http HEAD http://one.one.one.one/', 10, callback
 
     bg: '#00000000'
     widget: wibox.container.background
