@@ -27,7 +27,7 @@ callback = (stdout) =>
     widget: wibox.container.background
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn 'prime-run nemo Desktop'
+            awful.spawn 'prime-run nemo'
                 floating: true
                 focus:    true
                 sticky:   true

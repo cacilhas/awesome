@@ -89,7 +89,7 @@ assert require'notifications'
 
 --------------------------------------------------------------------------------
 -- Startup apps
-if os.execute'pgrep -f "picom --daemon"' != 0
+unless os.execute'pgrep -f "picom --daemon"'
     assert require'startup'
 
 

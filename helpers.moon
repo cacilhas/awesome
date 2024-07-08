@@ -46,7 +46,7 @@ shell = =>
 reload = ->
     stderr = os.tmpname!
 
-    if os.execute"cd #{filesystem.get_configuration_dir!} && make &> #{stderr}" != 0
+    unless os.execute"cd #{filesystem.get_configuration_dir!} && make &> #{stderr}"
         err = with io.open stderr, 'r'
             content = \read'*a'
             \close!
@@ -57,7 +57,7 @@ reload = ->
             title:   'Awesome reload failed'
             message: err
 
-    if os.execute"awesome -k &> #{stderr}" == 0
+    if os.execute"awesome -k &> #{stderr}"
         os.remove stderr
         return awesome.restart!
 

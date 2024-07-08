@@ -18,6 +18,11 @@ callback = (stdout) =>
     bg: '#00000000'
     widget: wibox.container.background
     buttons: {
-        awful.button {}, 1, -> awful.spawn 'sh -c "nemo ~/Downloads/"'
+        awful.button {}, 1, ->
+            awful.spawn 'prime-run nemo Downloads/'
+                floating: true
+                focus:    true
+                sticky:   true
+                placement: awful.placement.centered
     }
 }
