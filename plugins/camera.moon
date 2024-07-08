@@ -12,13 +12,14 @@ command = "lsmod | sed -E 's/  */ /g' | awk '$1 ~ /^uvcvideo$/ { print $3; }'"
 callback = ->
     awful.spawn.easy_async_with_shell command, (output) ->
         output = if output then trim output else ''
+        output = tonumber(output) or 0
         with image
-            if output != '1'
-                .image = "#{filesystem.get_configuration_dir!}/assets/webcam-off.png"
-                \set_opacity 0.5
-            else
+            if output % 2 == 1
                 .image = "#{filesystem.get_configuration_dir!}/assets/webcam-on.png"
                 \set_opacity 1
+            else
+                .image = "#{filesystem.get_configuration_dir!}/assets/webcam-off.png"
+                \set_opacity 0.5
 
 
 --------------------------------------------------------------------------------
