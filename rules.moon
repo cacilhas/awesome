@@ -47,7 +47,6 @@ ruled.client.connect_signal 'request::rules', ->
                 '^Droidcam'
                 '^FLTK$'
                 '^Free42$'
-                '^GDevelop'
                 '^Guake'
                 '^i3quitdialog'
                 '^java%-lang%-'
@@ -72,14 +71,17 @@ ruled.client.connect_signal 'request::rules', ->
             name: {
                 'Event Tester'  -- xev
             }
-            role: {'pop-up'}
+            role: {
+                'pop-up'
+            }
         except_any:
             name: { -- Clock has its own management
                 'Kodumaro Clock'
                 'kodumaro-clock'
             }
         properties:
-            floating: true
+            floating:  true
+            sticky:    true
             placement: awful.placement.centered
 
     ruled.client.append_rule
