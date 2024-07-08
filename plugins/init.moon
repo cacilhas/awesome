@@ -13,7 +13,8 @@ if status
         key = key\gsub '^.*/', ''
         name = "plugins.#{key}"
         key = key\gsub '%-', '_'
-        pcall -> module[key] = assert require name
+        unless key == 'init'
+            pcall -> module[key] = assert require name
     list\close!
 
 

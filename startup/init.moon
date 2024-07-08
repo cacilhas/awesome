@@ -8,7 +8,7 @@ startup = "#{filesystem.get_configuration_dir!}/startup"
 showerror = => (message) ->
     naughty.notification
         urgency: 'critical'
-        title:   "error loading startup script #{@}"
+        title:   "error loading startup script “#{@}”"
         :message
 
 status, list = pcall io.popen, "ls #{startup}/*.lua"
@@ -19,8 +19,9 @@ if status
         key = key\gsub '^.*/', ''
         name = "startup.#{key}"
         key = key\gsub '%-', '_'
-        startup = -> assert require name
-        xpcall startup, showerror name
+        unless key == 'init'
+            startup = -> assert require name
+            xpcall startup, showerror name
     list\close!
 
 else
