@@ -2,10 +2,13 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
+theme = require'beautiful'
 import trim from require'helpers'
 
 callback = (stdout) =>
-    @text = trim stdout
+    count = tonumber(trim stdout) or 0
+    color = if count == 0 then theme.fg_normal else theme.fg_urgent
+    @markup = "<span color=\"#{color}\">⇓ #{count}</span>"
 
 
 --------------------------------------------------------------------------------
