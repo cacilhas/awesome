@@ -40,6 +40,7 @@ mainmenu = awful.menu
                 {'Xprop', xprop}
                 {'Terminal', utils.alt_terminal}
                 {'dconf Editor', 'dconf-editor'}
+                {'Flatseal', 'flatpak run com.github.tchx84.Flatseal'}
                 {widget: wibox.widget.separator}
                 {'Font Selector', 'sel-font.sh'}
                 {"Reload Compositor", "fish #{filesystem.get_xdg_config_home!}/autostart-scripts/compositor.fish"}
