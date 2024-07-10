@@ -239,7 +239,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       'XF86HomePage'
-        on_press:  -> awful.spawn 'call-browser.sh'
+        on_press:  -> awful.spawn 'prime-run www-browser'
         description: 'open Web browser'
         group:       'launcher'
 
