@@ -256,6 +256,13 @@ awful.keyboard.append_global_keybindings {
         on_press:  -> awful.spawn 'xcalc'
         description: 'open calculator'
         group:       'launcher'
+
+    awful.key
+        modifiers: {SUPER}
+        key:       'F12'
+        on_press:  -> awful.spawn 'xcalc'
+        description: 'open calculator'
+        group:       'launcher'
 }
 
 ----------------
