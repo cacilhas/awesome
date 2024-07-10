@@ -226,7 +226,21 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       'g'
         on_press:    showgames
-        description: 'call application on NVIDIA card'
+        description: 'call game on NVIDIA card'
+        group:       'launcher'
+
+    awful.key
+        modifiers: {SUPER, ALT}
+        key:       'c'
+        on_press:  -> awful.spawn 'sh -c "yad --color --title \'Color Selector\' | xclip -selection clipboard -r"'
+        description: 'Choose a colour'
+        group:       'launcher'
+
+    awful.key
+        modifiers: {SUPER}
+        key:       'c'
+        on_press:  -> awful.spawn 'sh -c "xcolor | xclip -selection clipboard -r"'
+        description: 'Choose a colour'
         group:       'launcher'
 
     awful.key
