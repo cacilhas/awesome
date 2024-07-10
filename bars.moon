@@ -70,6 +70,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 call plugins.archlogo
                 wrap call plugins.hostname
                 wrap call plugins.downloads
+                wrap call plugins.email
                 wrap call plugins.speak
                 call plugins.camera
                 wrap call plugins.audio
