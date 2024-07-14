@@ -3,7 +3,7 @@ local *
 awful = require'awful'
 wibox = require'wibox'
 theme = require'beautiful'
-import trim from require'helpers'
+import showpopup, trim from require'helpers'
 
 callback = =>
     inbox = os.getenv'MAIL' or "/var/spool/mail/#{os.getenv'USER'}"
@@ -21,4 +21,8 @@ callback = =>
 
     bg: '#00000000'
     widget: wibox.container.background
+    buttons: {
+        awful.button {}, 1, ->
+            showpopup('Run mutt to list emails').visible = true
+    }
 }
