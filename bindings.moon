@@ -237,7 +237,7 @@ awful.keyboard.append_global_keybindings {
         group:       'launcher'
 
     awful.key
-        modifiers: {SUPER}
+        modifiers: {SUPER, CTRL, ALT}
         key:       'c'
         on_press:  -> awful.spawn 'sh -c "xcolor | xclip -selection clipboard -r"'
         description: 'Choose a colour'
