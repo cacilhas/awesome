@@ -30,14 +30,17 @@ screen.connect_signal 'request::desktop_decoration', =>
         ' '
         ' '
         ' '
-    }, @, awful.layout.suit.fair
+    }, @, awful.layout.suit.floating
 
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.max.fullscreen
-    awful.tag.find_by_name(s, ' ').layout = awful.layout.suit.floating
+    with awful
+        .tag.find_by_name(s, ' ').layout = .layout.suit.max
+        .tag.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
+        --.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
+        --.find_by_name(s, ' ').layout = .layout.suit.fair
+        --.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
+        --.find_by_name(s, ' ').layout = .layout.suit.fair
+        --.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
+        --.find_by_name(s, ' ').layout = .layout.suit.fair
 
 
     ----------------------------------------------------------------------------

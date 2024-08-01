@@ -38,6 +38,7 @@ ruled.client.connect_signal 'request::rules', ->
             --instance: {'copyq', 'pinentry'}
             class: {
                 '^archlogo$'
+                '^ark$'
                 '^Audacious$'
                 '^Clock$'
                 '^Cairo%-dock'
@@ -51,6 +52,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^i3quitdialog'
                 '^java%-lang%-'
                 '^memory$'
+                '^meteo-qt$'
                 '^Nemo$'
                 '^Pavucontrol$'
                 '^Pcmanfm$'
@@ -165,18 +167,44 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'astro'
         rule_any:
             class: {
-                '^Celestia$'
                 '^kstars$'
                 '^stellarium$'
                 '^XEphem$'
             }
         properties:
+            floating:       false
             fullscreen:     true
             switch_to_tags: true
             new_tag:
                 name:     ' '
-                layout:   awful.layout.suit.max.fullscreen
+                layout:   awful.layout.suit.floating
                 volatile: true
+
+    ruled.client.append_rule
+        id: 'celestia'
+        rule:
+            class: '^Celestia$'
+            name: '^Celestia$'
+        properties:
+            floating:       false
+            fullscreen:     true
+            switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.floating
+                volatile: true
+
+    ruled.client.append_rule
+        id: 'celestia-popup'
+        rule:
+            class: '^Celestia$'
+        except:
+            name: '^Celestia$'
+        properties:
+            floating:       true
+            fullscreen:     false
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
 
     ruled.client.append_rule
         id: 'audacious'
@@ -184,6 +212,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: 'Audacious'
         properties:
             request_no_titlebar: true
+            floating:            false
             tag:                 awful.tag.find_by_name nil, ' '
             switch_to_tags:      true
             skip_taskbar:        true
@@ -194,10 +223,12 @@ ruled.client.connect_signal 'request::rules', ->
             class: {
                 '^Audacity$'
                 '^Hydrogen$'
+                '^com%.github%.polymeilex%.neothesia$'
                 '^Spotify'
             }
         properties:
-            maximized:      true
+            fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
@@ -210,6 +241,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             switch_to_tags: true
             new_tag:
                 name:     ' '
@@ -222,6 +254,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^Cheese$'
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
@@ -244,6 +277,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             switch_to_tags: true
             tag:            awful.tag.find_by_name nil, ' '
 
@@ -260,13 +294,63 @@ ruled.client.connect_signal 'request::rules', ->
             class: {
                 '^com%.defold%.editor'
                 '^GDevelop'
-                '^Godot'
                 '^TrenchBroom$'
                 '^turbowarp%-desktop$'
                 '^UnrealEditor'
             }
         properties:
             fullscreen:     true
+            floating:       false
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
+
+    ruled.client.append_rule
+        id: 'godot'
+        rule_any:
+            class: '^Godot'
+            instance: {
+                '^Godot_Editor'
+                '^Godot_Engine$'
+            }
+        properties:
+            fullscreen:     false
+            maximized:      false
+            floating:       true
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
+    --
+    -- ruled.client.append_rule
+    --     id: 'godot-game'
+    --     rule:
+    --     except:
+    --         class: '^Godot'
+    --     properties:
+    --         fullscreen:     false
+    --         maximized:      false
+    --         floating:       true
+    --         tag:            awful.tag.find_by_name nil, ' '
+    --         switch_to_tags: true
+    --
+    -- ruled.client.append_rule
+    --     id: 'godot-editor-1'
+    --     rule:
+    --         instance: '^Godot_Editor'
+    --     properties:
+    --         fullscreen:     false
+    --         maximized:      true
+    --         floating:       true
+    --         tag:            awful.tag.find_by_name nil, ' '
+    --         switch_to_tags: true
+
+    ruled.client.append_rule
+        id: 'godot-editor-2'
+        rule:
+            class: '^Godot'
+            instance: '^Godot_Engine'
+        properties:
+            fullscreen:     false
+            maximized:      true
+            floating:       true
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
@@ -295,6 +379,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
@@ -304,6 +389,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^Lazarus$'
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             layout:         awful.layout.suit.floating
             switch_to_tags: true
@@ -374,6 +460,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^tm$'
             }
         properties:
+            floating:       false
             maximized:      true
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
@@ -384,6 +471,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^Squeak$'
         properties:
             fullscreen:     true
+            floating:       false
             switch_to_tags: true
             new_tag:
                 name:     ' ' -- 
@@ -400,6 +488,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
 
@@ -414,6 +503,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
             placement: awful.placement.centered
@@ -430,6 +520,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             fullscreen:     true
+            floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
             placement: awful.placement.centered
@@ -439,6 +530,7 @@ ruled.client.connect_signal 'request::rules', ->
         rule_any:
             class: {
                 '^betterbird$'
+                '^firefox$'
                 '^librewolf$'
                 '^Mailspring$'
                 '^obsidian'
@@ -451,6 +543,7 @@ ruled.client.connect_signal 'request::rules', ->
             role: {'^browser$'}
         properties:
             maximized:         true
+            floating:          false
             border_width:      0
             titlebars_enabled: false
             tag:               awful.tag.find_by_name nil, ' '
@@ -462,6 +555,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^llama%-desktop'
         properties:
             fullscreen:     true
+            floating:       false
             switch_to_tags: true
             new_tag:
                 name:     '🦙'
@@ -474,32 +568,32 @@ ruled.client.connect_signal 'request::rules', ->
 
 client.connect_signal 'property::maximized', =>
     if @maximized
-        s = @screen
-        topbargeom = s.topbar\geometry!
-        @\geometry
-            x:      s.geometry.x
-            y:      topbargeom.height
-            width:  s.geometry.width
-            height: s.geometry.height - topbargeom.height
+        with @screen
+            topbargeom = .topbar\geometry!
+            @\geometry
+                x:      .geometry.x
+                y:      topbargeom.height
+                width:  .geometry.width
+                height: .geometry.height - topbargeom.height
 
 client.connect_signal 'property::fullscreen', =>
     @screen.bottombar.visible = not @fullscreen if @focus
 
 client.connect_signal 'focus', =>
-    s = @screen
-    if @fullscreen
-        s.bottombar.visible = false
-    else
-        s.bottombar.visible = true
-        s.bottombar.y = s.geometry.height - 2
-    if @maximized
-        x = s.geometry.x
-        y = s.geometry.y + s.topbar.height
-        width = s.geometry.width
-        height = s.geometry.height - y
-        @\geometry :x, :y, :width, :height
+    with @screen
+        if @fullscreen
+            .bottombar.visible = false
+        else
+            .bottombar.visible = true
+            .bottombar.y = .geometry.height - 2
+        if @maximized
+            x = .geometry.x
+            y = .geometry.y + .topbar.height
+            width = .geometry.width
+            height = .geometry.height - y
+            @\geometry :x, :y, :width, :height
 
 client.connect_signal 'unfocus', =>
-    s = @screen
-    s.bottombar.visible = true
-    s.bottombar.y = s.geometry.height - 2
+    with @screen
+        .bottombar.visible = true
+        .bottombar.y = .geometry.height - 2

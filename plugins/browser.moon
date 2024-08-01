@@ -1,12 +1,13 @@
 local *
 
 awful = require'awful'
+gears = require'gears'
 wibox = require'wibox'
 import filesystem from require'gears'
 
 
 --------------------------------------------------------------------------------
--> wibox.widget {
+image = wibox.widget {
     image: "#{filesystem.get_configuration_dir!}/assets/www-browser.png"
     resize: true
     widget: wibox.widget.imagebox
@@ -15,3 +16,12 @@ import filesystem from require'gears'
             awful.spawn.with_shell 'prime-run www-browser'
     }
 }
+
+image.timer or= gears.timer
+    autostart: true
+    timeout:   30
+    callback:  -> image\emit_signal 'widget::redraw_needed'
+
+
+--------------------------------------------------------------------------------
+-> image

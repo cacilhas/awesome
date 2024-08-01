@@ -5,7 +5,6 @@ pactl  = require'plugins.audio.pactl'
 import filesystem from require'gears'
 import show_help from require'awful.hotkeys_popup'
 import ddgo, moonprompt, nexttag, prevtag, reload, rofi, showgames from require'helpers'
-import ssh_terminal from require'menubar'.utils
 terminal = require'menubar.utils'.alt_terminal
 import mainmenu from require'menus'
 
@@ -201,18 +200,18 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {SUPER}
-        key:       ' '
+        key:       's'
         on_press: ->
-            awful.spawn "#{rofi} -modes run,calc -show run -theme fancy -display-calc Calculate -display-run 'Mesa Intel' -terminal #{terminal} -config ~/.config/rofi/term.rasi"
-        description: 'run command on Mesa Intel card'
+            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-ssh SSH -ssh-command 'kitten @ launch --type=tab kitten ssh {host}'"
+        description: 'call application on Mesa Intel card'
         group:       'launcher'
 
     awful.key
         modifiers: {SUPER}
-        key:       's'
+        key:       ' '
         on_press: ->
-            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-ssh SSH -terminal '#{ssh_terminal}'"
-        description: 'run ssh'
+            awful.spawn "#{rofi} -modes run,calc -show run -theme fancy -display-calc Calculate -display-run 'Mesa Intel' -config ~/.config/rofi/term.rasi"
+        description: 'run command on Mesa Intel card'
         group:       'launcher'
 
     awful.key
