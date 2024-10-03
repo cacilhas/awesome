@@ -59,6 +59,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^plasma%.emojier$'
                 '^processing%-core%-'
                 '^Toplevel$'
+                '^Wish$'
                 '^XCalc$'
                 '^XEyes$'
                 '^xchomp$'
@@ -292,6 +293,7 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'game-engine'
         rule_any:
             class: {
+                '^Castle-editor'
                 '^com%.defold%.editor'
                 '^GDevelop'
                 '^TrenchBroom$'
@@ -372,7 +374,6 @@ ruled.client.connect_signal 'request::rules', ->
                 '^ecode%.bin$'
                 '^FreeCAD$'
                 '^Gambas3$'
-                '^goneovim'
                 '^jetbrains%-'
                 '^Processing$'
                 '^Whireshark$'
@@ -526,11 +527,26 @@ ruled.client.connect_signal 'request::rules', ->
             placement: awful.placement.centered
 
     ruled.client.append_rule
+        id: 'wayland'
+        rule:
+            class: '^Weston Compositor$'
+        properties:
+            floating:       false
+            fullscreen:     true
+            switch_to_tags: true
+            new_tag:
+                name:     ' '
+                layout:   awful.layout.suit.floating
+                volatile: true
+
+    ruled.client.append_rule
         id: 'wwww-browser'
         rule_any:
             class: {
                 '^betterbird$'
+                '^Element$'
                 '^firefox$'
+                '^HTTPie$'
                 '^librewolf$'
                 '^Mailspring$'
                 '^obsidian'
