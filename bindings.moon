@@ -202,7 +202,7 @@ awful.keyboard.append_global_keybindings {
         modifiers: {SUPER}
         key:       's'
         on_press: ->
-            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-ssh SSH -ssh-command 'kitten @ launch --type=tab kitten ssh {host}'"
+            awful.spawn "#{rofi} -modes ssh -show ssh -theme fancy -display-ssh SSH -terminal kitty.sh -ssh-command 'kitten @ launch --type=tab kitten ssh {host}'"
         description: 'call application on Mesa Intel card'
         group:       'launcher'
 
