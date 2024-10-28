@@ -123,6 +123,7 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 wrap call(plugins.bright), margin: 8
+                wrap call(plugins.temperature), margin: 8
                 wrap call(plugins.loadavg), margin: 8
                 wrap call(plugins.utc), margin: 8
                 wrap call(plugins.clock), margin: 8
