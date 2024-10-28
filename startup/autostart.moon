@@ -1,2 +1,2 @@
 awful = assert require'awful'
-awful.spawn 'dex --autostart --environment awesome'
+awful.spawn.once 'dex --autostart --environment awesome', {}
