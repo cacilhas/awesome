@@ -37,6 +37,7 @@ ruled.client.connect_signal 'request::rules', ->
         rule_any:
             --instance: {'copyq', 'pinentry'}
             class: {
+                'contabilone-agent-installer'
                 '^archlogo$'
                 '^ark$'
                 '^Audacious$'
@@ -84,6 +85,35 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             floating:  true
+
+    -- Sticky clients.
+    ruled.client.append_rule
+        id: 'floating'
+        rule_any:
+            --instance: {'copyq', 'pinentry'}
+            class: {
+                '^archlogo$'
+                '^Clock$'
+                '^Cairo%-dock'
+                '^dde%-calendar$'
+                '^Display$'
+                '^Guake'
+                '^i3quitdialog'
+                '^Nemo$'
+                '^Pcmanfm$'
+                '^plasma%.emojier$'
+                '^XCalc$'
+                '^XEyes$'
+            }
+            name: {
+                'Event Tester'  -- xev
+            }
+        except_any:
+            name: { -- Clock has its own management
+                'Kodumaro Clock'
+                'kodumaro-clock'
+            }
+        properties:
             sticky:    true
             placement: awful.placement.centered
 
@@ -239,6 +269,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: {
                 '^Qemu%-system'
                 '^Virt%-manager'
+                '^VirtualBox'
             }
         properties:
             fullscreen:     true
@@ -279,6 +310,18 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
+            switch_to_tags: true
+            tag:            awful.tag.find_by_name nil, ' '
+
+    ruled.client.append_rule
+        id: 'floating-window-games'
+        rule_any:
+            class: {
+                '^rustzx'
+            }
+        properties:
+            fullscreen:     false
+            floating:       true
             switch_to_tags: true
             tag:            awful.tag.find_by_name nil, ' '
 
@@ -546,6 +589,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^betterbird$'
                 '^Element$'
                 '^firefox$'
+                '^Google-chrome$'
                 '^HTTPie$'
                 '^librewolf$'
                 '^Mailspring$'
