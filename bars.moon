@@ -104,6 +104,7 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     bb_height = 64
     bb_y = @geometry.height - bb_height
+    tic = 1
 
     @bottombar = awful.wibar
         position: 'bottom'
@@ -139,26 +140,20 @@ screen.connect_signal 'request::desktop_decoration', =>
     -----------------------
     -- Bottom bar update --
 
-    tic = 1
+    @bottombar.showup = =>
+        glib.timeout_add glib.PRIORITY_DEFAULT, tic, ->
+            @y -= 1 if @y > bb_y
+            @y = bb_y if @y < bb_y
+            @y != bb_y
 
-    @bottombar\connect_signal 'mouse::enter', () ->
-        glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
-            @bottombar.y -= 1 if @bottombar.y > bb_y
-            @bottombar.y = bb_y if @bottombar.y < bb_y
-            @bottombar.y != bb_y
-
-    @bottombar\connect_signal 'mouse::leave', () ->
-        glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
+    @bottombar.hidedown = (bar, action) ->
+        glib.timeout_add glib.PRIORITY_DEFAULT, tic, ->
             desired = @geometry.height - 2
-            @bottombar.y += 1 if @bottombar.y < desired
-            @bottombar.y = desired if @bottombar.y > desired
-            @bottombar.y != desired
+            bar.y += 1 if bar.y < desired
+            bar.y = desired if bar.y > desired
+            action bar if action and bar.y == desired
+            bar.y != desired
 
-    @bottombar\connect_signal 'property::visible', () ->
-        if @bottombar.visible
-            glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
-                @bottombar.y -= 1 if @bottombar.y > bb_y
-                @bottombar.y = bb_y if @bottombar.y < bb_y
-                @bottombar.y != bb_y
-        else
-            @bottombar.y = @geometry.height - 2
+    @bottombar\connect_signal 'mouse::enter', -> @bottombar\showup!
+
+    @bottombar\connect_signal 'mouse::leave', -> @bottombar\hidedown!
