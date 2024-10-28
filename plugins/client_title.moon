@@ -7,12 +7,13 @@ gears = require'gears'
 
 callback = ->
     -- FIXME: it never returns a focused client
-    if client.focus
-        clienticon[1] = awful.widget.clienticon client.focus
-        clienttitle.text = client.focus.name
-    else
-        clienticon[1] = nil
-        clienttitle.text = ''
+    with c = client.focus
+        if c
+            clienticon[1] = awful.widget.clienticon c
+            clienttitle.text = .name
+        else
+            clienticon[1] = nil
+            clienttitle.text = ''
 
 
 --------------------------------------------------------------------------------
