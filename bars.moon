@@ -73,7 +73,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 call plugins.camera
                 wrap call plugins.audio
                 wrap call plugins.mic
-                wrap call plugins.connectivity
+                call plugins.connectivity
                 wrap call plugins.ethernet
                 sep
                 call plugins.games

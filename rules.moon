@@ -84,7 +84,7 @@ ruled.client.connect_signal 'request::rules', ->
                 'kodumaro-clock'
             }
         properties:
-            floating:  true
+            floating: true
 
     -- Sticky clients.
     ruled.client.append_rule
