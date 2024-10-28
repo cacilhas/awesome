@@ -98,7 +98,9 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     bb_height = 64
     bb_y = @geometry.height - bb_height
-    tic = 1
+    tween =
+        tic: 1
+        speed: 2
 
     @bottombar = awful.wibar
         position: 'bottom'
@@ -136,15 +138,15 @@ screen.connect_signal 'request::desktop_decoration', =>
     -- Bottom bar update --
 
     @bottombar.showup = =>
-        glib.timeout_add glib.PRIORITY_DEFAULT, tic, ->
-            @y -= 1 if @y > bb_y
+        glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
+            @y -= tween.speed if @y > bb_y
             @y = bb_y if @y < bb_y
             @y != bb_y
 
     @bottombar.hidedown = (bar, action) ->
-        glib.timeout_add glib.PRIORITY_DEFAULT, tic, ->
+        glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             desired = @geometry.height - 2
-            bar.y += 1 if bar.y < desired
+            bar.y += tween.speed if bar.y < desired
             bar.y = desired if bar.y > desired
             action bar if action and bar.y == desired
             bar.y != desired
