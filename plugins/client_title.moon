@@ -6,7 +6,8 @@ gears = require'gears'
 
 
 callback = ->
-    if client and client.focus
+    -- FIXME: it never returns a focused client
+    if client.focus
         clienticon[1] = awful.widget.clienticon client.focus
         clienttitle.text = client.focus.name
     else
