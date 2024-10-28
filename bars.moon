@@ -57,12 +57,9 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 call plugins.taglist, @
-                call plugins.client_title
                 @prompt
             }
-            wibox.widget
-                color: theme.bg_normal
-                widget: wibox.widget.separator
+            call plugins.client_title(@)
             {
                 layout: wibox.layout.fixed.horizontal
                 call plugins.archlogo

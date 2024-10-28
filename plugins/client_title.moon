@@ -1,42 +1,23 @@
 local *
 
+gears = require'gears'
 awful = require'awful'
 wibox = require'wibox'
-gears = require'gears'
-
-
-callback = ->
-    -- FIXME: it never returns a focused client
-    with c = client.focus
-        if c
-            clienticon[1] = awful.widget.clienticon c
-            clienttitle.text = .name
-        else
-            clienticon[1] = nil
-            clienttitle.text = ''
 
 
 --------------------------------------------------------------------------------
-clienticon = {
-    widget: wibox.container.margin
-}
-
-clienttitle = {
-    text:   ''
-    widget: wibox.widget.textbox
-}
-
-
-->
-    _G.titletimer\stop! if _G.titletimer
-    _G.titletimer = gears.timer
-        autostart: true
-        call_now:  true
-        timeout:   0.5
-        :callback
-
-    wibox.widget {
-        clienticon
-        clienttitle
-        layout: wibox.layout.align.horizontal
-    }
+=> awful.widget.tasklist
+    screen:  @
+    filter:  awful.widget.tasklist.filter.focused
+    style:
+        shape: gears.shape.rounded_rect
+        align: 'center'
+        bg_normal: '#00000000'
+        bg_focus: '#00000000'
+        bg_minimize: '#00000000'
+        fg_normal: 'gray'
+        fg_focus: 'gray'
+        fg_minimize: 'gray'
+    layout:
+        spacing: 2
+        layout: wibox.layout.flex.horizontal
