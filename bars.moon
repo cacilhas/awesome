@@ -5,6 +5,7 @@ awful = require'awful'
 wibox = require'wibox'
 theme = require'beautiful'
 plugins = require'plugins'
+glib = require('lgi').GLib
 import call from gears.protected_call
 
 import withmargin, wrap from require'helpers'
@@ -138,12 +139,26 @@ screen.connect_signal 'request::desktop_decoration', =>
     -----------------------
     -- Bottom bar update --
 
+    tic = 1
+
     @bottombar\connect_signal 'mouse::enter', () ->
-        @bottombar.y = bb_y
+        glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
+            @bottombar.y -= 1 if @bottombar.y > bb_y
+            @bottombar.y = bb_y if @bottombar.y < bb_y
+            @bottombar.y != bb_y
 
     @bottombar\connect_signal 'mouse::leave', () ->
-        @bottombar.y = @geometry.height - 2
+        glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
+            desired = @geometry.height - 2
+            @bottombar.y += 1 if @bottombar.y < desired
+            @bottombar.y = desired if @bottombar.y > desired
+            @bottombar.y != desired
 
     @bottombar\connect_signal 'property::visible', () ->
         if @bottombar.visible
-            @bottombar.y = bb_y
+            glib.timeout_add glib.PRIORITY_DEFAULT, tic, () ->
+                @bottombar.y -= 1 if @bottombar.y > bb_y
+                @bottombar.y = bb_y if @bottombar.y < bb_y
+                @bottombar.y != bb_y
+        else
+            @bottombar.y = @geometry.height - 2
