@@ -13,7 +13,7 @@ image = wibox.widget {
     widget: wibox.widget.imagebox
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn.single_instance 'prime-run www-browser', rule: 'browser'
+            awful.spawn.raise_or_spawn 'prime-run www-browser', window_rule: 'browser'
     }
 }
 

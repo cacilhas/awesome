@@ -12,5 +12,5 @@ wibox = require'wibox'
     widget:   wibox.widget.textclock
     buttons:  {
         awful.button {}, 1, ->
-            awful.spawn.single_instance 'kodumaro-clock', class: 'kodumaro-clock'
+            awful.spawn.raise_or_spawn 'kodumaro-clock', class: 'kodumaro-clock'
     }
