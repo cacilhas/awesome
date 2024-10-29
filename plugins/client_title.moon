@@ -7,8 +7,8 @@ wibox = require'wibox'
 
 --------------------------------------------------------------------------------
 => awful.widget.tasklist
-    screen:  @
-    filter:  awful.widget.tasklist.filter.focused
+    screen: @
+    filter: awful.widget.tasklist.filter.focused
     style:
         shape: gears.shape.rounded_rect
         align: 'center'

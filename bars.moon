@@ -59,7 +59,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 call plugins.taglist, @
                 @prompt
             }
-            call plugins.client_title(@)
+            plugins.client_title @
             {
                 layout: wibox.layout.fixed.horizontal
                 call plugins.archlogo
