@@ -41,7 +41,7 @@ callback = (stdout) =>
                 realbri = tonumber line\gmatch'[%d%.]+'!
                 percent = math.floor .5 + (bri * realbri * 100)
                 @markup = "<span size=\"small\">🔆#{percent}%</span>"
-                @container.value = percent
+                @container.value = math.min 100, percent
         stderr: -> @text = '🔆‼️%'
 
 
