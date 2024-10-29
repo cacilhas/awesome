@@ -35,19 +35,19 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {100*avg1/max, 0}
-            stops: {{0, 'cyan'}, {0.4, 'blue'}}
+            stops: {{0, 'green'}, {0.3, '#00bbbb'}, {0.6, 'blue'}}
     elseif avg1 < 5
         avg1widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg1/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'yellow'}}
+            stops: {{0, 'blue'}, {0.5, 'yellow'}}
     else
         avg1widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg1/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'red'}}
+            stops: {{0, 'orange'}, {0.5, 'red'}}
 
     avg5widget.value = avg5
     avg5widget.max_value = max
@@ -56,19 +56,19 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {100*avg5/max, 0}
-            stops: {{0, 'cyan'}, {0.4, 'blue'}}
+            stops: {{0, 'green'}, {0.3, '#00bbbb'}, {0.6, 'blue'}}
     elseif avg5 < 5
         avg5widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg5/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'yellow'}}
+            stops: {{0, 'blue'}, {0.5, 'yellow'}}
     else
         avg5widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg5/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'red'}}
+            stops: {{0, 'orange'}, {0.5, 'red'}}
 
     avg15widget.value = avg15
     avg15widget.max_value = max
@@ -77,19 +77,19 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {100*avg15/max, 0}
-            stops: {{0, 'cyan'}, {0.4, 'blue'}}
+            stops: {{0, 'green'}, {0.3, '#00bbbb'}, {0.6, 'blue'}}
     elseif avg15 < 5
         avg15widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg15/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'yellow'}}
+            stops: {{0, 'blue'}, {0.5, 'yellow'}}
     else
         avg15widget.color =
             type: 'linear'
             from: {0, 0}
             to:   {100*avg15/max, 0}
-            stops: {{0, 'orange'}, {0.4, 'red'}}
+            stops: {{0, 'orange'}, {0.5, 'red'}}
 
 
 avg1widget = wibox.widget
