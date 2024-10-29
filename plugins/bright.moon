@@ -2,6 +2,7 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
+theme = require'beautiful'
 import trim, wait from require'helpers'
 
 readbri = =>
@@ -27,8 +28,9 @@ setbright = =>
                 awful.spawn "xgamma -gamma #{bri}"
 
 callback = (stdout) =>
+    @align = 'center'
     unless stdout and #stdout > 0
-        @.text = '🔆‼️%'
+        @text = '🔆‼️%'
         return
     bri = readbri stdout
 
@@ -37,19 +39,27 @@ callback = (stdout) =>
             line = trim line
             if line\match'^Brightness:'
                 realbri = tonumber line\gmatch'[%d%.]+'!
-                @.text = "🔆#{math.floor .5 + (bri * realbri * 100)}%"
-        stderr: -> @.text = '🔆‼️%'
+                percent = math.floor .5 + (bri * realbri * 100)
+                @markup = "<span size=\"small\">🔆#{percent}%</span>"
+                @container.value = percent
+        stderr: -> @text = '🔆‼️%'
 
 
 --------------------------------------------------------------------------------
 ->
     watch, timer = awful.widget.watch 'sh -c "xgamma 2>&1"', 5, callback
 
-    wibox.widget {
+    watch.container = wibox.widget {
         watch
 
-        bg: '#00000000'
-        widget: wibox.container.background
+        bg: theme.bg_button
+        widget: wibox.container.radialprogressbar
+        color: 'white'
+        border_color: 'black'
+        forced_width: 84
+        border_width: 2
+        padding: 5
+        placement: awful.placement.centered
         buttons: {
             awful.button {}, 4, ->
                 setbright 'dec'
@@ -59,3 +69,5 @@ callback = (stdout) =>
                 wait .25, -> timer\emit_signal 'timeout'
         }
     }
+
+    watch.container

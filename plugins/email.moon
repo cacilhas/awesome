@@ -9,7 +9,7 @@ callback = =>
     inbox = os.getenv'MAIL' or "/var/spool/mail/#{os.getenv'USER'}"
     mails = 0
     for line in io.lines inbox
-        mails += 1 if line\match'^Received:'
+        mails += 1 if line\startswith'Received:'
 
     color = if mails == 0 then theme.fg_normal else theme.fg_urgent
     @markup = "<span color=\"#{color}\">✉ #{mails}</span>"

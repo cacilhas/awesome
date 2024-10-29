@@ -25,21 +25,23 @@ do
 
 --------------------------------------------------------------------------------
 --- Error handling
-naughty = assert require'naughty'   -- notification library
-naughty.connect_signal 'request::display_error', (startup) =>
-    aplay 'oxygen/stereo/dialog-error-critical.ogg'
-    naughty.notification
-        urgency: 'critical'
-        title:   "Oops, an error happened#{startup and ' during startup' or ''}!"
-        message: @
+do
+    naughty = assert require'naughty'   -- notification library
+    naughty.connect_signal 'request::display_error', (startup) =>
+        aplay 'oxygen/stereo/dialog-error-critical.ogg'
+        naughty.notification
+            urgency: 'critical'
+            title:   "Oops, an error happened#{startup and ' during startup' or ''}!"
+            message: @
 
 
 --------------------------------------------------------------------------------
 --- Theme
-theme = assert require'beautiful'
-themes_path = "#{filesystem.get_configuration_dir!}/themes"
-posix.setenv 'AWESOME_THEMES_PATH', themes_path if posix.setenv
-theme.init "#{themes_path}/cacilhas/theme.lua"
+do
+    theme = assert require'beautiful'
+    themes_path = "#{filesystem.get_configuration_dir!}/themes"
+    posix.setenv 'AWESOME_THEMES_PATH', themes_path if posix.setenv
+    theme.init "#{themes_path}/cacilhas/theme.lua"
 
 
 --------------------------------------------------------------------------------
@@ -95,4 +97,6 @@ unless os.execute'pgrep -f "picom --daemon"'
 
 --------------------------------------------------------------------------------
 -- Log-in notification
-aplay 'Oxygen-Sys-Log-In-Short.ogg'
+unless _G.startupdone
+    aplay 'Oxygen-Sys-Log-In-Short.ogg'
+    _G.startupdone = true
