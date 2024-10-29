@@ -31,29 +31,65 @@ callback = (stdout) =>
     avg1widget.value = avg1
     avg1widget.max_value = max
     if avg1 < 3
-        avg1widget.color = 'blue'
+        avg1widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'cyan'}, {0.4, 'blue'}}
     elseif avg1 < 5
-        avg1widget.color = 'yellow'
+        avg1widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'yellow'}}
     else
-        avg1widget.color = 'red'
+        avg1widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'red'}}
 
     avg5widget.value = avg5
     avg5widget.max_value = max
     if avg5 < 3
-        avg5widget.color = 'blue'
+        avg5widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'cyan'}, {0.4, 'blue'}}
     elseif avg5 < 5
-        avg5widget.color = 'yellow'
+        avg5widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'yellow'}}
     else
-        avg5widget.color = 'red'
+        avg5widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'red'}}
 
     avg15widget.value = avg15
     avg15widget.max_value = max
     if avg15 < 3
-        avg15widget.color = 'blue'
+        avg15widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'cyan'}, {0.4, 'blue'}}
     elseif avg15 < 5
-        avg15widget.color = 'yellow'
+        avg15widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'yellow'}}
     else
-        avg15widget.color = 'red'
+        avg15widget.color =
+            type: 'linear'
+            from: {0, 0}
+            to:   {25, 0}
+            stops: {{0, 'orange'}, {0.4, 'red'}}
 
 
 avg1widget = wibox.widget
