@@ -68,7 +68,7 @@ ruled.connect_signal "request::rules", ->
     :bg_focus, :bg_normal, :bg_urgent, :bg_minimize, :bg_systray, :bg_button
     :fg_focus, :fg_normal, :fg_urgent, :bd_urgent, :fg_minimize, :fg_icon, :bg_icon
 
-    useless_gap:  apply_dpi 0
+    useless_gap:  apply_dpi 4
     border_width: apply_dpi 2
     :border_color_normal
     :border_color_active
