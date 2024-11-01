@@ -118,7 +118,7 @@ awful.keyboard.append_global_keybindings {
             _G.menupressed = false
             for s in screen
                 s.topbar.ontop = false
-                s.topbar.opacity = 0.8
+                s.topbar.opacity = 0.625
                 s.bottombar\hidedown =>
                     @visible = false if client.fullscreen
         description: 'raise bars using '

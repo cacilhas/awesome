@@ -102,6 +102,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar = awful.wibar
         position: 'bottom'
         opacity:  1
+        bg:       theme.bg_normal\sub(1, 7) .. 'a0'
         width:    @geometry.width * 0.75
         height:   bb_height
         x:        @geometry.width * 0.375
