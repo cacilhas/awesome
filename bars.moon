@@ -136,25 +136,22 @@ screen.connect_signal 'request::desktop_decoration', =>
     -- Bottom bar update --
 
     @bottombar.showup = =>
+        @visible = true
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             @y -= tween.speed if @y > bb_y
             if @y < bb_y
                 @y = bb_y
-            elseif not menupressed
-                mcoords = mouse.coords!
-                if mcoords.y
-                    mouse.coords
-                        x: mcoords.x
-                        y: mcoords.y - tween.speed / 2
             @y != bb_y
 
-    @bottombar.hidedown = (bar, action) ->
+    @bottombar.hidedown = (bar) ->
         return if menupressed
+        return if (mouse.coords!.y or @geometry.height) > @geometry.height - 20
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             desired = @geometry.height - 2
             bar.y += tween.speed if bar.y < desired
-            bar.y = desired      if bar.y > desired
-            action bar           if action and bar.y == desired
+            if bar.y >= desired
+                bar.y = desired
+                bar.visible = false if client.focus and client.focus.fullscreen
             bar.y != desired
 
     @bottombar\connect_signal 'mouse::enter', -> @bottombar\showup!
