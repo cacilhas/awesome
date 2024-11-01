@@ -106,7 +106,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         width:    @geometry.width * 0.75
         height:   bb_height
         x:        @geometry.width * 0.375
-        y:        bb_y
+        y:        @geometry.height - 2
         ontop:    true
         shape:    gears.shape.rounded_rect
         screen:   @

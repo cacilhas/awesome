@@ -22,7 +22,7 @@ bg_systray  = bg_normal
 
 fg_focus    = "#1b0e00"
 fg_normal   = "#888888"
-bd_urgent   = "#ffff00"
+fg_urgent   = "#ffff00"
 fg_urgent   = white
 fg_minimize = white
 
@@ -58,7 +58,7 @@ ruled.connect_signal "request::rules", ->
         properties:
             bg: bg_urgent
             fg: white
-            border_color: bd_urgent
+            border_color: fg_urgent
 
 
 --------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ ruled.connect_signal "request::rules", ->
     -- BASICS
     font: "Bellota Bold 14"
     :bg_focus, :bg_normal, :bg_urgent, :bg_minimize, :bg_systray, :bg_button
-    :fg_focus, :fg_normal, :fg_urgent, :bd_urgent, :fg_minimize, :fg_icon, :bg_icon
+    :fg_focus, :fg_normal, :fg_urgent, :fg_urgent, :fg_minimize, :fg_icon, :bg_icon
 
     useless_gap:  apply_dpi 4
     border_width: apply_dpi 2
