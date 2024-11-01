@@ -141,13 +141,13 @@ screen.connect_signal 'request::desktop_decoration', =>
             @y != bb_y
 
     @bottombar.hidedown = (bar, action) ->
+        return if menupressed
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             desired = @geometry.height - 2
             bar.y += tween.speed if bar.y < desired
-            bar.y = desired if bar.y > desired
-            action bar if action and bar.y == desired
+            bar.y = desired      if bar.y > desired
+            action bar           if action and bar.y == desired
             bar.y != desired
 
     @bottombar\connect_signal 'mouse::enter', -> @bottombar\showup!
-
     @bottombar\connect_signal 'mouse::leave', -> @bottombar\hidedown!
