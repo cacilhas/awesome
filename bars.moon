@@ -94,7 +94,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     -- Bottom bar
 
     bb_height = 64
-    bb_y = @geometry.height - bb_height
+    bb_y = @geometry.height - bb_height - 16
     tween =
         tic: 1
         speed: 2
@@ -138,7 +138,14 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar.showup = =>
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             @y -= tween.speed if @y > bb_y
-            @y = bb_y if @y < bb_y
+            if @y < bb_y
+                @y = bb_y
+            elseif not menupressed
+                mcoords = mouse.coords!
+                if mcoords.y
+                    mouse.coords
+                        x: mcoords.x
+                        y: mcoords.y - tween.speed / 2
             @y != bb_y
 
     @bottombar.hidedown = (bar, action) ->
