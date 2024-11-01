@@ -55,7 +55,7 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {avg1_percent, 0}
-            stops: allert_stops
+            stops: alert_stops
 
     avg5widget.value = avg5
     avg5widget.max_value = max
@@ -76,7 +76,7 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {avg5_percent, 0}
-            stops: allert_stops
+            stops: alert_stops
 
     avg15widget.value = avg15
     avg15widget.max_value = max
@@ -97,7 +97,7 @@ callback = (stdout) =>
             type: 'linear'
             from: {0, 0}
             to:   {avg15_percent, 0}
-            stops: allert_stops
+            stops: alert_stops
 
 
 avg1widget = wibox.widget
