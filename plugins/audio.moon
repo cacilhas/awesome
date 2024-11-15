@@ -24,21 +24,21 @@ callback = (stdout) =>
         @markup = '<span color="red"> %3d%%</span>'\format(info.vol)
 
     elseif info.vol == 0
-        @markup = '<span color="#444400">   0%</span>'
+        @markup = '<span color="#444400">     0%</span>'
 
     elseif info.vol == 100
-        @markup = '<span color="#44ffff"> %3d%%</span>'\format(info.vol)
+        @markup = '<span color="#44ffff">   %3d%%</span>'\format(info.vol)
 
     elseif info.vol > 100
-        @markup = '<span color="#ffff22"> %3d%%</span>'\format(info.vol)
+        @markup = '<span color="#ffff22">   %3d%%</span>'\format(info.vol)
 
     elseif info.vol >= 80
         color = math.floor info.vol * 256 / 100
-        @markup = '<span color="#4444%02x"> %3d%%</span>'\format(color, info.vol)
+        @markup = '<span color="#4444%02x">   %3d%%</span>'\format(color, info.vol)
 
     else
         color = math.floor info.vol * 256 / 100
-        @markup = '<span color="#4444%02x"> %3d%%</span>'\format(color, info.vol)
+        @markup = '<span color="#4444%02x">   %3d%%</span>'\format(color, info.vol)
 
 
 --------------------------------------------------------------------------------
