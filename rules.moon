@@ -420,6 +420,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^jetbrains%-'
                 '^Processing$'
                 '^Whireshark$'
+                '%.Zed$'
             }
         properties:
             fullscreen:     true
