@@ -4,8 +4,10 @@ import showpopup from require'helpers'
 
 
 callback = (stdout) =>
-    value = stdout\gmatch'temp1: *([^ \n]+)'!
-    @markup = "<span size=\"x-small\">#{value}</span>" if value
+    value = stdout\gmatch'Package id 0: *([^ \nC]+C).*'!
+    num = tonumber value\sub 1, -4
+    color = if num and num >= 60 then ' color="#ff0000"' else ''
+    @markup = "<span size=\"x-small\"#{color}>#{value}</span>" if value
 
 
 --------------------------------------------------------------------------------
