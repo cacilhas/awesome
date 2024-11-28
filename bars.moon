@@ -33,9 +33,9 @@ screen.connect_signal 'request::desktop_decoration', =>
         ' '
     }, @, awful.layout.suit.floating
 
-    with awful
-        .tag.find_by_name(s, ' ').layout = .layout.suit.max
-        .tag.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
+    -- with awful
+    --     .tag.find_by_name(s, ' ').layout = .layout.suit.max
+    --     .tag.find_by_name(s, ' ').layout = .layout.suit.max.fullscreen
 
 
     ----------------------------------------------------------------------------

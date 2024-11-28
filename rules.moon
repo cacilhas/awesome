@@ -363,29 +363,6 @@ ruled.client.connect_signal 'request::rules', ->
             floating:       true
             tag:            awful.tag.find_by_name nil, ' '
             switch_to_tags: true
-    --
-    -- ruled.client.append_rule
-    --     id: 'godot-game'
-    --     rule:
-    --     except:
-    --         class: '^Godot'
-    --     properties:
-    --         fullscreen:     false
-    --         maximized:      false
-    --         floating:       true
-    --         tag:            awful.tag.find_by_name nil, ' '
-    --         switch_to_tags: true
-    --
-    -- ruled.client.append_rule
-    --     id: 'godot-editor-1'
-    --     rule:
-    --         instance: '^Godot_Editor'
-    --     properties:
-    --         fullscreen:     false
-    --         maximized:      true
-    --         floating:       true
-    --         tag:            awful.tag.find_by_name nil, ' '
-    --         switch_to_tags: true
 
     ruled.client.append_rule
         id: 'godot-editor-2'
@@ -420,7 +397,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^jetbrains%-'
                 '^Processing$'
                 '^Whireshark$'
-                '%.Zed$'
+                '^dev%.zed%.Zed$'
             }
         properties:
             fullscreen:     true
@@ -594,6 +571,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^HTTPie$'
                 '^librewolf$'
                 '^Mailspring$'
+                '^Microsoft-edge$'
                 '^obsidian'
                 '^QtTube$'
                 '^thunderbird$'
