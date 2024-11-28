@@ -14,7 +14,7 @@ callback = (stdout, _, reason, exitcode) =>
             title: 'Netcat Error'
             text: "Netcat killed with signal #{exitcode}\n#{reason}"
             timeout: 5
-            error: erroricon
+            -- icon: erroricon
 
 
 --------------------------------------------------------------------------------

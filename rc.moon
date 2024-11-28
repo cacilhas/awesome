@@ -29,7 +29,7 @@ do
     naughty = assert require'naughty'   -- notification library
     naughty.connect_signal 'request::display_error', (startup) =>
         aplay 'oxygen/stereo/dialog-error-critical.ogg'
-        naughty.notification
+        naughty.notify
             urgency: 'critical'
             title:   "Oops, an error happened#{startup and ' during startup' or ''}!"
             message: @
