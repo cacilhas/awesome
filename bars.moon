@@ -65,9 +65,9 @@ screen.connect_signal 'request::desktop_decoration', =>
                 call plugins.archlogo
                 wrap call plugins.hostname
                 wrap call plugins.downloads
-                wrap call plugins.email
                 wrap call plugins.speak
                 call plugins.camera
+                wrap call plugins.temperature
                 wrap call plugins.audio
                 wrap call plugins.mic
                 withmargin call(plugins.connectivity), left: 8, right: 4
@@ -123,7 +123,7 @@ screen.connect_signal 'request::desktop_decoration', =>
             {
                 layout: wibox.layout.fixed.horizontal
                 withmargin call(plugins.bright), margin: 8
-                wrap call(plugins.temperature), margin: 8
+                wrap call(plugins.email), margin: 8
                 wrap call(plugins.loadavg), margin: 8
                 wrap call(plugins.utc), margin: 8
                 wrap call(plugins.clock), margin: 8

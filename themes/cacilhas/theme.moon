@@ -11,6 +11,9 @@ import filesystem from require"gears"
 themes_path = filesystem.get_themes_dir!
 themes_path = filesystem.get_configuration_dir! .. "/themes" if themes_path\match"/usr"
 
+severe = '#ff0000'
+warn = '#ffff00'
+
 taglist_square_size = apply_dpi 4
 white       = "#ffffff"
 bg_focus    = "#2aa198"
@@ -22,7 +25,6 @@ bg_systray  = bg_normal
 
 fg_focus    = "#1b0e00"
 fg_normal   = "#888888"
-fg_urgent   = "#ffff00"
 fg_urgent   = white
 fg_minimize = white
 
@@ -67,6 +69,8 @@ ruled.connect_signal "request::rules", ->
     font: "Bellota Bold 14"
     :bg_focus, :bg_normal, :bg_urgent, :bg_minimize, :bg_systray, :bg_button
     :fg_focus, :fg_normal, :fg_urgent, :fg_urgent, :fg_minimize, :fg_icon, :bg_icon
+
+    :severe, :warn
 
     useless_gap:  apply_dpi 4
     border_width: apply_dpi 2

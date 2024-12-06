@@ -1,29 +1,56 @@
+local *
+
 awful = require'awful'
-naughty = assert require'naughty'
+naughty = require'naughty'
+theme = require'beautiful'
 wibox = require'wibox'
 import showpopup from require'helpers'
 
-timeout = 15
 
+local last_id
 
 callback = (stdout) =>
     value = stdout\gmatch'Package id 0: *([^ \nC]+C).*'!
     num = tonumber value\sub 1, -4
 
-    if num >= 80
-        naughty.notify
+    if num and num >= 82
+        if last_id
+            last_id = nil unless naughty.getById last_id
+
+        notif = naughty.notify
             urgency: 'critical'
             title: 'Temperature too high'
             message: "CPU temperature is #{value}!"
-            :timeout
+            timeout: 8
+            replaces_id: last_id
 
-    color = if num and num >= 60 then ' color="#ff0000"' else ''
+        last_id = notif\get_id! if notif
+
+    color = if not num
+        ''
+
+    elseif num >= 82
+        r, g, b = theme.severe\match '#(..)(..)(..)'
+        if g == '00'
+            g = 128 - ((num - 82) * 64 / 9)
+            g = math.min 255, math.max(0, g)
+            g = '%02x'\format g
+            " color=\"##{r}#{g}#{b}\""
+        else
+            " color=\"##{theme.severe}\""
+
+    elseif num >= 60
+        " color=\"#{theme.warn}\""
+
+    else
+        ''
+
     @markup = "<span size=\"x-small\"#{color}>#{value}</span>" if value
 
 
 --------------------------------------------------------------------------------
 -> wibox.widget {
-    awful.widget.watch 'sensors', timeout, callback
+    awful.widget.watch 'sensors', 10, callback
 
     bg: '#00000000'
     widget: wibox.container.background
