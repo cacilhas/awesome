@@ -148,7 +148,7 @@ avg15widget = wibox.widget
 
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn "#{terminal} -e btop"
+            awful.spawn.raise_or_spawn "#{terminal} -e btop"
                 fullscreen: true
                 urgent:     true
     }

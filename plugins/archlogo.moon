@@ -11,5 +11,5 @@ import filesystem from require'gears'
     widget:  wibox.widget.textbox
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn "#{filesystem.get_configuration_dir!}/assets/archlogo"
+            awful.spawn.raise_or_spawn "#{filesystem.get_configuration_dir!}/assets/archlogo"
     }
