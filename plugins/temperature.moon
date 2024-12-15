@@ -5,47 +5,45 @@ naughty = require'naughty'
 theme = require'beautiful'
 wibox = require'wibox'
 import showpopup from require'helpers'
+import terminal from require'menubar.utils'
 
 
 local last_id
 
-callback = (stdout) =>
+callback = (stdout) => pcall ->
     value = stdout\gmatch'Package id 0: *([^ \nC]+C).*'!
     num = tonumber value\sub 1, -4
 
-    if num and num >= 82
-        if last_id
-            last_id = nil unless naughty.getById last_id
+    if num
 
-        notif = naughty.notify
-            urgency: 'critical'
-            title: 'Temperature too high'
-            message: "CPU temperature is #{value}!"
-            timeout: 8
-            replaces_id: last_id
+        if num >= 82
+            if last_id
+                last_id = nil unless naughty.getById last_id
 
-        last_id = notif\get_id! if notif
+            urgency = if num >= 100 then 'critical' else 'normal'
 
-    color = if not num
-        ''
+            notif = naughty.notify
+                :urgency
+                title: 'Temperature too high'
+                message: "CPU temperature is #{value}!"
+                replaces_id: last_id
+                ignore_suspend: true
 
-    elseif num >= 82
-        r, g, b = theme.severe\match '#(..)(..)(..)'
-        if g == '00'
-            g = 128 - ((num - 82) * 64 / 9)
-            g = math.min 255, math.max(0, g)
-            g = '%02x'\format g
-            " color=\"##{r}#{g}#{b}\""
-        else
+            last_id = notif\get_id! if notif
+
+        color = if num >= 100
             " color=\"##{theme.severe}\""
 
-    elseif num >= 60
-        " color=\"#{theme.warn}\""
+        elseif num >= 82
+            " color=\"##{theme.warn}\""
 
-    else
-        ''
+        elseif num >= 60
+            ' color="green"'
 
-    @markup = "<span size=\"x-small\"#{color}>#{value}</span>" if value
+        else
+            ''
+
+        @markup = "<span size=\"x-small\"#{color}>#{value}</span>"
 
 
 --------------------------------------------------------------------------------
@@ -58,5 +56,10 @@ callback = (stdout) =>
         awful.button {}, 1, ->
             awful.spawn.easy_async_with_shell 'sensors', =>
                 showpopup(@).visible = true
+
+        awful.button {}, 3, ->
+            awful.spawn.raise_or_spawn "#{terminal} -e 'htop -s PERCENT_CPU'"
+                fullscreen: true
+                urgent:     true
     }
 }
