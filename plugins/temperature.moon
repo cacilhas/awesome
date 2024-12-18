@@ -11,7 +11,7 @@ import terminal from require'menubar.utils'
 local last_id
 
 callback = (stdout) => pcall ->
-    value = stdout\gmatch'Package id 0: *([^ \nC]+C).*'!
+    value = stdout\gmatch'Package id 0: +([%d%.+-]+°C)'!
     num = tonumber value\sub 1, -4
 
     if num
