@@ -41,9 +41,9 @@ callback = (stdout) => pcall ->
 
         -- Set foreground colour
         color = if num >= 100
-            " color=\"##{theme.severe}\""
+            " color=\"#{theme.severe}\""
         elseif num >= 82
-            " color=\"##{theme.warn}\""
+            " color=\"#{theme.warn}\""
         elseif num >= 60
             ' color="green"'
         else
