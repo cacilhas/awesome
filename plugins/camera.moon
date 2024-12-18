@@ -2,9 +2,8 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-gears = require'gears'
 import trim from require'helpers'
-import filesystem from gears
+import filesystem from require'gears'
 
 
 command = "lsmod | sed -E 's/  */ /g' | awk '$1 ~ /^uvcvideo$/ { print $3; }'"
@@ -33,12 +32,12 @@ image = wibox.widget {
     }
 }
 
-image.timer or= gears.timer
-    autostart: true
-    call_now:  true
-    timeout:   1
-    :callback
-
 
 --------------------------------------------------------------------------------
--> image
+-> wibox.widget {
+    image
+    awful.widget.watch command, 1, callback
+
+    bg: '#00000000'
+    widget: wibox.container.background
+}

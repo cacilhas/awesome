@@ -19,6 +19,5 @@ import reload from require'helpers'
     buttons: {
         awful.button {}, 1, -> awesome.quit!
         awful.button {}, 3, awful.util.restart
-        --awful.button {}, 3, reload
     }
 }
