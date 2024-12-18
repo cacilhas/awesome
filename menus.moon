@@ -6,7 +6,7 @@ wibox   = require'wibox'
 import utils from require'menubar'
 import apply_dpi from require'beautiful.xresources'
 import filesystem from require'gears'
-import ddgo, moonprompt, reload, reloadscripts, redditsearch, xprop from require 'helpers'
+import ddgo, moonprompt, reload, reloadscripts, xprop from require 'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -25,7 +25,6 @@ mainmenu = awful.menu
             'Awesome'
             {
                 {'Manual', 'www-browser https://awesomewm.org/doc/api/', theme.awesome_icon}
-                {'Reddit', redditsearch, theme.reddit_icon}
                 { 'Command', moonprompt, '/usr/share/icons/breeze/apps/64/utilities-terminal.svg'}
                 {widget: wibox.widget.separator}
                 {'Reload Awesome', reload, '/usr/share/icons/breeze-dark/actions/32/edit-redo.svg'}

@@ -44,12 +44,12 @@ awful.keyboard.append_global_keybindings {
         description: 'lower volume'
         group:       'awesome'
 
-    awful.key
-        modifiers: {SUPER}
-        key:       'F2'
-        on_press: -> pactl.sink.volume '-10%'
-        description: 'lower volume'
-        group:       'awesome'
+    -- awful.key
+    --     modifiers: {SUPER}
+    --     key:       'F2'
+    --     on_press: -> pactl.sink.volume '-10%'
+    --     description: 'lower volume'
+    --     group:       'awesome'
 
     awful.key
         modifiers: {}
@@ -58,12 +58,12 @@ awful.keyboard.append_global_keybindings {
         description: 'raise volume'
         group:       'awesome'
 
-    awful.key
-        modifiers: {SUPER}
-        key:       'F3'
-        on_press: -> pactl.sink.volume '+10%'
-        description: 'raise volume'
-        group:       'awesome'
+    -- awful.key
+    --     modifiers: {SUPER}
+    --     key:       'F3'
+    --     on_press: -> pactl.sink.volume '+10%'
+    --     description: 'raise volume'
+    --     group:       'awesome'
 
     awful.key
         modifiers: {}
@@ -72,12 +72,12 @@ awful.keyboard.append_global_keybindings {
         description: 'mute/unmute mic'
         group:       'awesome'
 
-    awful.key
-        modifiers: {SUPER}
-        key:       'F4'
-        on_press: -> pactl.source.togglemute!
-        description: 'mute/unmute mic'
-        group:       'awesome'
+    -- awful.key
+    --     modifiers: {SUPER}
+    --     key:       'F4'
+    --     on_press: -> pactl.source.togglemute!
+    --     description: 'mute/unmute mic'
+    --     group:       'awesome'
 
 }
 
@@ -366,28 +366,28 @@ awful.keyboard.append_global_keybindings {
         group:       'client'
 
     awful.key
-        modifiers: {SUPER,  SHIFT}
+        modifiers: {SUPER, SHIFT}
         key:       'Up'
         on_press: -> awful.client.swap.bydirection 'up'
         description: 'swap to the top'
         group:       'client'
 
     awful.key
-        modifiers: {SUPER,  SHIFT}
+        modifiers: {SUPER, SHIFT}
         key:       'Right'
         on_press: -> awful.client.swap.bydirection 'right'
         description: 'swap to the right'
         group:       'client'
 
     awful.key
-        modifiers: {SUPER,  SHIFT}
+        modifiers: {SUPER, SHIFT}
         key:       'Down'
         on_press: -> awful.client.swap.bydirection 'down'
         description: 'swap to the bottom'
         group:       'client'
 
     awful.key
-        modifiers: {SUPER,  SHIFT}
+        modifiers: {SUPER, SHIFT}
         key:       'Left'
         on_press: -> awful.client.swap.bydirection 'left'
         description: 'swap to the left'
@@ -420,8 +420,6 @@ awful.keyboard.append_global_keybindings {
         on_press: awful.tag.viewnext
         description: 'view next tag'
         group:       'tag'
-
-    -- awful.key {SUPER, CTRL}, 'Escape', awful.tag.history.restore, description: 'go back', group: 'tag'
 }
 
 ----------
@@ -460,7 +458,7 @@ awful.keyboard.append_global_keybindings {
 
     awful.key
         modifiers: {SUPER}
-        key:       'F10'
+        key:       'F9'
         on_press: ->
             if not client.focus
                 with c = awful.client.restore!
@@ -491,7 +489,7 @@ client.connect_signal 'request::default_keybindings', ->
     awful.keyboard.append_client_keybindings {
         awful.key
             modifiers: {SUPER}
-            key:       'f'
+            key:       'F11'
             on_press: =>
                 @fullscreen = not @fullscreen
                 @\raise!
@@ -529,33 +527,11 @@ client.connect_signal 'request::default_keybindings', ->
 
         awful.key
             modifiers: {SUPER}
-            key:       'F11'
+            key:       'F10'
             on_press: =>
                 @maximized = not @maximized
                 @\raise!
                 @\emit_signal 'request::titlebars'
             description: '(un)maximize'
             group:       'client'
-    }
-
---------------------------------------------------------------------------------
---- Mouse bindings
-
-client.connect_signal 'request::default_mousebindings', ->
-    awful.mouse.append_client_mousebindings {
-        awful.button
-            modifiers: {}
-            button:    1
-            on_press: =>
-                @activate context: 'mouse_click'
-
-        awful.button
-            modifiers: {SUPER}
-            button:    1
-            on_press: => @activate context: 'mouse_click', action: 'mouse_move'
-
-        awful.button
-            modifiers: {SUPER}
-            button: 3
-            on_press: => @activate context: 'mouse_click', action: 'mouse_resize'
     }

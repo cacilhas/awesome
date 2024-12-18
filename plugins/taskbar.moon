@@ -17,6 +17,7 @@ wibox = require'wibox'
         layout: wibox.layout.flex.horizontal
     buttons: {
         awful.button {}, 1, => @\activate context: 'tasklist', action: 'toggle_minimization'
+        awful.button {}, 2, => @\kill!
         awful.button {}, 3, -> awful.menu.client_list theme: {width: 250}
         awful.button {}, 4, -> awful.client.focus.byidx -1
         awful.button {}, 5, -> awful.client.focus.byidx  1

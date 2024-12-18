@@ -106,26 +106,19 @@ moonprompt = -> awful.prompt.run
 
 
 --------------------------------------------------------------------------------
-ddgo = -> awful.prompt.run
-    prompt: ' <span color="#884400">DuckDuckGo&gt;</span> '
-    textbox: awful.screen.focused!.prompt.widget
-    history_path: "#{filesystem.get_cache_dir!}/ddgo"
-    exe_callback: =>
-        awful.spawn "prime-run www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
-
-
---------------------------------------------------------------------------------
-redditsearch = -> awful.prompt.run
-    prompt: ' <span color="#884400">Reddit&gt;</span> '
-    textbox: awful.screen.focused!.prompt.widget
-    history_path: "#{filesystem.get_cache_dir!}/reddit"
-    exe_callback: =>
-        awful.spawn "prime-run www-browser https://www.reddit.com/r/awesomewm/search/?q=#{@\gsub "%s+", "+"}"
+ddgo = ->
+    awful.screen.focused!.tags[1]\view_only!
+    awful.prompt.run
+        prompt: ' <span color="#884400">DuckDuckGo&gt;</span> '
+        textbox: awful.screen.focused!.prompt.widget
+        history_path: "#{filesystem.get_cache_dir!}/ddgo"
+        exe_callback: =>
+            awful.spawn "prime-run www-browser https://www.duckduckgo.com/?q=#{@\gsub "%s+", "+"}"
 
 
 --------------------------------------------------------------------------------
 reloadscripts = ->
-    awful.spawn "dex #{filesystem.get_xdg_config_home!}/autostart/Scripts.desktop"
+    awful.spawn 'dex --autostart --environment awesome'
 
 
 --------------------------------------------------------------------------------
@@ -246,9 +239,6 @@ link =
                     link.dev = data[7]
                     return
 
-    show: (cb) ->
-        awful.spawn.easy_async_with_shell "ip link show dev #{link.dev}", cb
-
 link.init!
 
 
@@ -337,6 +327,6 @@ with require'menubar'.utils
     :showpopup, :reload, :reloadscripts
     :nexttag, :prevtag
     :link, :say, :wait
-    :ddgo, :redditsearch, :geo, :xprop
+    :ddgo, :geo, :xprop
     :withmargin, :wrap
 }

@@ -99,7 +99,6 @@ ruled.connect_signal "request::rules", ->
     awesome_icon: "#{themes_path}/cacilhas/awesome-icon.png"
     exit_icon:    "#{themes_path}/cacilhas/exit.png"
     xorg_icon:    "#{themes_path}/cacilhas/xorg.svg"
-    reddit_icon:  "#{themes_path}/cacilhas/reddit.svg"
     ddgo_icon:    "#{themes_path}/cacilhas/duckduckgo.svg"
 
         -- from default for now...

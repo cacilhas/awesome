@@ -60,6 +60,7 @@ callback = (stdout) =>
         border_width: 2
         padding: 5
         placement: awful.placement.centered
+        max_value: 100
         buttons: {
             awful.button {}, 4, ->
                 setbright 'dec'

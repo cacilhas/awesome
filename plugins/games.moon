@@ -13,6 +13,5 @@ import showgames from require'helpers'
     widget: wibox.widget.imagebox
     buttons: {
         awful.button {}, 1, showgames
-            --awful.spawn.with_shell "prime-run eidolon menu"
     }
 }

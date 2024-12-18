@@ -71,16 +71,16 @@ assert require'mousebindings'
 
 --------------------------------------------------------------------------------
 --- Key bindings
-assert require'bindings'
+assert require'keybindings'
 
 
 --------------------------------------------------------------------------------
---- Rules
+--- Client rules
 assert require'rules'
 
 
 --------------------------------------------------------------------------------
---- Titlebars
+--- Title bars
 assert require'titlebars'
 
 

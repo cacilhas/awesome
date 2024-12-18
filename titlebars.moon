@@ -24,12 +24,9 @@ client.connect_signal 'request::titlebars', =>
         awful.titlebar(@).widget = {
             {
                 awful.titlebar.widget.closebutton @
-                -- awful.titlebar.widget.floatingbutton @
                 awful.titlebar.widget.minimizebutton @
                 awful.titlebar.widget.maximizedbutton @
-                -- awful.titlebar.widget.stickybutton @
-                -- awful.titlebar.widget.ontopbutton @
-                layout: wibox.layout.fixed.horizontal!
+                layout: wibox.layout.fixed.horizontal
             }
             {
                 {

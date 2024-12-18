@@ -9,7 +9,7 @@ ruled = require'ruled'
 
 ruled.client.connect_signal 'request::rules', ->
     ----------------------------------------------------------------------------
-    -- All clients’ rules
+    -- General rules
 
     ruled.client.append_rule
         id: 'global'
