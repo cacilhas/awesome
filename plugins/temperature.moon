@@ -16,6 +16,7 @@ callback = (stdout) => pcall ->
 
     if num
 
+        -- Notification
         if num >= 82
             if last_id
                 last_id = nil unless naughty.getById last_id
@@ -31,15 +32,20 @@ callback = (stdout) => pcall ->
 
             last_id = notif\get_id! if notif
 
+        elseif last_id
+            notif = naughty.getById last_id
+            if notif
+                last_id = nil if notif\destroy!
+            else
+                last_id = nil
+
+        -- Set foreground colour
         color = if num >= 100
             " color=\"##{theme.severe}\""
-
         elseif num >= 82
             " color=\"##{theme.warn}\""
-
         elseif num >= 60
             ' color="green"'
-
         else
             ''
 
