@@ -20,16 +20,27 @@ ruled.client.connect_signal 'request::rules', ->
             screen:    awful.screen.preferred
             placement: awful.placement.no_overlap + awful.placement.no_offscreen
 
-    ruled.client.append_rule
-        id: 'desktop'
-        rule:
-            type: 'desktop'
-        properties:
-            sticky: true
-            placement: awful.placement.top_right
-            border_width:      0
-            focus:             false
-            titlebars_enabled: false
+    with screen.primary
+        nil  -- workaround Moonscript issue
+        :width, :height = .geometry
+        placement = (args) =>
+            args.margins =
+                left: 0
+                right: 0
+                top: .topbar\geometry!.height
+                bottom: .bottombar\geometry!.height
+            awful.placement.top_left @, args
+
+        ruled.client.append_rule
+            id: 'desktop'
+            rule:
+                type: 'desktop'
+            properties:
+                sticky: true
+                :placement
+                border_width: 0
+                focus:             false
+                titlebars_enabled: false
 
     -- Floating clients.
     ruled.client.append_rule
