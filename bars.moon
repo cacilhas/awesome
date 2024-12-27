@@ -134,11 +134,8 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     -----------------------
     -- Bottom bar update --
-    @bottombar.shown = false
-
     @bottombar.showup = =>
-        return if @shown
-        @shown = true
+        return if @y == bb_y
         @visible = true
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             @y -= tween.speed if @y > bb_y
@@ -147,19 +144,16 @@ screen.connect_signal 'request::desktop_decoration', =>
             @y != bb_y
 
     @bottombar.hidedown = (bar) ->
-        return if menupressed or not bar.shown
-        return if (mouse.coords!.y or @geometry.height) > @geometry.height - 20
-        bar.shown = false
+        return @bottombar\showup! if #@clients < 2
+        return if (mouse.coords!.y or @geometry.height) > bb_y
+        desired = @geometry.height - 2
+        return if menupressed or bar.y == desired
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
-            desired = @geometry.height - 2
             bar.y += tween.speed if bar.y < desired
             if bar.y >= desired
                 bar.y = desired
                 bar.visible = false if client.focus and client.focus.fullscreen
             bar.y != desired
-
-    -- @bottombar\connect_signal 'mouse::enter', -> @bottombar\showup!
-    -- @bottombar\connect_signal 'mouse::leave', -> @bottombar\hidedown!
 
     @bottombar.showntimer = gears.timer
         timeout: 0.25
@@ -172,4 +166,4 @@ screen.connect_signal 'request::desktop_decoration', =>
             return @bottombar\showup! if #@clients < 2
             return @bottombar\hidedown! if client.focus and client.focus.fullscreen
             return @bottombar\showup! if y > @geometry.height - 2
-            return @bottombar\hidedown! if y < @bottombar\geometry!.y
+            return @bottombar\hidedown! if y < bb_y
