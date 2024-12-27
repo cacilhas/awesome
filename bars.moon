@@ -147,8 +147,7 @@ screen.connect_signal 'request::desktop_decoration', =>
             @y != bb_y
 
     @bottombar.hidedown = (bar) ->
-        return unless bar.shown
-        return if menupressed
+        return if menupressed or not bar.shown
         return if (mouse.coords!.y or @geometry.height) > @geometry.height - 20
         bar.shown = false
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
@@ -161,3 +160,16 @@ screen.connect_signal 'request::desktop_decoration', =>
 
     -- @bottombar\connect_signal 'mouse::enter', -> @bottombar\showup!
     -- @bottombar\connect_signal 'mouse::leave', -> @bottombar\hidedown!
+
+    @bottombar.showntimer = gears.timer
+        timeout: 0.25
+        autostart: true
+        call_now: true
+        callback: ->
+            return unless @
+            :y = mouse.coords!
+            return unless y
+            return @bottombar\showup! if #@clients < 2
+            return @bottombar\hidedown! if client.focus and client.focus.fullscreen
+            return @bottombar\showup! if y > @geometry.height - 2
+            return @bottombar\hidedown! if y < @bottombar\geometry!.y
