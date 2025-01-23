@@ -575,7 +575,7 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'wwww-browser'
         rule_any:
             class: {
-                '^betterbird$'
+                '^eu%.betterbird%.Betterbird$'
                 '^Element$'
                 '^firefox$'
                 '^Google-chrome$'

@@ -106,8 +106,8 @@ avg1widget = wibox.widget
     color: 'blue'
     background_color: '#00000000'
     forced_width: 100
-    border_width: 2
-    border_color: theme.fg_normal
+    border_width: 1
+    border_color: theme.bg_normal
     widget: wibox.widget.progressbar
 
 avg5widget = wibox.widget
@@ -116,8 +116,8 @@ avg5widget = wibox.widget
     color: 'blue'
     background_color: '#00000000'
     forced_width: 100
-    border_width: 2
-    border_color: theme.fg_normal
+    border_width: 1
+    border_color: theme.bg_normal
     widget: wibox.widget.progressbar
 
 avg15widget = wibox.widget
@@ -126,8 +126,8 @@ avg15widget = wibox.widget
     color: 'blue'
     background_color: '#00000000'
     forced_width: 100
-    border_width: 2
-    border_color: theme.fg_normal
+    border_width: 1
+    border_color: theme.bg_normal
     widget: wibox.widget.progressbar
 
 
