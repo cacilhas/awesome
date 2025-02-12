@@ -33,7 +33,7 @@ awful.keyboard.append_global_keybindings {
     awful.key
         modifiers: {}
         key:       'XF86AudioMute'
-        on_press: -> pactl.sink.tooglemute!
+        on_press: -> pactl.sink.togglemute!
         description: 'mute/umute audio'
         group:       'awesome'
 

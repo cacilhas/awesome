@@ -19,7 +19,9 @@ callback = (stdout) => pcall ->
         -- Notification
         if num >= 82
             if last_id
-                last_id = nil unless naughty.getById last_id
+                notif = naughty.getById last_id
+                notif\destroy! if notify
+                last_id = nil
 
             urgency = if num >= 100 then 'critical' else 'normal'
 
@@ -34,10 +36,8 @@ callback = (stdout) => pcall ->
 
         elseif last_id
             notif = naughty.getById last_id
-            if notif
-                last_id = nil if notif\destroy!
-            else
-                last_id = nil
+            notif\destroy! if notify
+            last_id = nil
 
         -- Set foreground colour
         color = if num >= 100
