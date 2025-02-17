@@ -20,7 +20,7 @@ callback = (stdout) => pcall ->
         if num >= 82
             if last_id
                 notif = naughty.getById last_id
-                notif\destroy! if notify
+                notif\destroy! if notif
                 last_id = nil
 
             urgency = if num >= 100 then 'critical' else 'normal'

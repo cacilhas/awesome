@@ -417,11 +417,17 @@ ruled.client.connect_signal 'request::rules', ->
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: 'lazarus'
-        rule:
-            class: '^Lazarus$'
+        id: 'non-fs-ide'
+        rule_any:
+            class: {
+                '^Lazarus$'
+            }
+            name: {
+                '^Visual Tcl$'
+                '^vTcl$'
+            }
         properties:
-            fullscreen:     true
+            fullscreen:     false
             floating:       false
             tag:            awful.tag.find_by_name nil, ' '
             layout:         awful.layout.suit.floating
