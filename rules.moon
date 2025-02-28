@@ -406,6 +406,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^FreeCAD$'
                 '^Gambas3$'
                 '^jetbrains%-'
+                '^lmms$'
                 '^Processing$'
                 '^Whireshark$'
                 '^dev%.zed%.Zed$'
@@ -420,6 +421,7 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'non-fs-ide'
         rule_any:
             class: {
+                '^Glade$'
                 '^Lazarus$'
             }
             name: {
