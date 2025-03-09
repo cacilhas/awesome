@@ -595,6 +595,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^QtTube$'
                 '^thunderbird$'
                 '^Slimjet$'
+                '^servo$'
                 '^Tor Browser$'
                 '^Vivaldi'
             }
