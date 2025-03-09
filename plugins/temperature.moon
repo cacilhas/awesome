@@ -15,29 +15,24 @@ callback = (stdout) => pcall ->
     num = tonumber value\sub 1, -4
 
     if num
-
         -- Notification
-        if num >= 82
-            if last_id
-                notif = naughty.getById last_id
-                notif\destroy! if notif
-                last_id = nil
+        if last_id
+            notif = naughty.getById last_id
+            notif\destroy! if notif
+            last_id = nil
 
+        if num >= 82
             urgency = if num >= 100 then 'critical' else 'normal'
 
-            notif = naughty.notify
-                :urgency
-                title: 'Temperature too high'
-                message: "CPU temperature is #{value}!"
-                replaces_id: last_id
-                ignore_suspend: true
+            if urgency == 'critical' or not client.focus.fullscreen
+                notif = naughty.notify
+                    :urgency
+                    title: 'Temperature too high'
+                    message: "CPU temperature is #{value}!"
+                    replaces_id: last_id
+                    ignore_suspend: true
 
-            last_id = notif\get_id! if notif
-
-        elseif last_id
-            notif = naughty.getById last_id
-            notif\destroy! if notify
-            last_id = nil
+                last_id = notif\get_id! if notif
 
         -- Set foreground colour
         color = if num >= 100
