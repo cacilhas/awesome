@@ -24,7 +24,7 @@ callback = (stdout) => pcall ->
         if num >= 82
             urgency = if num >= 100 then 'critical' else 'normal'
 
-            if urgency == 'critical' or not client.focus.fullscreen
+            if num >= 97 or not client.focus.fullscreen
                 notif = naughty.notify
                     :urgency
                     title: 'Temperature too high'
