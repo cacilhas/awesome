@@ -644,7 +644,7 @@ client.connect_signal 'focus', =>
             .bottombar.visible = false
         else
             .bottombar.visible = true
-            .bottombar.y = .geometry.height - 2
+            .bottombar.y = .geometry.height - 1
         if @maximized
             x = .geometry.x
             y = .geometry.y + .topbar.height
@@ -655,4 +655,3 @@ client.connect_signal 'focus', =>
 client.connect_signal 'unfocus', =>
     with @screen
         .bottombar.visible = true
-        .bottombar.y = .geometry.height - 2

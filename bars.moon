@@ -147,7 +147,7 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar.hidedown = (bar) ->
         return @bottombar\showup! if #@clients < 2
         return if (mouse.coords!.y or @geometry.height) > bb_y
-        desired = @geometry.height - 2
+        desired = @geometry.height - 1
         return if menupressed or bar.y == desired
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             bar.y += tween.speed if bar.y < desired
