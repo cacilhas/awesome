@@ -491,6 +491,15 @@ ruled.client.connect_signal 'request::rules', ->
             switch_to_tags: true
 
     ruled.client.append_rule
+        id: 'graphite'
+        rule:
+            name: '^Graphite$'
+        properties:
+            fullscreen:     true
+            tag:            awful.tag.find_by_name nil, ' '
+            switch_to_tags: true
+
+    ruled.client.append_rule
         id: 'office'
         rule_any:
             class: {

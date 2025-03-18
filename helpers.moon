@@ -314,6 +314,13 @@ showgames = ->
 
 
 --------------------------------------------------------------------------------
+killclients = ->
+    for c in *awful.screen.focused!.clients
+        with c
+            \kill! if c and .type != 'desktop'
+
+
+--------------------------------------------------------------------------------
 with require'menubar'.utils
     .terminal     = 'xterm' -- Set the terminal for applications that require it
     .alt_terminal = 'kitty.sh'
@@ -329,4 +336,5 @@ with require'menubar'.utils
     :link, :say, :wait
     :ddgo, :geo, :xprop
     :withmargin, :wrap
+    :killclients
 }
