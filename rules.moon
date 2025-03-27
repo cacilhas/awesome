@@ -605,6 +605,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^thunderbird$'
                 '^Slimjet$'
                 '^servo$'
+                '^shortwave$'
                 '^Tor Browser$'
                 '^Vivaldi'
             }
