@@ -6,7 +6,7 @@ wibox   = require'wibox'
 import utils from require'menubar'
 import apply_dpi from require'beautiful.xresources'
 import filesystem from require'gears'
-import ddgo, killclients, moonprompt, reload, reloadscripts, xprop from require 'helpers'
+import ddgo, killclients, moonprompt, reload, reloadscripts, updatehistory, xprop from require 'helpers'
 
 
 --------------------------------------------------------------------------------
@@ -27,6 +27,7 @@ mainmenu = awful.menu
                 {'Manual', 'www-browser https://awesomewm.org/doc/api/', theme.awesome_icon}
                 { 'Command', moonprompt, '/usr/share/icons/breeze/apps/64/utilities-terminal.svg'}
                 {'Kill clients', killclients, '/usr/share/icons/breeze-dark/actions/32/edit-delete.svg'}
+                {'Update tags history', updatehistory, '/usr/share/icons/breeze-dark/actions/24/quickopen.svg'}
                 {widget: wibox.widget.separator}
                 {'Reload Awesome', reload, '/usr/share/icons/breeze-dark/actions/32/edit-redo.svg'}
                 {'Exit', -> awesome.quit!, '/usr/share/icons/breeze/actions/24/gtk-quit.svg'}

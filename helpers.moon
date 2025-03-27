@@ -321,6 +321,11 @@ killclients = ->
 
 
 --------------------------------------------------------------------------------
+updatehistory = ->
+    awful.tag.history.update awful.screen.focused!
+
+
+--------------------------------------------------------------------------------
 with require'menubar'.utils
     .terminal     = 'xterm' -- Set the terminal for applications that require it
     .alt_terminal = 'kitty.sh'
@@ -336,5 +341,5 @@ with require'menubar'.utils
     :link, :say, :wait
     :ddgo, :geo, :xprop
     :withmargin, :wrap
-    :killclients
+    :killclients, :updatehistory
 }
