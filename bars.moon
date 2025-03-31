@@ -76,6 +76,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 call plugins.games
                 call plugins.browser
                 call plugins.obsidian
+                call plugins.radio
                 wibox.widget.systray
                 awful.widget.layoutbox {
                     screen:  @

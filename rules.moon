@@ -567,6 +567,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^Droidcam$'
                 '^kdenlive$'
                 '^obs$'
+                '^Stremio$'
             }
         properties:
             fullscreen:     true
@@ -605,7 +606,6 @@ ruled.client.connect_signal 'request::rules', ->
                 '^thunderbird$'
                 '^Slimjet$'
                 '^servo$'
-                '^shortwave$'
                 '^Tor Browser$'
                 '^Vivaldi'
             }
@@ -617,6 +617,17 @@ ruled.client.connect_signal 'request::rules', ->
             titlebars_enabled: false
             tag:               awful.tag.find_by_name nil, ' '
             switch_to_tags:    true
+
+    ruled.client.append_rule
+        id: 'radio'
+        rule:
+            class: '^shortwave$'
+        properties:
+            sticky: true
+            border_width: 0
+            floating:          false
+            focus:             false
+            titlebars_enabled: false
 
     ruled.client.append_rule
         id: 'LLM'
