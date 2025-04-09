@@ -72,6 +72,7 @@ screen.connect_signal 'request::desktop_decoration', =>
                 wrap call plugins.mic
                 withmargin call(plugins.connectivity), left: 8, right: 4
                 wrap call plugins.ethernet
+                call plugins.notif
                 sep
                 call plugins.games
                 call plugins.browser
