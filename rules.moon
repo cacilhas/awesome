@@ -598,6 +598,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^firefox$'
                 '^Google-chrome$'
                 '^HTTPie$'
+                '^Jitsi Meet$'
                 '^librewolf$'
                 '^Mailspring$'
                 '^Microsoft-edge$'
@@ -627,6 +628,7 @@ ruled.client.connect_signal 'request::rules', ->
             border_width: 0
             floating:          false
             focus:             false
+            ontop:             true
             titlebars_enabled: false
 
     ruled.client.append_rule
