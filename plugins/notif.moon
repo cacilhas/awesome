@@ -7,6 +7,11 @@ naughty = require'naughty'
 callback = =>
     naughty.toggle!
     widget.text = if naughty.is_suspended! then '🔕' else '🔔'
+    unless naughty.is_suspended!
+        naughty.notify
+            title: 'Info'
+            message: 'Notifications enabled'
+            timeout: 2
 
 
 --------------------------------------------------------------------------------

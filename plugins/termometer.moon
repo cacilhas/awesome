@@ -1,7 +1,6 @@
 local *
 
 awful = require'awful'
-naughty = require'naughty'
 wibox = require'wibox'
 theme = require'beautiful'
 
