@@ -34,6 +34,15 @@ do
             title:   "Oops, an error happened#{startup and ' during startup' or ''}!"
             message: @
 
+    handler = gears.protected_call._error_handler
+
+    gears.protected_call._error_handler = =>
+        handler @
+        naughty.notify
+            urgent: 'critical'
+            title:  'Protected Call Error'
+            message: @
+
 
 --------------------------------------------------------------------------------
 --- Theme
