@@ -288,7 +288,8 @@ do
             return awful.key
                 modifiers: {SUPER}
                 key:       tostring(@ % 10)
-                on_press: -> tag\view_only!
+                --on_press: -> tag\view_only!
+                on_press: -> tag\emit_signal 'request::select'
                 description: "got to tag #{tag.name}"
                 group:       'awesome'
     awful.keyboard.append_global_keybindings [dealsupernumber tag for tag = 1, 9]
