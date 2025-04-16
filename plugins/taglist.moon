@@ -5,13 +5,20 @@ wibox = require'wibox'
 import prevtag, nexttag, withmargin from require'helpers'
 
 
+noempty = =>
+    return false unless @
+    return true if @selected
+    count = [1 for c in *@clients! when not c.minimized]
+    #count > 0
+
+
 --------------------------------------------------------------------------------
 =>
     local taglist
     taglist =
         short: awful.widget.taglist {
             screen:  @
-            filter:  awful.widget.taglist.filter.noempty
+            filter:  noempty -- awful.widget.taglist.filter.noempty
             buttons: {
                 awful.button {},       1, => @\view_only!
                 awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
@@ -24,7 +31,7 @@ import prevtag, nexttag, withmargin from require'helpers'
 
         long: awful.widget.taglist {
             screen:  @
-            filter:  awful.widget.taglist.filter.all
+            filter:  -> true
             buttons: {
                 awful.button {},       1, => @\view_only!
                 awful.button {'Mod4'}, 1, (=> client.focus\move_to_tag @ if client.focus)
