@@ -128,7 +128,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             sticky:    true
-            tags: {}
+            tags:      {}
             placement: awful.placement.centered
 
     ruled.client.append_rule
@@ -249,7 +249,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             floating:       true
             fullscreen:     false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -259,7 +259,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             request_no_titlebar: true
             floating:            false
-            tag:                 awful.tag.find_by_name nil, ' '
+            tag:                 awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags:      true
             skip_taskbar:        true
 
@@ -275,7 +275,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -302,7 +302,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -327,7 +327,7 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     true
             floating:       false
             switch_to_tags: true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
 
     ruled.client.append_rule
         id: 'floating-window-games'
@@ -339,7 +339,7 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     false
             floating:       true
             switch_to_tags: true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
 
     ruled.client.append_rule
         id: 'nanpure'
@@ -362,7 +362,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -377,7 +377,7 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     false
             maximized:      false
             floating:       true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -389,7 +389,7 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     false
             maximized:      true
             floating:       true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -419,7 +419,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -436,7 +436,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     false
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             layout:         awful.layout.suit.floating
             switch_to_tags: true
 
@@ -462,7 +462,7 @@ ruled.client.connect_signal 'request::rules', ->
             floating:       false
             fullscreen:     true
             maximized:      false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -479,7 +479,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             floating:       false
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -492,7 +492,7 @@ ruled.client.connect_signal 'request::rules', ->
             floating:       true
             fullscreen:     false
             maximized:      false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -501,7 +501,7 @@ ruled.client.connect_signal 'request::rules', ->
             name: '^Graphite$'
         properties:
             fullscreen:     true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -517,7 +517,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             floating:       false
             maximized:      true
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -544,7 +544,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -559,7 +559,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
             placement: awful.placement.centered
 
@@ -577,7 +577,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name nil, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
             placement: awful.placement.centered
 
@@ -621,7 +621,7 @@ ruled.client.connect_signal 'request::rules', ->
             floating:          false
             border_width:      0
             titlebars_enabled: false
-            tag:               awful.tag.find_by_name nil, ' '
+            tag:               awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags:    true
 
     ruled.client.append_rule
