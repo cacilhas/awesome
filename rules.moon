@@ -37,6 +37,8 @@ ruled.client.connect_signal 'request::rules', ->
                 type: 'desktop'
             properties:
                 sticky: true
+                below: true
+                tags: {}
                 :placement
                 border_width: 0
                 focus:             false
@@ -126,6 +128,7 @@ ruled.client.connect_signal 'request::rules', ->
             }
         properties:
             sticky:    true
+            tags: {}
             placement: awful.placement.centered
 
     ruled.client.append_rule
@@ -192,6 +195,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             floating: true
             sticky:   true
+            tags: {}
             placement: awful.placement.top_right
 
     ruled.client.append_rule
@@ -626,6 +630,7 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^shortwave$'
         properties:
             sticky: true
+            tags: {}
             border_width: 0
             floating:          false
             focus:             false
