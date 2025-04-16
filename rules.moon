@@ -684,3 +684,13 @@ client.connect_signal 'focus', =>
 client.connect_signal 'unfocus', =>
     with @screen
         .bottombar.visible = true
+
+
+--------------------------------------------------------------------------------
+-- Workaround for sticky clients
+
+client.connect_signal 'manage', =>
+    @\tags {} if @sticky
+
+client.connect_signal 'tagged', =>
+    @\tags {} if @sticky
