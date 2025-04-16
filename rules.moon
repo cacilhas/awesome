@@ -311,6 +311,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^freedink$'
                 '^kpat$'
                 '^kshisen$'
+                '^LODERUNN.bin.x86_64$'
                 '^magnet%-ball$'
                 '^Nonogram$'
                 '^stella$'
