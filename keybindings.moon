@@ -44,6 +44,20 @@ awful.keyboard.append_global_keybindings {
         description: 'lower volume'
         group:       'awesome'
 
+    awful.key
+        modifiers: {}
+        key:       'XF86MonBrightnessUp'
+        onpress: -> awful.spawn 'brightcli +'
+        description: 'raise brightness'
+        group:       'awesome'
+
+    awful.key
+        modifiers: {}
+        key:       'XF86MonBrightnessDown'
+        onpress: -> awful.spawn 'brightcli -'
+        description: 'decrease brightness'
+        group:       'awesome'
+
     -- awful.key
     --     modifiers: {SUPER}
     --     key:       'F2'
