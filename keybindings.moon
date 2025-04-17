@@ -519,6 +519,13 @@ client.connect_signal 'request::default_keybindings', ->
             group:       'client'
 
         awful.key
+            modifiers: {ALT}
+            key:       'F4'
+            on_press: => @\kill!
+            description: 'kill window'
+            group:       'client'
+
+        awful.key
             modifiers: {SUPER, ALT}
             key:       'q'
             on_press: => awesome.kill @pid, 9
