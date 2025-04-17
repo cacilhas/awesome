@@ -13,7 +13,7 @@ callback = (stdout) =>
 
     for line in stdout\gmatch'[^\n]+'
         matcher = line\gmatch'[^ ]+'
-        if matcher! == 'temp1:'
+        if matcher! == 'temp2:'
             value = matcher!
             @markup = "<span size=\"small\"><span color=\"red\">🌡</span>#{value}</span>"
             @container.value = tonumber value\gmatch'[%d%.]+'!
