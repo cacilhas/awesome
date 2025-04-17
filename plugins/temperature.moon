@@ -21,10 +21,10 @@ callback = (stdout) => pcall ->
             notif\destroy! if notif
             last_id = nil
 
-        if num >= 82
-            urgency = if num >= 100 then 'critical' else 'normal'
+        if num >= 83
+            urgency = if num >= 85 then 'critical' else 'normal'
 
-            if num >= 97 or not client.focus.fullscreen
+            if num >= 85 or not client.focus.fullscreen
                 notif = naughty.notify
                     :urgency
                     title: 'Temperature too high'
