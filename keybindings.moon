@@ -126,13 +126,13 @@ awful.keyboard.append_global_keybindings {
             for s in screen
                 s.topbar.ontop = true
                 s.topbar.opacity = 1
-                s.bottombar\showup!
+                -- s.bottombar\showup!
         on_release: ->
             _G.menupressed = false
             for s in screen
                 s.topbar.ontop = false
                 s.topbar.opacity = 0.625
-                s.bottombar\hidedown!
+                -- s.bottombar\hidedown!
         description: 'raise bars using '
         group:       'awesome'
 
