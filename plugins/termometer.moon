@@ -13,7 +13,7 @@ callback = (stdout) =>
 
     for line in stdout\gmatch'[^\n]+'
         matcher = line\gmatch'[^ ]+'
-        if matcher! == 'temp1:'
+        if matcher! == 'Composite:'
             value = matcher!
             @markup = "<span size=\"small\"><span color=\"red\">🌡</span>#{value}</span>"
             @container.value = tonumber value\gmatch'[%d%.]+'!
@@ -36,7 +36,7 @@ callback = (stdout) =>
         padding: 5
         placement: awful.placement.centered
         min_value: 10
-        max_value: 60
+        max_value: 80
         buttons: {
             awful.button {}, 1, -> timer\emit_signal 'timeout'
         }
