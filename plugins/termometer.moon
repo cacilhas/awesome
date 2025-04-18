@@ -36,7 +36,7 @@ callback = (stdout) =>
         padding: 5
         placement: awful.placement.centered
         min_value: 10
-        max_value: 60
+        max_value: 80
         buttons: {
             awful.button {}, 1, -> timer\emit_signal 'timeout'
         }

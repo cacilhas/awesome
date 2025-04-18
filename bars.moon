@@ -140,6 +140,8 @@ screen.connect_signal 'request::desktop_decoration', =>
     @bottombar.showup = =>
         return if @y == bb_y
         @visible = true
+        @ontop = true
+
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             @y -= tween.speed if @y > bb_y
             if @y < bb_y
@@ -147,10 +149,14 @@ screen.connect_signal 'request::desktop_decoration', =>
             @y != bb_y
 
     @bottombar.hidedown = (bar) ->
-        return @bottombar\showup! if #@clients < 2
+        return @bottombar\showup! if @topbar.ontop  -- MENU button pressed
+        clients = [c for c in *@clients when not (c.hidden or c.minimized)]
+        return @bottombar\showup! if #clients == 0
+
         return if (mouse.coords!.y or @geometry.height) > bb_y
         desired = @geometry.height - 1
-        return if menupressed or bar.y == desired
+        return if bar.y == desired
+
         glib.timeout_add glib.PRIORITY_DEFAULT, tween.tic, ->
             bar.y += tween.speed if bar.y < desired
             if bar.y >= desired
@@ -163,10 +169,7 @@ screen.connect_signal 'request::desktop_decoration', =>
         autostart: true
         call_now: true
         callback: ->
-            return unless @
-            :y = mouse.coords!
-            return unless y
-            return @bottombar\showup! if #@clients < 2
-            return @bottombar\hidedown! if client.focus and client.focus.fullscreen
+            :y = mouse.coords! or (@geometry.height / 2)
+            return @bottombar\hidedown! if client.focus and (client.focus.fullscreen or client.focus.maximized)
             return @bottombar\showup! if y > @geometry.height - 2
             return @bottombar\hidedown! if y < bb_y
