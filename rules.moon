@@ -48,7 +48,6 @@ ruled.client.connect_signal 'request::rules', ->
     ruled.client.append_rule
         id: 'floating'
         rule_any:
-            --instance: {'copyq', 'pinentry'}
             class: {
                 'contabilone-agent-installer'
                 '^archlogo$'
@@ -92,7 +91,7 @@ ruled.client.connect_signal 'request::rules', ->
                 'pop-up'
             }
         except_any:
-            name: { -- Clock has its own management
+            name: { -- Clock has its own rules
                 'Kodumaro Clock'
                 'kodumaro-clock'
             }
@@ -101,9 +100,8 @@ ruled.client.connect_signal 'request::rules', ->
 
     -- Sticky clients.
     ruled.client.append_rule
-        id: 'floating'
+        id: 'sticky'
         rule_any:
-            --instance: {'copyq', 'pinentry'}
             class: {
                 '^archlogo$'
                 '^Clock$'
@@ -204,6 +202,8 @@ ruled.client.connect_signal 'request::rules', ->
             class: '^i3lock$'
         properties:
             fullscreen: true
+            sticky:     true
+            tags:       {}
 
 
     ----------------------------------------------------------------------------
@@ -264,10 +264,11 @@ ruled.client.connect_signal 'request::rules', ->
             skip_taskbar:        true
 
     ruled.client.append_rule
-        id: 'audio'
+        id: 'multimedia'
         rule_any:
             class: {
                 '^Audacity$'
+                '^Cheese$'
                 '^Hydrogen$'
                 '^com%.github%.polymeilex%.neothesia$'
                 '^Spotify'
@@ -294,16 +295,6 @@ ruled.client.connect_signal 'request::rules', ->
                 name:     ' '
                 layout:   awful.layout.suit.fair
                 volatile: true
-
-    ruled.client.append_rule
-        id: 'cheese'
-        rule:
-            class: '^Cheese$'
-        properties:
-            fullscreen:     true
-            floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
-            switch_to_tags: true
 
     ruled.client.append_rule
         id: 'games'
@@ -350,26 +341,8 @@ ruled.client.connect_signal 'request::rules', ->
             floating: true
 
     ruled.client.append_rule
-        id: 'game-engine'
-        rule_any:
-            class: {
-                '^Castle-editor'
-                '^com%.defold%.editor'
-                '^GDevelop'
-                '^TrenchBroom$'
-                '^turbowarp%-desktop$'
-                '^UnrealEditor'
-            }
-        properties:
-            fullscreen:     true
-            floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
-            switch_to_tags: true
-
-    ruled.client.append_rule
         id: 'godot'
         rule_any:
-            class: '^Godot'
             instance: {
                 '^Godot_Editor'
                 '^Godot_Engine$'
@@ -400,7 +373,7 @@ ruled.client.connect_signal 'request::rules', ->
         except_any:
             instance: {
                 '^Godot_Editor'
-                '^Godot_Engine$'
+                '^Godot_Engine'
             }
         properties:
             fullscreen:     true
@@ -421,17 +394,23 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'ide'
         rule_any:
             class: {
+                '^Castle-editor'
                 '^Code$'
                 '^code%-oss$'
+                '^com%.defold%.editor'
+                '^dev%.zed%.Zed$'
                 '^DrRacket$'
                 '^ecode%.bin$'
                 '^FreeCAD$'
                 '^Gambas3$'
+                '^GDevelop'
                 '^jetbrains%-'
                 '^lmms$'
                 '^Processing$'
+                '^TrenchBroom$'
+                '^turbowarp%-desktop$'
+                '^UnrealEditor'
                 '^Whireshark$'
-                '^dev%.zed%.Zed$'
             }
         properties:
             fullscreen:     true
@@ -440,7 +419,7 @@ ruled.client.connect_signal 'request::rules', ->
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: 'non-fs-ide'
+        id: 'windowed-ide'
         rule_any:
             class: {
                 '^Glade$'
@@ -500,7 +479,7 @@ ruled.client.connect_signal 'request::rules', ->
             switch_to_tags: true
 
     ruled.client.append_rule
-        id: 'gimp-windows'
+        id: 'gimp-window'
         rule:
             class: '^Gimp'
         except:
