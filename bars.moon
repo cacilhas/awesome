@@ -26,10 +26,10 @@ screen.connect_signal 'request::desktop_decoration', =>
         ' '
         ' '
         ' '
-        ' '
+        -- ' '
         ' ' -- 
-        ' '
-        ' '
+        -- ' '
+        -- ' '
         ' '
     }, @, awful.layout.suit.floating
 

@@ -259,7 +259,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             request_no_titlebar: true
             floating:            false
-            tag:                 awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:                 awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags:      true
             skip_taskbar:        true
 
@@ -275,7 +275,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -302,7 +302,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -312,6 +312,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^airshipper$'
                 '^Dfarc'
                 '^doѕbox'
+                '^emulationstation$'
                 '^freedink$'
                 '^kpat$'
                 '^kshisen$'
@@ -362,7 +363,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -377,7 +378,7 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     false
             maximized:      false
             floating:       true
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -389,7 +390,23 @@ ruled.client.connect_signal 'request::rules', ->
             fullscreen:     false
             maximized:      true
             floating:       true
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            switch_to_tags: true
+
+    ruled.client.append_rule
+        id: 'godot-game'
+        rule:
+            class: '^Godot'
+        except_any:
+            instance: {
+                '^Godot_Editor'
+                '^Godot_Engine$'
+            }
+        properties:
+            fullscreen:     true
+            maximized:      false
+            floating:       false
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
@@ -544,7 +561,7 @@ ruled.client.connect_signal 'request::rules', ->
         properties:
             fullscreen:     true
             floating:       false
-            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
+            tag:            awful.tag.find_by_name awful.screen.focused!, ' '
             switch_to_tags: true
 
     ruled.client.append_rule
