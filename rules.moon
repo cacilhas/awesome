@@ -213,6 +213,7 @@ ruled.client.connect_signal 'request::rules', ->
         id: 'astro'
         rule_any:
             class: {
+                '^Gaia Sky$'
                 '^kstars$'
                 '^stellarium$'
                 '^XEphem$'
@@ -305,6 +306,8 @@ ruled.client.connect_signal 'request::rules', ->
                 '^doѕbox'
                 '^emulationstation$'
                 '^freedink$'
+                '^Kodumaro-nonogram$'
+                '^Kodumaro-numples$'
                 '^kpat$'
                 '^kshisen$'
                 '^LODERUNN.bin.x86_64$'
