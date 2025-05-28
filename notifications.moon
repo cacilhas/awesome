@@ -7,6 +7,7 @@ theme   = require'beautiful'
 import filesystem from require'gears'
 import aplay, say from require'helpers'
 
+
 --------------------------------------------------------------------------------
 --- Notifications
 
@@ -38,3 +39,8 @@ naughty.connect_signal 'request::display', =>
         message = if @title and #@title > 0 then @title else @message
         say message, @urgency == 'critical'
     naughty.layout.box notification: @
+
+
+--------------------------------------------------------------------------------
+notify: =>
+    naughty.notify @ unless naughty.is_suspended!
