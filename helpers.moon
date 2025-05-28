@@ -52,7 +52,7 @@ reload = ->
             \close!
             return content
         os.remove stderr
-        return naughty.notification
+        return naughty.notify
             urgency: 'critical'
             title:   'Awesome reload failed'
             message: err
@@ -66,7 +66,7 @@ reload = ->
         \close!
         return content
     os.remove stderr
-    naughty.notification
+    naughty.notify
         urgency: 'critical'
         title:   'Awesome reload failed'
         message: err
