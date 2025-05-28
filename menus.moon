@@ -16,6 +16,8 @@ mainmenu = awful.menu
         {
             'System'
             {
+                {'Reset Desktop', 'nemo-desktop --quit', '/usr/share/icons/breeze/apps/32/nemo.svg'}
+                {widget: wibox.widget.separator}
                 {'Reboot', 'sudo reboot', '/usr/share/icons/breeze-dark/actions/32/edit-redo.svg'}
                 {'Halt', 'sudo halt -p', '/usr/share/icons/breeze/actions/24/gtk-quit.svg'}
             }

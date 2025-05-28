@@ -401,6 +401,7 @@ ruled.client.connect_signal 'request::rules', ->
                 '^Code$'
                 '^code%-oss$'
                 '^com%.defold%.editor'
+                '^DBeaver$'
                 '^dev%.zed%.Zed$'
                 '^DrRacket$'
                 '^ecode%.bin$'
