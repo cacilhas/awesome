@@ -2,15 +2,15 @@ local *
 
 awful = require'awful'
 wibox = require'wibox'
-naughty = require'naughty'
 import link, showpopup from require'helpers'
+import notify from require'notifications'
 
 callback = (stdout, _, reason, exitcode) =>
     if reason == 'exit'
         @text = if exitcode == 0 then '🌐' else '⛔'
     else
         @text = '‼️'
-        naughty.notify
+        notify
             title: 'Netcat Error'
             text: "Netcat killed with signal #{exitcode}\n#{reason}"
             timeout: 5

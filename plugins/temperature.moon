@@ -6,6 +6,7 @@ theme = require'beautiful'
 wibox = require'wibox'
 import showpopup from require'helpers'
 import terminal from require'menubar.utils'
+import notify from require'notifications'
 
 
 local last_id
@@ -25,7 +26,7 @@ callback = (stdout) => pcall ->
             urgency = if num >= 100 then 'critical' else 'normal'
 
             if num >= 97 or not client.focus.fullscreen
-                notif = naughty.notify
+                notif = notify
                     :urgency
                     title: 'Temperature too high'
                     message: "CPU temperature is #{value}!"

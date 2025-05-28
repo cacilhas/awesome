@@ -1,12 +1,12 @@
 local *
 
-naughty = assert require'naughty'
+import notify from assert require'notifications'
 import filesystem from require'gears'
 
 startup = "#{filesystem.get_configuration_dir!}/startup"
 
 showerror = => (message) ->
-    naughty.notification
+    notify
         urgency: 'critical'
         title:   "error loading startup script “#{@}”"
         :message
