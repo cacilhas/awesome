@@ -4,7 +4,7 @@ awful  = require'awful'
 pactl  = require'plugins.audio.pactl'
 import filesystem from require'gears'
 import show_help from require'awful.hotkeys_popup'
-import ddgo, moonprompt, nexttag, prevtag, reload, rofi, showgames from require'helpers'
+import ddgo, moonprompt, nexttag, pgrep, prevtag, reload, rofi, showgames from require'helpers'
 terminal = require'menubar.utils'.alt_terminal
 import mainmenu from require'menus'
 
@@ -93,6 +93,56 @@ awful.keyboard.append_global_keybindings {
     --     description: 'mute/unmute mic'
     --     group:       'awesome'
 
+}
+
+---------------------
+-- Multimedia keys --
+---------------------
+
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       'XF86AudioPlay'
+        on_press: ->
+            if pgrep 'spotify'
+                awful.spawn 'playerctl --player=spotify play-pause'
+            else
+                awful.spawn.with_shell 'xdotool search --sync --class shortwave; playerctl --player=de.haeckerfelix.Shortwave play-pause'
+                awful.spawn 'shortwave'
+        description: 'play/pause audio'
+        group:       'awesome'
+}
+
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       'XF86AudioStop'
+        on_press: ->
+            if pgrep 'spotify'
+                awful.spawn 'playerctl --player=spotify stop'
+            else
+                awful.spawn.with_shell 'xdotool search --sync --class shortwave; playerctl --player=de.haeckerfelix.Shortwave stop; sleep 0.25; xdotool search --class shortwave windowquit'
+                awful.spawn 'shortwave'
+        description: 'stop audio'
+        group:       'awesome'
+}
+
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       'XF86AudioPrev'
+        on_press: -> awful.spawn 'playerctl --player=spotify previous'
+        description: 'previous song on Spotify'
+        group:       'awesome'
+}
+
+awful.keyboard.append_global_keybindings {
+    awful.key
+        modifiers: {}
+        key:       'XF86AudioNext'
+        on_press: -> awful.spawn 'playerctl --player=spotify next'
+        description: 'next song on Spotify'
+        group:       'awesome'
 }
 
 --------------------

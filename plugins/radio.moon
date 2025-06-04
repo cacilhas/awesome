@@ -12,6 +12,6 @@ import filesystem from require'gears'
     widget: wibox.widget.imagebox
     buttons: {
         awful.button {}, 1, ->
-            awful.spawn.with_shell 'shortwave'
+            awful.spawn 'shortwave'
     }
 }
